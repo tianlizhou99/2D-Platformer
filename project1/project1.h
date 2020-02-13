@@ -34,6 +34,9 @@ public:
 	afx_msg void OnAppAbout();
 	afx_msg void OnFileNew();
 	DECLARE_MESSAGE_MAP()
+private:
+	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+	ULONG_PTR gdiplusToken = 0;
 };
 
 extern Cproject1App theApp;

@@ -11,6 +11,8 @@
 #define new DEBUG_NEW
 #endif
 
+using namespace Gdiplus;
+using namespace std;
 
 // CChildView
 
