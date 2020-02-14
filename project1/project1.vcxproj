@@ -183,6 +183,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Badger.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ChildView.h" />
@@ -201,9 +202,11 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Visitor.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Wolverine.h" />
     <ClInclude Include="XmlNode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Badger.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ChildView.cpp" />
@@ -223,6 +226,7 @@
     <ClCompile Include="project1.cpp" />
     <ClCompile Include="Visitor.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Wolverine.cpp" />
     <ClCompile Include="XmlNode.cpp" />
   </ItemGroup>
   <ItemGroup>

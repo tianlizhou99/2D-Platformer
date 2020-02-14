@@ -2,13 +2,13 @@
 #include<memory>
 #include "Character.h"
 #include "Entity.h"
-class CPlayer :public CCharacter
+class CBadger :public CCharacter
 {
 public:
-    /** Constructor for Player
+    /** Constructor for Badger
     * \param game is the game the playeris held in
     */
-    CPlayer(CGame* game);
+    CBadger(CGame* game);
     /** saves the items to xml
     * \param node the item to save
     * \return a shared pointer to an object to save
@@ -17,10 +17,11 @@ public:
         XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node) override;
 
     /// Default constructor (disabled)
-    CPlayer() = delete;
+    CBadger() = delete;
 
     /// Copy constructor (disabled)
-    CPlayer(const CPlayer&) = delete;
+    CBadger(const CBadger&) = delete;
+
 
 };
 
