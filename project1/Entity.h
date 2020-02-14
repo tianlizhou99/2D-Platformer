@@ -12,6 +12,8 @@
 #include<string>
 
 
+
+
 class CGame;
 /**
  * base class for any object in the game
@@ -31,7 +33,9 @@ public:
     /// \param elapsed The time since the last update
     virtual void Update(double elapsed) {}
 
-    
+protected:
+    CEntity(CGame* game, const std::wstring& filename);
+
 private:
     double mPosX; ///< X location for the center of the item
     double mPosy; ///< Y location for the center of the item

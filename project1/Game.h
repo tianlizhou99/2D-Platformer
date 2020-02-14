@@ -31,6 +31,7 @@ private:
 public:
     void Add(std::shared_ptr<CEntity> entity);
 
+    void XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
 
 };
-
