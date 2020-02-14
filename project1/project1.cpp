@@ -1,32 +1,31 @@
 
-// project1.cpp : Defines the class behaviors for the application.
+// Project1.cpp : Defines the class behaviors for the application.
 //
 
 #include "pch.h"
 #include "framework.h"
 #include "afxwinappex.h"
 #include "afxdialogex.h"
-#include "project1.h"
+#include "Project1.h"
 #include "MainFrm.h"
+#include "XmlNode.h"
 
-#include "ChildFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// Cproject1App
+// CProject1App
 
-BEGIN_MESSAGE_MAP(Cproject1App, CWinApp)
-	ON_COMMAND(ID_APP_ABOUT, &Cproject1App::OnAppAbout)
-	ON_COMMAND(ID_FILE_NEW, &Cproject1App::OnFileNew)
+BEGIN_MESSAGE_MAP(CProject1App, CWinApp)
+	ON_COMMAND(ID_APP_ABOUT, &CProject1App::OnAppAbout)
 END_MESSAGE_MAP()
 
 
-// Cproject1App construction
+// CProject1App construction
 
-Cproject1App::Cproject1App() noexcept
+CProject1App::CProject1App() noexcept
 {
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
@@ -39,20 +38,20 @@ Cproject1App::Cproject1App() noexcept
 
 	// TODO: replace application ID string below with unique ID string; recommended
 	// format for string is CompanyName.ProductName.SubProduct.VersionInformation
-	SetAppID(_T("project1.AppID.NoVersion"));
+	SetAppID(_T("Project1.AppID.NoVersion"));
 
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
 
-// The one and only Cproject1App object
+// The one and only CProject1App object
 
-Cproject1App theApp;
+CProject1App theApp;
 
 
-// Cproject1App initialization
+// CProject1App initialization
 
-BOOL Cproject1App::InitInstance()
+BOOL CProject1App::InitInstance()
 {
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -65,7 +64,7 @@ BOOL Cproject1App::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
-	Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
 
 	// Initialize OLE libraries
 	if (!AfxOleInit())
@@ -93,53 +92,35 @@ BOOL Cproject1App::InitInstance()
 
 	// To create the main window, this code creates a new frame window
 	// object and then sets it as the application's main window object
-	CMDIFrameWnd* pFrame = new CMainFrame;
+	CFrameWnd* pFrame = new CMainFrame;
 	if (!pFrame)
 		return FALSE;
 	m_pMainWnd = pFrame;
-	// create main MDI frame window
-	if (!pFrame->LoadFrame(IDR_MAINFRAME))
-		return FALSE;
-	// try to load shared MDI menus and accelerator table
-	//TODO: add additional member variables and load calls for
-	//	additional menu types your application may need
-	HINSTANCE hInst = AfxGetResourceHandle();
-	m_hMDIMenu  = ::LoadMenu(hInst, MAKEINTRESOURCE(IDR_project1TYPE));
-	m_hMDIAccel = ::LoadAccelerators(hInst, MAKEINTRESOURCE(IDR_project1TYPE));
+	// create and load the frame with its resources
+	pFrame->LoadFrame(IDR_MAINFRAME,
+		WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, nullptr,
+		nullptr);
 
 
 
 
-	// The main window has been initialized, so show and update it
-	pFrame->ShowWindow(m_nCmdShow);
+
+	// The one and only window has been initialized, so show and update it
+	pFrame->ShowWindow(SW_SHOW);
 	pFrame->UpdateWindow();
-
 	return TRUE;
 }
 
-int Cproject1App::ExitInstance()
+int CProject1App::ExitInstance()
 {
-	Gdiplus::GdiplusShutdown(gdiplusToken);
 	//TODO: handle additional resources you may have added
-	if (m_hMDIMenu != nullptr)
-		FreeResource(m_hMDIMenu);
-	if (m_hMDIAccel != nullptr)
-		FreeResource(m_hMDIAccel);
-
 	AfxOleTerm(FALSE);
 
 	return CWinApp::ExitInstance();
 }
 
-// Cproject1App message handlers
+// CProject1App message handlers
 
-void Cproject1App::OnFileNew()
-{
-	CMainFrame* pFrame = STATIC_DOWNCAST(CMainFrame, m_pMainWnd);
-	// create a new MDI child window
-	pFrame->CreateNewChild(
-		RUNTIME_CLASS(CChildFrame), IDR_project1TYPE, m_hMDIMenu, m_hMDIAccel);
-}
 
 // CAboutDlg dialog used for App About
 
@@ -174,13 +155,13 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // App command to run the dialog
-void Cproject1App::OnAppAbout()
+void CProject1App::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
 
-// Cproject1App message handlers
+// CProject1App message handlers
 
 
 

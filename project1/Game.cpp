@@ -4,14 +4,13 @@
 #include "Wall.h"
 #include "Platform.h"
 #include "EndDoor.h"
-#include "Character.h"
-#include "Player.h"
 using namespace std;
-
+#include <iostream>
 
 CGame::CGame()
 {
-
+    mLevelWidth = 0;
+    mLevelHeight = 0;
 }
 
 CGame::~CGame()
@@ -35,26 +34,6 @@ void CGame::XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
     // A pointer for the item we are loading
     shared_ptr<CLevel> item;
-
-    // We have an item. What type?
-    wstring type = node->GetAttributeValue(L"type", L"");
-    if (type == L"wall")
-    {
-        item = make_shared<CWall>(this);
-    }
-    else if (type == L"platform")
-    {
-        item = make_shared<CPlatform>(this);
-    }
-    else if (type == L"enddoor")
-    {
-        item = make_shared<CEndDoor>(this);
-    }
-    if (item != nullptr)
-    {
-        item->XmlLoad(node);
-        Add(item);
-    }
 }
 
 /** Draw the game
@@ -62,9 +41,12 @@ void CGame::XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node)
 */
 void CGame::OnDraw(Gdiplus::Graphics* graphics)
 {
-    graphics->DrawImage(mBackground.get(), 0, 0,
-        mBackground->GetWidth(), mBackground->GetHeight());
-    
+    for (int iter = -(int)mBackground->GetWidth(); iter * mBackground->GetWidth() < mLevelWidth + 2 * mBackground->GetWidth(); iter += mBackground->GetWidth())
+    {
+        graphics->DrawImage(mBackground.get(), iter, 0,
+            mBackground->GetWidth(), mBackground->GetHeight());
+    }
+
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
@@ -88,9 +70,17 @@ void CGame::Load(const std::wstring& filename)
         //
         for (auto node : root->GetChildren())
         {
-            if (node->GetType() == NODE_ELEMENT && node->GetName() == L"items")
+            //setting the background image
+            if (node->GetType() == NODE_ELEMENT && node->GetName() == L"background")
             {
-                XmlLevel(node);
+                mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + node->GetAttributeValue(L"image", L"")).c_str()));
+            }
+
+            //setting the level width and height
+            if (node->GetType() == NODE_ELEMENT && node->GetName() == L"level")
+            {
+                mLevelHeight = node->GetAttributeIntValue(L"height", 0);
+                mLevelWidth = node->GetAttributeIntValue(L"width", 0);
             }
         }
 

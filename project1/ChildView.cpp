@@ -22,7 +22,7 @@ const int FrameDuration = 30;
 
 CChildView::CChildView()
 {
-	OnLevelLevel0();
+	OnLevelsLevel0();
 }
 
 CChildView::~CChildView()
@@ -32,10 +32,10 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
-	ON_COMMAND(ID_LEVEL_LEVEL0, &CChildView::OnLevelLevel0)
-	ON_COMMAND(ID_LEVEL_LEVEL1, &CChildView::OnLevelLevel1)
-	ON_COMMAND(ID_LEVEL_LEVEL2, &CChildView::OnLevelLevel2)
-	ON_COMMAND(ID_LEVEL_LEVEL3, &CChildView::OnLevelLevel3)
+	ON_COMMAND(ID_LEVELS_LEVEL0, &CChildView::OnLevelsLevel0)
+	ON_COMMAND(ID_LEVELS_LEVEL1, &CChildView::OnLevelsLevel1)
+	ON_COMMAND(ID_LEVELS_LEVEL2, &CChildView::OnLevelsLevel2)
+	ON_COMMAND(ID_LEVELS_LEVEL3, &CChildView::OnLevelsLevel3)
 END_MESSAGE_MAP()
 
 
@@ -107,25 +107,25 @@ void CChildView::OnPaint()
 
 
 
-void CChildView::OnLevelLevel0()
+void CChildView::OnLevelsLevel0()
 {
 	mGame.Load(L"levels/level0.xml");
 }
 
 
-void CChildView::OnLevelLevel1()
+void CChildView::OnLevelsLevel1()
 {
-	mGame.Load(L"levels/level1xml");
+	mGame.Load(L"levels/level1.xml");
 }
 
 
-void CChildView::OnLevelLevel2()
+void CChildView::OnLevelsLevel2()
 {
 	mGame.Load(L"levels/level2.xml");
 }
 
 
-void CChildView::OnLevelLevel3()
+void CChildView::OnLevelsLevel3()
 {
 	mGame.Load(L"levels/level3.xml");
 }

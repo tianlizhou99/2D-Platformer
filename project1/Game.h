@@ -30,7 +30,7 @@ private:
     
     std::unique_ptr<Gdiplus::Bitmap> mBackground; ///< Background image
     
-    int mLevelWidth, mLevelHeight; /// Level width and height
+    int mLevelWidth = 0, mLevelHeight = 0; /// Level width and height
 
 public:
     CGame();

@@ -1,5 +1,5 @@
 
-// project1.h : main header file for the project1 application
+// Project1.h : main header file for the Project1 application
 //
 #pragma once
 
@@ -10,14 +10,14 @@
 #include "resource.h"       // main symbols
 
 
-// Cproject1App:
-// See project1.cpp for the implementation of this class
+// CProject1App:
+// See Project1.cpp for the implementation of this class
 //
 
-class Cproject1App : public CWinApp
+class CProject1App : public CWinApp
 {
 public:
-	Cproject1App() noexcept;
+	CProject1App() noexcept;
 
 
 // Overrides
@@ -26,17 +26,10 @@ public:
 	virtual int ExitInstance();
 
 // Implementation
-protected:
-	HMENU  m_hMDIMenu;
-	HACCEL m_hMDIAccel;
 
 public:
 	afx_msg void OnAppAbout();
-	afx_msg void OnFileNew();
 	DECLARE_MESSAGE_MAP()
-private:
-	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
-	ULONG_PTR gdiplusToken = 0;
 };
 
-extern Cproject1App theApp;
+extern CProject1App theApp;

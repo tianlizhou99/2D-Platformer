@@ -1,16 +1,15 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by project1.rc
+// Used by Project1.rc
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_MAINFRAME                   128
-#define IDR_project1TYPE                130
-#define ID_WINDOW_MANAGER               131
-#define ID_LEVEL_LEVEL0                 32771
-#define ID_LEVEL_LEVEL1                 32772
-#define ID_LEVEL_LEVEL2                 32773
-#define ID_LEVEL_LEVEL3                 32774
+#define IDR_Project1TYPE                130
+#define ID_LEVELS_LEVEL0                32771
+#define ID_LEVELS_LEVEL1                32772
+#define ID_LEVELS_LEVEL2                32773
+#define ID_LEVELS_LEVEL3                32774
 
 // Next default values for new objects
 // 

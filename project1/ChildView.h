@@ -34,10 +34,10 @@ protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnLevelLevel0();
-	afx_msg void OnLevelLevel1();
-	afx_msg void OnLevelLevel2();
-	afx_msg void OnLevelLevel3();
+	afx_msg void OnLevelsLevel0();
+	afx_msg void OnLevelsLevel1();
+	afx_msg void OnLevelsLevel2();
+	afx_msg void OnLevelsLevel3();
 private:
 	CGame mGame;
 

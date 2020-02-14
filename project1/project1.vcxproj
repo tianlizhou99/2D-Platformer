@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{CA6C8ECA-C739-4A01-A25F-17241BF02FCE}</ProjectGuid>
+    <ProjectGuid>{52BB7775-1779-4338-997D-2EC07540A403}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
-    <RootNamespace>project1</RootNamespace>
+    <RootNamespace>Project1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -96,6 +96,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -185,7 +187,6 @@
   <ItemGroup>
     <ClInclude Include="Badger.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="EndDoor.h" />
@@ -197,7 +198,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="project1.h" />
+    <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Visitor.h" />
@@ -208,7 +209,6 @@
   <ItemGroup>
     <ClCompile Include="Badger.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="EndDoor.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -223,20 +223,20 @@
     </ClCompile>
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="project1.cpp" />
+    <ClCompile Include="Project1.cpp" />
     <ClCompile Include="Visitor.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Wolverine.cpp" />
     <ClCompile Include="XmlNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="project1.rc" />
+    <ResourceCompile Include="Project1.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\project1.rc2" />
+    <None Include="res\Project1.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\project1.ico" />
+    <Image Include="res\Project1.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
