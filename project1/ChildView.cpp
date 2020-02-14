@@ -15,6 +15,9 @@
 using namespace Gdiplus;
 using namespace std;
 
+/// Frame duration in milliseconds
+const int FrameDuration = 30;
+
 // CChildView
 
 CChildView::CChildView()
@@ -70,6 +73,7 @@ void CChildView::OnPaint()
     if (mFirstDraw)
     {
         mFirstDraw = false;
+		SetTimer(1, FrameDuration, nullptr);
 
         /*
         * Initialize the elapsed time system
@@ -85,6 +89,15 @@ void CChildView::OnPaint()
     // Get the size of the window
     CRect rect;
     GetClientRect(&rect);
+
+	/*
+	 * Compute the elapsed time since the last draw
+	 */
+	LARGE_INTEGER time;
+	QueryPerformanceCounter(&time);
+	long long diff = time.QuadPart - mLastTime;
+	double elapsed = double(diff) / mTimeFreq;
+	mLastTime = time.QuadPart;
 
     /*
      * Actually Draw the game
