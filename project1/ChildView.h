@@ -4,6 +4,7 @@
 
 
 #pragma once
+#include "Game.h"
 
 
 // CChildView window
@@ -33,9 +34,17 @@ protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnLevelLevel0();
-	afx_msg void OnLevelLevel1();
-	afx_msg void OnLevelLevel2();
-	afx_msg void OnLevelLevel3();
+	afx_msg void OnLevelsLevel0();
+	afx_msg void OnLevelsLevel1();
+	afx_msg void OnLevelsLevel2();
+	afx_msg void OnLevelsLevel3();
+private:
+	CGame mGame;
+
+	/// True until the first time we draw
+	bool mFirstDraw = true;
+
+	long long mLastTime = 0;    ///< Last time we read the timer
+	double mTimeFreq = 0;       ///< Rate the timer updates
 };
 

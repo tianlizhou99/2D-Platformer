@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "project1.h"
+#include "DoubleBufferDC.h"
 #include "ChildView.h"
 
 #ifdef _DEBUG
@@ -14,10 +15,14 @@
 using namespace Gdiplus;
 using namespace std;
 
+/// Frame duration in milliseconds
+const int FrameDuration = 30;
+
 // CChildView
 
 CChildView::CChildView()
 {
+	OnLevelsLevel0();
 }
 
 CChildView::~CChildView()
@@ -27,16 +32,21 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
-	ON_COMMAND(ID_LEVEL_LEVEL0, &CChildView::OnLevelLevel0)
-	ON_COMMAND(ID_LEVEL_LEVEL1, &CChildView::OnLevelLevel1)
-	ON_COMMAND(ID_LEVEL_LEVEL2, &CChildView::OnLevelLevel2)
-	ON_COMMAND(ID_LEVEL_LEVEL3, &CChildView::OnLevelLevel3)
+	ON_COMMAND(ID_LEVELS_LEVEL0, &CChildView::OnLevelsLevel0)
+	ON_COMMAND(ID_LEVELS_LEVEL1, &CChildView::OnLevelsLevel1)
+	ON_COMMAND(ID_LEVELS_LEVEL2, &CChildView::OnLevelsLevel2)
+	ON_COMMAND(ID_LEVELS_LEVEL3, &CChildView::OnLevelsLevel3)
 END_MESSAGE_MAP()
 
 
 
 // CChildView message handlers
 
+/**
+* This function is called before the window is created.
+* \param cs A structure with the window creation parameters
+* \returns TRUE
+*/
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs) 
 {
 	if (!CWnd::PreCreateWindow(cs))
@@ -52,34 +62,70 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildView::OnPaint() 
 {
-	CPaintDC dc(this); // device context for painting
+	CPaintDC paintDC(this); // device context for painting
+	CDoubleBufferDC dc(&paintDC); // device context for painting
 	
-	// TODO: Add your message handler code here
+	Graphics graphics(dc.m_hDC);
+	graphics.Clear(Color(0, 0, 0));
 	
 	// Do not call CWnd::OnPaint() for painting messages
+
+    if (mFirstDraw)
+    {
+        mFirstDraw = false;
+		SetTimer(1, FrameDuration, nullptr);
+
+        /*
+        * Initialize the elapsed time system
+        */
+        LARGE_INTEGER time, freq;
+        QueryPerformanceCounter(&time);
+        QueryPerformanceFrequency(&freq);
+
+        mLastTime = time.QuadPart;
+        mTimeFreq = double(freq.QuadPart);
+    }
+
+    // Get the size of the window
+    CRect rect;
+    GetClientRect(&rect);
+
+	/*
+	 * Compute the elapsed time since the last draw
+	 */
+	LARGE_INTEGER time;
+	QueryPerformanceCounter(&time);
+	long long diff = time.QuadPart - mLastTime;
+	double elapsed = double(diff) / mTimeFreq;
+	mLastTime = time.QuadPart;
+
+    /*
+     * Actually Draw the game
+     */
+    mGame.OnDraw(&graphics);
 }
 
 
 
-void CChildView::OnLevelLevel0()
+void CChildView::OnLevelsLevel0()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level0.xml");
 }
 
 
-void CChildView::OnLevelLevel1()
+void CChildView::OnLevelsLevel1()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level1.xml");
 }
 
 
-void CChildView::OnLevelLevel2()
+void CChildView::OnLevelsLevel2()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level2.xml");
 }
 
 
-void CChildView::OnLevelLevel3()
+void CChildView::OnLevelsLevel3()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level3.xml");
 }
