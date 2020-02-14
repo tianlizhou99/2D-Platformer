@@ -4,8 +4,19 @@
 #include "Wall.h"
 #include "Platform.h"
 #include "EndDoor.h"
+#include "Character.h"
+#include "Player.h"
 using namespace std;
 
+
+CGame::CGame()
+{
+
+}
+
+CGame::~CGame()
+{
+}
 
 /**
 * Add an item to the game
@@ -53,7 +64,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics)
 {
     graphics->DrawImage(mBackground.get(), 0, 0,
         mBackground->GetWidth(), mBackground->GetHeight());
-
+    
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);

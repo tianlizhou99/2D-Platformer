@@ -29,7 +29,7 @@ public:
 
     /// Copy constructor (disabled)
     CEntity(const CEntity&) = delete;
-
+    void SetLocation(double x, double y);
     /** The X location of the item
      * \returns X location in pixels */
     double GetX() const { return mX; }
@@ -44,7 +44,8 @@ public:
 
     void Draw(Gdiplus::Graphics* graphics);
 
-    void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
+    virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
+    virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
     /// Handle updates for animation
     /// \param elapsed The time since the last update

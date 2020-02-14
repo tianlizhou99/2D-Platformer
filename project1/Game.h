@@ -31,6 +31,8 @@ private:
     std::unique_ptr<Gdiplus::Bitmap> mBackground; ///< Background image
 
 public:
+    CGame();
+    virtual ~CGame();
     void Add(std::shared_ptr<CEntity> entity);
     void XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node);
     void OnDraw(Gdiplus::Graphics* graphics);

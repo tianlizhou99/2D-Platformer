@@ -6,6 +6,12 @@ using namespace xmlnode;
 using namespace Gdiplus;
 //using namespace xmlnode;
 
+void CEntity::SetLocation(double x, double y)
+{
+    mX = x;
+    mY = y;
+}
+
 /**
  * Destructor
  */
@@ -42,6 +48,7 @@ CEntity::CEntity(const std::wstring& filename)
         msg += filename;
         AfxMessageBox(msg.c_str());
     }
+
 }
 
 /**
@@ -75,4 +82,14 @@ void CEntity::Draw(Gdiplus::Graphics* graphics)
  */
 void CEntity::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
+}
+
+std::shared_ptr<xmlnode::CXmlNode> CEntity::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
+{
+    auto itemNode = node->AddChild(L"entity");
+
+    itemNode->SetAttribute(L"x", mX);
+    itemNode->SetAttribute(L"y", mY);
+
+    return itemNode;
 }
