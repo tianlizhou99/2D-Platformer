@@ -3,11 +3,10 @@
 //
 
 #include "pch.h"
-#include<string>
 #include "framework.h"
 #include "project1.h"
-#include "ChildView.h"
 #include "DoubleBufferDC.h"
+#include "ChildView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -23,6 +22,7 @@ const int FrameDuration = 30;
 
 CChildView::CChildView()
 {
+	OnLevelLevel0();
 }
 
 CChildView::~CChildView()
@@ -42,6 +42,11 @@ END_MESSAGE_MAP()
 
 // CChildView message handlers
 
+/**
+* This function is called before the window is created.
+* \param cs A structure with the window creation parameters
+* \returns TRUE
+*/
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs) 
 {
 	if (!CWnd::PreCreateWindow(cs))
@@ -57,27 +62,33 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildView::OnPaint() 
 {
-	CPaintDC paintDC(this);     // device context for painting
+	CPaintDC paintDC(this); // device context for painting
 	CDoubleBufferDC dc(&paintDC); // device context for painting
+	
 	Graphics graphics(dc.m_hDC);
+	graphics.Clear(Color(0, 0, 0));
+	
+	// Do not call CWnd::OnPaint() for painting messages
 
-	mGame.OnDraw(&graphics);
-
-	if (mFirstDraw)
-	{
-		mFirstDraw = false;
+    if (mFirstDraw)
+    {
+        mFirstDraw = false;
 		SetTimer(1, FrameDuration, nullptr);
 
-		/*
-		 * Initialize the elapsed time system
-		 */
-		LARGE_INTEGER time, freq;
-		QueryPerformanceCounter(&time);
-		QueryPerformanceFrequency(&freq);
+        /*
+        * Initialize the elapsed time system
+        */
+        LARGE_INTEGER time, freq;
+        QueryPerformanceCounter(&time);
+        QueryPerformanceFrequency(&freq);
 
-		mLastTime = time.QuadPart;
-		mTimeFreq = double(freq.QuadPart);
-	}
+        mLastTime = time.QuadPart;
+        mTimeFreq = double(freq.QuadPart);
+    }
+
+    // Get the size of the window
+    CRect rect;
+    GetClientRect(&rect);
 
 	/*
 	 * Compute the elapsed time since the last draw
@@ -87,30 +98,34 @@ void CChildView::OnPaint()
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
-	//mGame.Update(elapsed);
+
+    /*
+     * Actually Draw the game
+     */
+    mGame.OnDraw(&graphics);
 }
 
 
 
 void CChildView::OnLevelLevel0()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level0.xml");
 }
 
 
 void CChildView::OnLevelLevel1()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level1xml");
 }
 
 
 void CChildView::OnLevelLevel2()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level2.xml");
 }
 
 
 void CChildView::OnLevelLevel3()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level3.xml");
 }

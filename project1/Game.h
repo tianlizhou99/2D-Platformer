@@ -29,6 +29,8 @@ private:
     /// level mLevel
     
     std::unique_ptr<Gdiplus::Bitmap> mBackground; ///< Background image
+    
+    int mLevelWidth, mLevelHeight; /// Level width and height
 
 public:
     CGame();
