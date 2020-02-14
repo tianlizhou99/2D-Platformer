@@ -13,7 +13,8 @@
 class CWall :
 	public CLevel
 {
-    CWall::CWall(CGame* game);
+public:
+    CWall(CGame* game);
 
     /// Default constructor (disabled)
     CWall() = delete;
