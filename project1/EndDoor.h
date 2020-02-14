@@ -13,7 +13,8 @@
 class CEndDoor :
 	public CLevel
 {
-    CEndDoor::CEndDoor(CGame* game);
+public:
+    CEndDoor(CGame* game);
 
     /// Default constructor (disabled)
     CEndDoor() = delete;

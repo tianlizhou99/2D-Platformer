@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "project1.h"
+#include "DoubleBufferDC.h"
 #include "ChildView.h"
 
 #ifdef _DEBUG
@@ -18,6 +19,7 @@ using namespace std;
 
 CChildView::CChildView()
 {
+	OnLevelLevel0();
 }
 
 CChildView::~CChildView()
@@ -37,6 +39,11 @@ END_MESSAGE_MAP()
 
 // CChildView message handlers
 
+/**
+* This function is called before the window is created.
+* \param cs A structure with the window creation parameters
+* \returns TRUE
+*/
 BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs) 
 {
 	if (!CWnd::PreCreateWindow(cs))
@@ -52,34 +59,60 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildView::OnPaint() 
 {
-	CPaintDC dc(this); // device context for painting
+	CPaintDC paintDC(this); // device context for painting
+	CDoubleBufferDC dc(&paintDC); // device context for painting
 	
-	// TODO: Add your message handler code here
+	Graphics graphics(dc.m_hDC);
+	graphics.Clear(Color(0, 0, 0));
 	
 	// Do not call CWnd::OnPaint() for painting messages
+
+    if (mFirstDraw)
+    {
+        mFirstDraw = false;
+
+        /*
+        * Initialize the elapsed time system
+        */
+        LARGE_INTEGER time, freq;
+        QueryPerformanceCounter(&time);
+        QueryPerformanceFrequency(&freq);
+
+        mLastTime = time.QuadPart;
+        mTimeFreq = double(freq.QuadPart);
+    }
+
+    // Get the size of the window
+    CRect rect;
+    GetClientRect(&rect);
+
+    /*
+     * Actually Draw the game
+     */
+    mGame.OnDraw(&graphics);
 }
 
 
 
 void CChildView::OnLevelLevel0()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level0.xml");
 }
 
 
 void CChildView::OnLevelLevel1()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level1xml");
 }
 
 
 void CChildView::OnLevelLevel2()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level2.xml");
 }
 
 
 void CChildView::OnLevelLevel3()
 {
-	// TODO: Add your command handler code here
+	mGame.Load(L"levels/level3.xml");
 }

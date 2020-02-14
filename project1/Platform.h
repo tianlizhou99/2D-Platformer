@@ -13,7 +13,8 @@
 class CPlatform :
 	public CLevel
 {
-    CPlatform::CPlatform(CGame* game);
+public:
+    CPlatform(CGame* game);
 
     /// Default constructor (disabled)
     CPlatform() = delete;

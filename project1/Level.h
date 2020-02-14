@@ -9,6 +9,8 @@
 
 #pragma once
 #include "Entity.h"
+#include "XmlNode.h"
+using namespace xmlnode;
 
 using namespace std;
 
@@ -25,6 +27,7 @@ public:
 
     /// Copy constructor (disabled)
     CLevel(const CLevel&) = delete;
+
     void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
 protected:
