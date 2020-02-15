@@ -14,6 +14,9 @@
 // See Project1.cpp for the implementation of this class
 //
 
+/**
+ * class that represents the default app window for the game
+ */
 class CProject1App : public CWinApp
 {
 public:

@@ -29,6 +29,10 @@ public:
 
     /// Copy constructor (disabled)
     CEntity(const CEntity&) = delete;
+
+    /** Sets location of the entity on the screen
+     * \param x position
+     * \param y position */
     void SetLocation(double x, double y);
     /** The X location of the item
      * \returns X location in pixels */
@@ -44,11 +48,17 @@ public:
 
     void Draw(Gdiplus::Graphics* graphics);
 
+    /// \return void
     virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
+    /** Saves game state
+     * \param node to save to
+     * \returns node */
     virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
     /// Handle updates for animation
     /// \param elapsed The time since the last update
+    /// \return void
     virtual void Update(double elapsed) {}
 
 protected:

@@ -9,7 +9,9 @@
 #pragma once
 #include "Level.h"
 
-
+ /**
+  * class that represents a platform to jump on
+  */
 class CPlatform :
 	public CLevel
 {

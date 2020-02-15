@@ -5,7 +5,6 @@
 #include "Platform.h"
 #include "EndDoor.h"
 using namespace std;
-#include <iostream>
 
 CGame::CGame()
 {
@@ -77,17 +76,19 @@ void CGame::Load(const std::wstring& filename)
         //
         for (auto node : root->GetChildren())
         {
-            //setting the background image
-            if (node->GetType() == NODE_ELEMENT && node->GetName() == L"background")
+            if (node->GetType() == NODE_ELEMENT)
             {
-                mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + node->GetAttributeValue(L"image", L"")).c_str()));
-            }
-
-            //setting the level width and height
-            if (node->GetType() == NODE_ELEMENT && node->GetName() == L"level")
-            {
-                mLevelHeight = node->GetAttributeIntValue(L"height", 0);
-                mLevelWidth = node->GetAttributeIntValue(L"width", 0);
+                //setting the background image
+                if (node->GetName() == L"background")
+                {
+                    mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + node->GetAttributeValue(L"image", L"")).c_str()));
+                }
+                //setting the level width and height
+                if (node->GetName() == L"level")
+                {
+                    mLevelHeight = node->GetAttributeIntValue(L"height", 0);
+                    mLevelWidth = node->GetAttributeIntValue(L"width", 0);
+                }
             }
         }
 
