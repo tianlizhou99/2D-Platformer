@@ -6,7 +6,7 @@ class CPlayer :public CCharacter
 {
 public:
     /** Constructor for Player
-    * \param Game is the Game the Player is held in
+    * \param game is the game the playeris held in
     */
     CPlayer(CGame* game);
     /** saves the items to xml
