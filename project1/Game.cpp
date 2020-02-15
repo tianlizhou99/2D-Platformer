@@ -41,10 +41,13 @@ void CGame::XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node)
 */
 void CGame::OnDraw(Gdiplus::Graphics* graphics)
 {
-    for (int iter = -(int)mBackground->GetWidth(); iter * mBackground->GetWidth() < mLevelWidth + 2 * mBackground->GetWidth(); iter += mBackground->GetWidth())
+    if (mBackground != nullptr)
     {
-        graphics->DrawImage(mBackground.get(), iter, 0,
-            mBackground->GetWidth(), mBackground->GetHeight());
+        for (int iter = -(int)mBackground->GetWidth(); iter * mBackground->GetWidth() < mLevelWidth + 2 * mBackground->GetWidth(); iter += mBackground->GetWidth())
+        {
+            graphics->DrawImage(mBackground.get(), iter, 0,
+                mBackground->GetWidth(), mBackground->GetHeight());
+        }
     }
 
     for (auto entity : mEntities)
