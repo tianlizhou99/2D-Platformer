@@ -13,8 +13,8 @@ public:
     * \param node the item to save
     * \return a shared pointer to an object to save
     */
-    /*virtual std::shared_ptr<xmlnode::CXmlNode>
-        XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node) override;*/
+    virtual std::shared_ptr<xmlnode::CXmlNode>
+        XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node) override;
 
     /// Default constructor (disabled)
     CPlayer() = delete;
