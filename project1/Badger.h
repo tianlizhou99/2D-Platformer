@@ -1,5 +1,5 @@
 /**
- * \file Bager.h
+ * \file Badger.h
  *
  * \author team Sprixie
  *
