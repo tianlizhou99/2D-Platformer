@@ -2,6 +2,8 @@
 #include<memory>
 #include "Character.h"
 #include "Entity.h"
+
+//Class for representing a wolverine
 class CWolverine :public CCharacter
 {
 public:
