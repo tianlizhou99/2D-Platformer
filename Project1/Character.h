@@ -1,6 +1,16 @@
+/**
+ * \file Character.h
+ *
+ * \author team Sprixie
+ *
+ *  Class that implements a character
+ */
 #pragma once
 #include "Entity.h"
 #include "Game.h"
+ /**
+ *A Character Class
+ */
 class CCharacter :public CEntity
 {
 public:
@@ -19,19 +29,19 @@ public:
 
     /// Copy constructor (disabled)
     CCharacter(const CCharacter&) = delete;
-    /** sets the fishes speed in the x direction
-    * \param x is speed of fish
+    /** sets the characters speed in the x direction
+    * \param x is speed of character
     */
     void SetSpeedX(double x);
-    /** sets the fishes speed in the y direction
-    * \param y is speed of fish
+    /** sets the characters speed in the y direction
+    * \param y is speed of characters
     */
     void SetSpeedY(double y);
 
 
 protected:
-    /** Constructor for fish
-    * \param aquarium is the aquarium fish is held in
+    /** Constructor for character
+    * \param game is the game the character is held in
     */
     CCharacter(CGame* game, const std::wstring& filename);
 private:

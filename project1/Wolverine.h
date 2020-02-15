@@ -1,14 +1,24 @@
+/**
+ * \file Wolverine.h
+ *
+ * \author team Sprixie
+ *
+ *  Class that implements a wolverine character
+ */
 #pragma once
 #include<memory>
 #include "Character.h"
 #include "Entity.h"
-class CPlayer :public CCharacter
+ /**
+ *A Wolverine Class
+ */
+class CWolverine :public CCharacter
 {
 public:
-    /** Constructor for Player
+    /** Constructor for Wolverine
     * \param game is the game the playeris held in
     */
-    CPlayer(CGame* game);
+    CWolverine(CGame* game);
     /** saves the items to xml
     * \param node the item to save
     * \return a shared pointer to an object to save
@@ -17,10 +27,11 @@ public:
         XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node) override;
 
     /// Default constructor (disabled)
-    CPlayer() = delete;
+    CWolverine() = delete;
 
     /// Copy constructor (disabled)
-    CPlayer(const CPlayer&) = delete;
+    CWolverine(const CWolverine&) = delete;
+
 
 };
 
