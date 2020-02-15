@@ -6,9 +6,9 @@
 #pragma once
 #include "Game.h"
 
-
-// CChildView window
-
+/**
+ * Childview class
+ */
 class CChildView : public CWnd
 {
 // Construction
@@ -39,7 +39,7 @@ public:
 	afx_msg void OnLevelsLevel2();
 	afx_msg void OnLevelsLevel3();
 private:
-	CGame mGame;
+	CGame mGame; ///< Game being run
 
 	/// True until the first time we draw
 	bool mFirstDraw = true;

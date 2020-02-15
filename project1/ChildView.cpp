@@ -60,6 +60,10 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	return TRUE;
 }
 
+/**
+* Function to paint objects
+* \returns void
+*/
 void CChildView::OnPaint() 
 {
 	CPaintDC paintDC(this); // device context for painting
@@ -106,25 +110,37 @@ void CChildView::OnPaint()
 }
 
 
-
+/**
+* Event handler for level 0
+* \returns void
+*/
 void CChildView::OnLevelsLevel0()
 {
 	mGame.Load(L"levels/level0.xml");
 }
 
-
+/**
+* Event handler for level 1
+* \returns void
+*/
 void CChildView::OnLevelsLevel1()
 {
 	mGame.Load(L"levels/level1.xml");
 }
 
-
+/**
+* Event handler for level 2
+* \returns void
+*/
 void CChildView::OnLevelsLevel2()
 {
 	mGame.Load(L"levels/level2.xml");
 }
 
-
+/**
+* Event handler for level 3
+* \returns void
+*/
 void CChildView::OnLevelsLevel3()
 {
 	mGame.Load(L"levels/level3.xml");

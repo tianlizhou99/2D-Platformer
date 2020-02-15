@@ -53,6 +53,10 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics)
     }
 }
 
+/** Loads a level
+* \param filename The level file to load
+* \returns void
+*/
 void CGame::Load(const std::wstring& filename)
 {
     // We surround with a try/catch to handle errors
