@@ -22,18 +22,18 @@ class CEntity;
 class CGame
 {
 private:
-    int mScore = 0;
-    double mTime = 0;
+    int mScore = 0; ///< score of the player
+    double mTime = 0; ///< time elapsed
 
-    std::vector < std::shared_ptr<CEntity>> mEntities;
-    /// level mLevel
+    std::vector < std::shared_ptr<CEntity>> mEntities; ///< Vector of entities
     
     std::unique_ptr<Gdiplus::Bitmap> mBackground; ///< Background image
     
-    int mLevelWidth = 0, mLevelHeight = 0; /// Level width and height
+    int mLevelWidth = 0; ///< Level width
+    int mLevelHeight = 0; ///< Level height
 
 public:
-    CGame();
+    CGame(); 
     virtual ~CGame();
     void Add(std::shared_ptr<CEntity> entity);
     void XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node);
