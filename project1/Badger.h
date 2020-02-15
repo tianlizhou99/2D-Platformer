@@ -1,7 +1,17 @@
+/**
+ * \file Badger.h
+ *
+ * \author team Sprixie
+ *
+ *  Class that implements a Badger character
+ */
 #pragma once
 #include<memory>
 #include "Character.h"
 #include "Entity.h"
+ /**
+ *A Badger Character Class
+ */
 class CBadger :public CCharacter
 {
 public:

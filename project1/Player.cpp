@@ -12,7 +12,7 @@ CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
 
 std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
-    auto itemNode = CCharacter::XmlSave(node);
+    auto itemNode = CPlayer::XmlSave(node);
     itemNode->SetAttribute(L"type", L"Player");
     return itemNode;
 }

@@ -1,7 +1,17 @@
+/**
+ * \file Wolverine.h
+ *
+ * \author team Sprixie
+ *
+ *  Class that implements a wolverine character
+ */
 #pragma once
 #include<memory>
 #include "Character.h"
 #include "Entity.h"
+ /**
+ *A Wolverine Class
+ */
 class CWolverine :public CCharacter
 {
 public:
