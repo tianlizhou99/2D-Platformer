@@ -4,6 +4,8 @@
 #include "Wall.h"
 #include "Platform.h"
 #include "EndDoor.h"
+#include "Character.h"
+#include "Player.h"
 using namespace std;
 #include <iostream>
 
@@ -11,6 +13,7 @@ CGame::CGame()
 {
     mLevelWidth = 0;
     mLevelHeight = 0;
+
 }
 
 CGame::~CGame()

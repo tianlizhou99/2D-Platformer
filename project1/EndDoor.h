@@ -10,8 +10,7 @@
 #include "Level.h"
 
 
-class CEndDoor :
-	public CLevel
+class CEndDoor : public CLevel
 {
 public:
     CEndDoor(CGame* game);
