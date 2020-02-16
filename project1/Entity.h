@@ -61,6 +61,10 @@ public:
     /// \return void
     virtual void Update(double elapsed) {}
 
+    /** The the location of the game the entity is apart of
+     * \returns game the entity is associated with */
+    CGame * GetGame() const { return mGame; }
+
 protected:
     CEntity(CGame* game, const std::wstring& filename);
 

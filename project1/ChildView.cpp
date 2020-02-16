@@ -88,6 +88,8 @@ void CChildView::OnPaint()
 
         mLastTime = time.QuadPart;
         mTimeFreq = double(freq.QuadPart);
+
+
     }
 
     // Get the size of the window

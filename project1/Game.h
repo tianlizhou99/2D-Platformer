@@ -40,4 +40,13 @@ public:
     void OnDraw(Gdiplus::Graphics* graphics);
     void Load(const std::wstring& filename);
     void Clear();
+
+    /** retrieve the time state of the game
+     * \returns mTime the time state of the game */
+    double GetTime() { return mTime; };
+
+    /** sets the time of the game
+     * \param time the time the game is beign set to
+     **/
+    void SetTime(double time) { mTime = time; };
 };
