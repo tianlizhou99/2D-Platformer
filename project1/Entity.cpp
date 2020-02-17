@@ -82,6 +82,8 @@ void CEntity::Draw(Gdiplus::Graphics* graphics)
  */
 void CEntity::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
+    mX = node->GetAttributeDoubleValue(L"x", 0);
+    mY = node->GetAttributeDoubleValue(L"y", 0);
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CEntity::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
