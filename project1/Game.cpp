@@ -36,7 +36,8 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics)
 {
     if (mBackground != nullptr)
     {
-        for (int iter = -(int)mBackground->GetWidth(); iter * mBackground->GetWidth() < mLevelWidth + 2 * mBackground->GetWidth(); iter += mBackground->GetWidth())
+        int width = static_cast<int>(mBackground->GetWidth());
+        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width)
         {
             graphics->DrawImage(mBackground.get(), iter, 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
@@ -63,14 +64,7 @@ void CGame::Load(const std::wstring& filename)
 
         // Once we know it is open, clear the existing data
         Clear();
-        
-        // Load level data from root
-        if (root->GetName() == L"level")
-        {
-            //mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + root->GetAttributeValue(L"image", L"")).c_str()));
-            mLevelHeight = root->GetAttributeIntValue(L"height", 0);
-            mLevelWidth = root->GetAttributeIntValue(L"width", 0);
-        }
+      
 
         // Maps for declarations of each type 
         map<wstring, wstring> background_declarations;
@@ -89,6 +83,12 @@ void CGame::Load(const std::wstring& filename)
         {
             if (node->GetType() == NODE_ELEMENT)
             {
+                // Load level data from root
+                if (root->GetName() == L"level")
+                {
+                    mLevelHeight = root->GetAttributeIntValue(L"height", 0);
+                    mLevelWidth = root->GetAttributeIntValue(L"width", 0);
+                }
                 if (node->GetName() == L"declarations")
                 {
                     for (auto node2 : node->GetChildren())
@@ -98,6 +98,7 @@ void CGame::Load(const std::wstring& filename)
                         if (name == L"background")
                         {
                             background_declarations[id] = node2->GetAttributeValue(L"image", L"");
+                            mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + node2->GetAttributeValue(L"image", L"")).c_str()));
                         }
                         if (name == L"platform")
                         {
@@ -133,9 +134,6 @@ void CGame::Load(const std::wstring& filename)
                     {
                         auto id = node2->GetAttributeValue(L"id", L"");
                         auto name = node2->GetName();
-                        if (name == L"background")
-                        {
-                        }
                         if (name == L"platform")
                         {
                             auto leftimage = L"images/" + get<0>(platform_declarations[id]);
