@@ -40,6 +40,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_LEVELS_LEVEL2, &CChildView::OnLevelsLevel2)
 	ON_COMMAND(ID_LEVELS_LEVEL3, &CChildView::OnLevelsLevel3)
 	ON_WM_TIMER()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 
@@ -169,4 +170,18 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 	
 	Invalidate();
 	CWnd::OnTimer(nIDEvent);
+}
+
+/**
+ * Erase the background
+ *
+ * This is disabled to eliminate flicker
+ * \param pDC Device context
+ * \returns FALSE
+ */
+BOOL CChildView::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	return FALSE;
 }
