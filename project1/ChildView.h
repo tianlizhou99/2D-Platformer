@@ -48,5 +48,6 @@ private:
 	double mTimeFreq;       ///< Rate the timer updates
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 };
 

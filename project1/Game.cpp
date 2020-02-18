@@ -4,8 +4,12 @@
 #include "Wall.h"
 #include "Platform.h"
 #include "EndDoor.h"
+#include "Character.h"
 #include <map>
 #include <tuple>
+#include "Player.h"
+#include "Money.h"
+#include "President.h"
 using namespace std;
 
 CGame::CGame()
@@ -28,16 +32,6 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 	mEntities.push_back(entity);
 }
 
-/**
-* Handle a level node.
-* \param node Pointer to XML node we are handling
-*/
-void CGame::XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node)
-{
-    // A pointer for the item we are loading
-    shared_ptr<CLevel> item;
-}
-
 /** Draw the game
 * \param graphics The GDI+ graphics context to draw on
 */
@@ -45,7 +39,8 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics)
 {
     if (mBackground != nullptr)
     {
-        for (int iter = -(int)mBackground->GetWidth(); iter * mBackground->GetWidth() < mLevelWidth + 2 * mBackground->GetWidth(); iter += mBackground->GetWidth())
+        int width = static_cast<int>(mBackground->GetWidth());
+        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width)
         {
             graphics->DrawImage(mBackground.get(), iter, 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
@@ -72,14 +67,7 @@ void CGame::Load(const std::wstring& filename)
 
         // Once we know it is open, clear the existing data
         Clear();
-        
-        // Load level data from root
-        if (root->GetName() == L"level")
-        {
-            //mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + root->GetAttributeValue(L"image", L"")).c_str()));
-            mLevelHeight = root->GetAttributeIntValue(L"height", 0);
-            mLevelWidth = root->GetAttributeIntValue(L"width", 0);
-        }
+      
 
         // Maps for declarations of each type 
         map<wstring, wstring> background_declarations;
@@ -98,39 +86,48 @@ void CGame::Load(const std::wstring& filename)
         {
             if (node->GetType() == NODE_ELEMENT)
             {
+                // Load level data from root
+                if (root->GetName() == L"level")
+                {
+                    mLevelHeight = root->GetAttributeIntValue(L"height", 0);
+                    mLevelWidth = root->GetAttributeIntValue(L"width", 0);
+                }
                 if (node->GetName() == L"declarations")
                 {
                     for (auto node2 : node->GetChildren())
                     {
-                        if (node2->GetName() == L"background")
+                        auto id = node2->GetAttributeValue(L"id", L"");
+                        auto name = node2->GetName();
+                        if (name == L"background")
                         {
-                            background_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            background_declarations[id] = node2->GetAttributeValue(L"image", L"");
+                            mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + node2->GetAttributeValue(L"image", L"")).c_str()));
                         }
-                        if (node2->GetName() == L"platform")
+                        if (name == L"platform")
                         {
                             auto t = make_tuple(node2->GetAttributeValue(L"left-image", L""), node2->GetAttributeValue(L"mid-image", L""), node2->GetAttributeValue(L"right-image", L""));
-                            platform_declarations[node2->GetAttributeValue(L"id", L"")] = t;
+                            platform_declarations[id] = t;
                         }
-                        if (node2->GetName() == L"wall")
+                        if (name == L"wall")
                         {
-                            wall_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            wall_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
-                        if (node2->GetName() == L"money")
+                        if (name == L"money")
                         {
                             auto t = make_tuple(node2->GetAttributeValue(L"image", L""), node2->GetAttributeIntValue(L"value", 0));
-                            money_declarations[node2->GetAttributeValue(L"id", L"")] = t;
+                            money_declarations[id] = t;
                         }
-                        if (node2->GetName() == L"tuition-tip")
+                        if (name == L"tuition-tip")
                         {
-                            tuitionup_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            tuitionup_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
-                        if (node2->GetName() == L"door")
+                        if (name == L"door")
                         {
-                            door_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            door_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
-                        if (node2->GetName() == L"villain")
+                        if (name == L"villain")
                         {
-                            villain_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            villain_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
                     }
                 }
@@ -138,26 +135,57 @@ void CGame::Load(const std::wstring& filename)
                 {
                     for (auto node2 : node->GetChildren())
                     {
-                        if (node2->GetName() == L"background")
+                        auto id = node2->GetAttributeValue(L"id", L"");
+                        auto name = node2->GetName();
+                        if (name == L"platform")
                         {
+                            auto leftimage = L"images/" + get<0>(platform_declarations[id]);
+                            auto midimage = L"images/" + get<1>(platform_declarations[id]);
+                            auto rightimage = L"images/" + get<2>(platform_declarations[id]);
+                            auto entity = make_shared<CPlatform>(this, leftimage, midimage, rightimage);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetWidth(node2->GetAttributeIntValue(L"width", 0));
+                            entity->SetHeight(node2->GetAttributeIntValue(L"height", 0));
+                            Add(entity);
                         }
-                        if (node2->GetName() == L"platform")
+                        if (name == L"wall")
                         {
+                            auto image = L"images/" + wall_declarations[id];
+                            auto entity = make_shared<CWall>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetWidth(node2->GetAttributeIntValue(L"width", 0));
+                            entity->SetHeight(node2->GetAttributeIntValue(L"height", 0));
+                            Add(entity);
                         }
-                        if (node2->GetName() == L"wall")
+                        if (name == L"money")
                         {
+                            // needs to be changed to a money object
+                            auto image = L"images/" + get<0>(money_declarations[id]);
+                            auto entity = make_shared<CMoney>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
-                        if (node2->GetName() == L"money")
+                        if (name == L"tuition-tip")
                         {
+                            // needs to be changed to a tuitionup object
+                            auto image = L"images/" + tuitionup_declarations[id];
+                            auto entity = make_shared<CPresident>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
-                        if (node2->GetName() == L"tuition-tip")
+                        if (name == L"door")
                         {
+                            auto image = L"images/" + door_declarations[id];
+                            auto entity = make_shared<CEndDoor>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
-                        if (node2->GetName() == L"door")
+                        if (name == L"villain")
                         {
-                        }
-                        if (node2->GetName() == L"villain")
-                        {
+                            auto image = L"images/" + villain_declarations[id];
+                            auto entity = make_shared<CCharacter>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
                     }
                 }
@@ -193,3 +221,32 @@ void CGame::Update(double elapsed)
     }
 }
 
+std::vector<double> CGame::ItemDistances(CPlayer* player)
+{
+    std::vector<double> distances;
+    for (auto entity : mEntities)
+    {
+        if ((player != entity.get()) && (entity->Worth() != 0))
+        {
+            // Distance in the X and Y directions
+            double dx = player->GetX() - entity->GetX();
+            double dy = player->GetY() - entity->GetY();
+
+            double distance = sqrt(dx * dx + dy * dy);
+
+            distances.push_back(distance);
+        }
+    }
+    return distances;
+}
+
+/** Accept a visitor for the collection
+ * \param visitor The visitor for the collection
+ *
+void CGame::Accept(CVisitor* visitor)
+{
+    for (auto entity : mEntities)
+    {
+        entity->Accept(visitor);
+    }
+}*/

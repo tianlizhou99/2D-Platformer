@@ -10,7 +10,7 @@ class CPlayer :public CCharacter
 {
 public:
     /** Constructor for Player
-    * \param game is the game the playeris held in
+    * \param Game is the Game the Player is held in
     */
     CPlayer(CGame* game);
     /** saves the items to xml
@@ -25,6 +25,15 @@ public:
 
     /// Copy constructor (disabled)
     CPlayer(const CPlayer&) = delete;
+    void Jump();
+    void Update(double elpased) override;
+
+    /** Accept a visitor
+    * \param visitor The visitor we accept */
+    virtual void Accept(CVisitor* visitor) { visitor->VisitPlayer(this); }
+
+private:
+    double mJumping = false; ///< whether player is jumping
+    double mTime = 0; ///< time elapsed since space bar
 
 };
-

@@ -20,5 +20,6 @@ public:
 	CScoreboard(CGame* game);
 
 	void Update(double elpased) override;
+
 };
 

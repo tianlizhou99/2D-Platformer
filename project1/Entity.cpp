@@ -21,7 +21,7 @@ CEntity::~CEntity()
 
 /**
  * Constructor
- * \param game The aquarium this Entity is a member of
+ * \param game The game this Entity is a member of
  * \param filename The name of the file storing image to add
  */
 CEntity::CEntity(CGame* game, const std::wstring& filename) : mGame(game)
@@ -33,22 +33,6 @@ CEntity::CEntity(CGame* game, const std::wstring& filename) : mGame(game)
         msg += filename;
         AfxMessageBox(msg.c_str());
     }
-}
-
-/**
- * Constructor
- * \param filename The name of the file storing image to add
- */
-CEntity::CEntity(const std::wstring& filename)
-{
-    mEntityImage = std::unique_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
-    if (mEntityImage->GetLastStatus() != Ok)
-    {
-        std::wstring msg(L"Failed to open ");
-        msg += filename;
-        AfxMessageBox(msg.c_str());
-    }
-
 }
 
 /**
@@ -76,8 +60,6 @@ void CEntity::Draw(Gdiplus::Graphics* graphics)
 
 /**
  * Load the attributes for an item node.
- *
- *
  * \param node The Xml node we are loading the item from
  */
 void CEntity::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)

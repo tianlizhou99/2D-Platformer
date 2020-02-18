@@ -14,3 +14,7 @@ CWall::CWall(CGame* game) :
     CLevel(game, ImageNameWall1)
 {
 }
+
+CWall::CWall(CGame* game, wstring& filename) : CLevel(game, filename)
+{
+}

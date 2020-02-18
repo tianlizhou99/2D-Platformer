@@ -2,6 +2,7 @@
 #include "Scoreboard.h"
 #include <memory>
 #include <string>
+#include "Visitor.h"
 
 using namespace Gdiplus;
 using namespace std;
@@ -55,5 +56,19 @@ CScoreboard::CScoreboard(CGame* game) :
  * given in milliseconds
  */
 void CScoreboard::Update(double elpased)
-{
+{	
+	auto game = GetGame();
+	CPlayer player(game);
+
+	auto itemDists = game->ItemDistances(&player);
+
+	double score = GetScore();
+	for (auto itemDist : itemDists)
+	{
+		if (itemDist <= 0)
+		{
+			score += 100; //use Worth function later
+		}
+	}
+	game->SetScore(score);
 }

@@ -17,3 +17,14 @@ CPlatform::CPlatform(CGame* game) :
     CLevel(game, ImageNameIndCenter)
 {
 }
+
+CPlatform::CPlatform(CGame* game, const std::wstring& filename) : CLevel(game, filename)
+{
+}
+
+CPlatform::CPlatform(CGame* game, const std::wstring& filename1, const std::wstring& filename2, const std::wstring& filename3) : CLevel(game, filename2)
+{
+    mLeftImage = filename1;
+    mMidImage = filename2;
+    mRightImage = filename3;
+}

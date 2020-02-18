@@ -3,13 +3,14 @@
 //
 
 #include "pch.h"
+#include <memory>
 #include "framework.h"
 #include "project1.h"
 #include "DoubleBufferDC.h"
 #include "ChildView.h"
 #include "Timer.h"
-#include <memory>
 #include "Scoreboard.h"
+#include "Player.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -40,6 +41,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_LEVELS_LEVEL2, &CChildView::OnLevelsLevel2)
 	ON_COMMAND(ID_LEVELS_LEVEL3, &CChildView::OnLevelsLevel3)
 	ON_WM_TIMER()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 
@@ -81,6 +83,7 @@ void CChildView::OnPaint()
     if (mFirstDraw)
     {
         mFirstDraw = false;
+
 		SetTimer(1, FrameDuration, nullptr);
 
         /*
@@ -101,7 +104,9 @@ void CChildView::OnPaint()
 		auto scorebaord = make_shared<CScoreboard>(&mGame);
 		mGame.Add(scorebaord);
 
-		
+		// add player to the game
+		auto player = make_shared<CPlayer>(&mGame);
+		mGame.Add(player);
     }
 
     // Get the size of the window
@@ -134,6 +139,7 @@ void CChildView::OnPaint()
 void CChildView::OnLevelsLevel0()
 {
 	mGame.Load(L"levels/level0.xml");
+	mFirstDraw = true;
 }
 
 /**
@@ -143,6 +149,7 @@ void CChildView::OnLevelsLevel0()
 void CChildView::OnLevelsLevel1()
 {
 	mGame.Load(L"levels/level1.xml");
+	mFirstDraw = true;
 }
 
 /**
@@ -152,6 +159,7 @@ void CChildView::OnLevelsLevel1()
 void CChildView::OnLevelsLevel2()
 {
 	mGame.Load(L"levels/level2.xml");
+	mFirstDraw = true;
 }
 
 /**
@@ -161,6 +169,7 @@ void CChildView::OnLevelsLevel2()
 void CChildView::OnLevelsLevel3()
 {
 	mGame.Load(L"levels/level3.xml");
+	mFirstDraw = true;
 }
 
 
@@ -169,4 +178,16 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 	
 	Invalidate();
 	CWnd::OnTimer(nIDEvent);
+}
+
+/**
+ * Erase the background
+ *
+ * This is disabled to eliminate flicker
+ * \param pDC Device context
+ * \returns FALSE
+ */
+BOOL CChildView::OnEraseBkgnd(CDC* pDC)
+{
+	return FALSE;
 }

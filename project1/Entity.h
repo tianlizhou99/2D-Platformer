@@ -11,6 +11,7 @@
 #include<memory>
 #include<string>
 #include "XmlNode.h"
+#include "Visitor.h"
 using namespace xmlnode;
 
 
@@ -65,14 +66,19 @@ public:
      * \returns game the entity is associated with */
     CGame * GetGame() const { return mGame; }
 
-protected:
     CEntity(CGame* game, const std::wstring& filename);
 
-private:
-    double mX; ///< X location for the center of the item
-    double mY; ///< Y location for the center of the item
+    virtual int Worth() { return 0; }
 
-    bool mYMirror; ///< True flips entity across y-axis
+    /** Accept a visitor
+    * \param visitor The visitor we accept */
+    //virtual void Accept(CVisitor* visitor) = 0;
+
+private:
+    double mX = 0; ///< X location for the center of the item
+    double mY = 0; ///< Y location for the center of the item
+
+    bool mYMirror = false; ///< True flips entity across y-axis
 
     /// The image of this entity
     std::unique_ptr<Gdiplus::Bitmap> mEntityImage;

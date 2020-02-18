@@ -20,6 +20,7 @@ public:
 
 	void Update(double elpased) override;
 
+
 private:
 	double mTime = 0; ///< time elapsed
 };
