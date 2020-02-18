@@ -25,6 +25,11 @@ public:
 
     /// Copy constructor (disabled)
     CPlayer(const CPlayer&) = delete;
+    void Jump();
+    void Update(double elpased) override;
+
+private:
+    double mJumping = false; ///< whether player is jumping
+    double mTime = 0; ///< time elapsed since space bar
 
 };
-
