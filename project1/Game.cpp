@@ -4,6 +4,8 @@
 #include "Wall.h"
 #include "Platform.h"
 #include "EndDoor.h"
+#include <map>
+#include <tuple>
 using namespace std;
 
 CGame::CGame()
