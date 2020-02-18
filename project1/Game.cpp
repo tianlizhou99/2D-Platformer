@@ -102,35 +102,37 @@ void CGame::Load(const std::wstring& filename)
                 {
                     for (auto node2 : node->GetChildren())
                     {
-                        if (node2->GetName() == L"background")
+                        auto id = node2->GetAttributeValue(L"id", L"");
+                        auto name = node2->GetName();
+                        if (name == L"background")
                         {
-                            background_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            background_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
-                        if (node2->GetName() == L"platform")
+                        if (name == L"platform")
                         {
                             auto t = make_tuple(node2->GetAttributeValue(L"left-image", L""), node2->GetAttributeValue(L"mid-image", L""), node2->GetAttributeValue(L"right-image", L""));
-                            platform_declarations[node2->GetAttributeValue(L"id", L"")] = t;
+                            platform_declarations[id] = t;
                         }
-                        if (node2->GetName() == L"wall")
+                        if (name == L"wall")
                         {
-                            wall_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            wall_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
-                        if (node2->GetName() == L"money")
+                        if (name == L"money")
                         {
                             auto t = make_tuple(node2->GetAttributeValue(L"image", L""), node2->GetAttributeIntValue(L"value", 0));
-                            money_declarations[node2->GetAttributeValue(L"id", L"")] = t;
+                            money_declarations[id] = t;
                         }
-                        if (node2->GetName() == L"tuition-tip")
+                        if (name == L"tuition-tip")
                         {
-                            tuitionup_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            tuitionup_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
-                        if (node2->GetName() == L"door")
+                        if (name == L"door")
                         {
-                            door_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            door_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
-                        if (node2->GetName() == L"villain")
+                        if (name == L"villain")
                         {
-                            villain_declarations[node2->GetAttributeValue(L"id", L"")] = node2->GetAttributeValue(L"image", L"");
+                            villain_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
                     }
                 }
@@ -138,25 +140,32 @@ void CGame::Load(const std::wstring& filename)
                 {
                     for (auto node2 : node->GetChildren())
                     {
-                        if (node2->GetName() == L"background")
+                        auto id = node2->GetAttributeValue(L"id", L"");
+                        auto name = node2->GetName();
+                        if (name == L"background")
                         {
                         }
-                        if (node2->GetName() == L"platform")
+                        if (name == L"platform")
+                        {
+                            auto leftimage = L"images/" + get<0>(platform_declarations[id]);
+                            auto midimage = L"images/" + get<1>(platform_declarations[id]);
+                            auto rightimage = L"images/" + get<2>(platform_declarations[id]);
+                            auto entity = make_shared<CPlatform>(this, leftimage, midimage, rightimage);
+                            Add(entity);
+                        }
+                        if (name == L"wall")
                         {
                         }
-                        if (node2->GetName() == L"wall")
+                        if (name == L"money")
                         {
                         }
-                        if (node2->GetName() == L"money")
+                        if (name == L"tuition-tip")
                         {
                         }
-                        if (node2->GetName() == L"tuition-tip")
+                        if (name == L"door")
                         {
                         }
-                        if (node2->GetName() == L"door")
-                        {
-                        }
-                        if (node2->GetName() == L"villain")
+                        if (name == L"villain")
                         {
                         }
                     }
