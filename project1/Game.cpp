@@ -7,6 +7,9 @@
 #include "Character.h"
 #include <map>
 #include <tuple>
+#include "Player.h"
+#include "Money.h"
+#include "President.h"
 using namespace std;
 
 CGame::CGame()
@@ -160,7 +163,7 @@ void CGame::Load(const std::wstring& filename)
                         {
                             // needs to be changed to a money object
                             auto image = L"images/" + get<0>(money_declarations[id]);
-                            auto entity = make_shared<CEntity>(this, image);
+                            auto entity = make_shared<CMoney>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
                         }
@@ -168,7 +171,7 @@ void CGame::Load(const std::wstring& filename)
                         {
                             // needs to be changed to a tuitionup object
                             auto image = L"images/" + tuitionup_declarations[id];
-                            auto entity = make_shared<CEntity>(this, image);
+                            auto entity = make_shared<CPresident>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
                         }
@@ -220,3 +223,32 @@ void CGame::Update(double elapsed)
     }
 }
 
+std::vector<double> CGame::ItemDistances(CPlayer* player)
+{
+    std::vector<double> distances;
+    for (auto entity : mEntities)
+    {
+        if ((player != entity.get()) && (entity->Worth() != 0))
+        {
+            // Distance in the X and Y directions
+            double dx = player->GetX() - entity->GetX();
+            double dy = player->GetY() - entity->GetY();
+
+            double distance = sqrt(dx * dx + dy * dy);
+
+            distances.push_back(distance);
+        }
+    }
+    return distances;
+}
+
+/** Accept a visitor for the collection
+ * \param visitor The visitor for the collection
+ *
+void CGame::Accept(CVisitor* visitor)
+{
+    for (auto entity : mEntities)
+    {
+        entity->Accept(visitor);
+    }
+}*/

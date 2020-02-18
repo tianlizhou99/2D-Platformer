@@ -11,6 +11,7 @@
 #include<memory>
 #include<string>
 #include "XmlNode.h"
+#include "Visitor.h"
 using namespace xmlnode;
 
 
@@ -66,6 +67,12 @@ public:
     CGame * GetGame() const { return mGame; }
 
     CEntity(CGame* game, const std::wstring& filename);
+
+    virtual int Worth() { return 0; }
+
+    /** Accept a visitor
+    * \param visitor The visitor we accept */
+    //virtual void Accept(CVisitor* visitor) = 0;
 
 private:
     double mX = 0; ///< X location for the center of the item

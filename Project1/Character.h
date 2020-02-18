@@ -43,6 +43,7 @@ public:
     * \param filename File location of the image
     */
     CCharacter(CGame* game, const std::wstring& filename);
+
 private:
     ///  speed in the X direction
     double mSpeedX;

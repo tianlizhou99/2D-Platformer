@@ -28,6 +28,7 @@ public:
 
     CPlatform(CGame* game, const std::wstring& filename1, const std::wstring& filename2, const std::wstring& filename3);
 
+
 private:
     wstring mLeftImage;
     wstring mMidImage;

@@ -12,6 +12,7 @@
 #include<vector>
 #include<string>
 #include "XmlNode.h"
+#include "Player.h"
 using namespace xmlnode;
 
 
@@ -40,11 +41,17 @@ public:
     void Load(const std::wstring& filename);
     void Clear();
     void Update(double elapsed);
+    //void Accept(CVisitor* visitor);
 
-    std::vector<double> PlatformDistances(CEntity* entity1);
+
+    std::vector<double> ItemDistances(CPlayer* player);
 
     /** gets the current score of the game
      * \returns the current score of the game */
     int GetScore() { return mScore; };
+
+    /** gets the current score of the game
+     * \returns the current score of the game */
+    void SetScore(int score) { mScore = score; };
 
 };

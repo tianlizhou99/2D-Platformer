@@ -25,5 +25,6 @@ public:
     CWall(const CWall&) = delete;
 
     CWall(CGame* game, wstring& filename);
+
 };
 
