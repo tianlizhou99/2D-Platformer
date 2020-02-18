@@ -10,8 +10,8 @@
 #pragma once
 #include "Entity.h"
 #include "XmlNode.h"
-using namespace xmlnode;
 
+using namespace xmlnode;
 using namespace std;
 
 
@@ -36,8 +36,6 @@ protected:
 private:
 	/// The image of this level component
 	std::unique_ptr<Gdiplus::Bitmap> mImage;
-
-	wstring mFile;
 
 };
 

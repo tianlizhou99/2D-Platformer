@@ -3,7 +3,7 @@
 
 /**
  * Constructor
- * \param aquarium The aquarium we are in
+ * \param game The game we are in
  * \param filename Filename for the image we use
  */
 CLevel::CLevel(CGame* game, const std::wstring& filename) :
