@@ -14,6 +14,9 @@
 // See Project1.cpp for the implementation of this class
 //
 
+/**
+ * class that represents the default app window for the game
+ */
 class CProject1App : public CWinApp
 {
 public:
@@ -30,6 +33,10 @@ public:
 public:
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+
+private:
+	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+	ULONG_PTR gdiplusToken = 0;
 };
 
 extern CProject1App theApp;

@@ -2,6 +2,10 @@
 #include<memory>
 #include "Character.h"
 #include "Entity.h"
+
+/**
+ * class that represents the player character
+ */
 class CPlayer :public CCharacter
 {
 public:

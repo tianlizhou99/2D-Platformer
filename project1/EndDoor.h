@@ -9,7 +9,9 @@
 #pragma once
 #include "Level.h"
 
-
+/**
+* class that represents the door to end the level
+*/
 class CEndDoor :
 	public CLevel
 {

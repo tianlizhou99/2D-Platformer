@@ -9,7 +9,9 @@
 #pragma once
 #include "Level.h"
 
-
+ /**
+  * class that represents a wall to crash into
+  */
 class CWall :
 	public CLevel
 {

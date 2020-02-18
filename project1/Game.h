@@ -14,6 +14,7 @@
 #include "XmlNode.h"
 using namespace xmlnode;
 
+
 class CEntity;
 
 /**
@@ -23,7 +24,6 @@ class CGame
 {
 private:
     int mScore = 0; ///< score of the player
-    double mTime = 0; ///< time elapsed
 
     std::vector < std::shared_ptr<CEntity>> mEntities; ///< Vector of entities
     
@@ -40,4 +40,10 @@ public:
     void OnDraw(Gdiplus::Graphics* graphics);
     void Load(const std::wstring& filename);
     void Clear();
+    void Update(double elapsed);
+
+    /** gets the current score of the game
+     * \returns the current score of the game */
+    int GetScore() { return mScore; };
+
 };

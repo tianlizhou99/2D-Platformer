@@ -44,7 +44,9 @@ private:
 	/// True until the first time we draw
 	bool mFirstDraw = true;
 
-	long long mLastTime = 0;    ///< Last time we read the timer
-	double mTimeFreq = 0;       ///< Rate the timer updates
+	long long mLastTime;    ///< Last time we read the timer
+	double mTimeFreq;       ///< Rate the timer updates
+public:
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
