@@ -83,6 +83,7 @@ void CChildView::OnPaint()
     if (mFirstDraw)
     {
         mFirstDraw = false;
+
 		SetTimer(1, FrameDuration, nullptr);
 
         /*
