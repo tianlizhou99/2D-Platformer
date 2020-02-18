@@ -24,6 +24,4 @@ CLevel::CLevel(CGame* game, const std::wstring& filename) :
 void CLevel::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
     CEntity::XmlLoad(node);
-    mWidth = node->GetAttributeDoubleValue(L"width", 0);
-    mHeight = node->GetAttributeDoubleValue(L"height", 0);
 }
