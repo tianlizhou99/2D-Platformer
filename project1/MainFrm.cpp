@@ -93,6 +93,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 void CMainFrame::AssertValid() const
 {
 	CFrameWnd::AssertValid();
+
 }
 
 void CMainFrame::Dump(CDumpContext& dc) const

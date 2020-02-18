@@ -11,6 +11,7 @@
 #include<memory>
 #include<string>
 #include "XmlNode.h"
+#include "Visitor.h"
 using namespace xmlnode;
 
 
@@ -29,6 +30,10 @@ public:
 
     /// Copy constructor (disabled)
     CEntity(const CEntity&) = delete;
+
+    /** Sets location of the entity on the screen
+     * \param x position
+     * \param y position */
     void SetLocation(double x, double y);
     /** The X location of the item
      * \returns X location in pixels */
@@ -42,23 +47,38 @@ public:
 
     CEntity(const std::wstring& filename);
 
-    void Draw(Gdiplus::Graphics* graphics);
+    virtual void Draw(Gdiplus::Graphics* graphics);
 
+    /// \return void
     virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
+    /** Saves game state
+     * \param node to save to
+     * \returns node */
     virtual std::shared_ptr<xmlnode::CXmlNode> XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
     /// Handle updates for animation
     /// \param elapsed The time since the last update
+    /// \return void
     virtual void Update(double elapsed) {}
 
-protected:
+    /** The the location of the game the entity is apart of
+     * \returns game the entity is associated with */
+    CGame * GetGame() const { return mGame; }
+
     CEntity(CGame* game, const std::wstring& filename);
 
-private:
-    double mX; ///< X location for the center of the item
-    double mY; ///< Y location for the center of the item
+    virtual int Worth() { return 0; }
 
-    bool mYMirror; ///< True flips entity across y-axis
+    /** Accept a visitor
+    * \param visitor The visitor we accept */
+    //virtual void Accept(CVisitor* visitor) = 0;
+
+private:
+    double mX = 0; ///< X location for the center of the item
+    double mY = 0; ///< Y location for the center of the item
+
+    bool mYMirror = false; ///< True flips entity across y-axis
 
     /// The image of this entity
     std::unique_ptr<Gdiplus::Bitmap> mEntityImage;

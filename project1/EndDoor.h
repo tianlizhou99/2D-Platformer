@@ -9,8 +9,11 @@
 #pragma once
 #include "Level.h"
 
-
-class CEndDoor : public CLevel
+/**
+* class that represents the door to end the level
+*/
+class CEndDoor :
+	public CLevel
 {
 public:
     CEndDoor(CGame* game);
@@ -20,5 +23,8 @@ public:
 
     /// Copy constructor (disabled)
     CEndDoor(const CEndDoor&) = delete;
+
+    CEndDoor(CGame* game, wstring& filename);
+
 };
 

@@ -9,7 +9,9 @@
 #pragma once
 #include "Level.h"
 
-
+ /**
+  * class that represents a wall to crash into
+  */
 class CWall :
 	public CLevel
 {
@@ -21,5 +23,8 @@ public:
 
     /// Copy constructor (disabled)
     CWall(const CWall&) = delete;
+
+    CWall(CGame* game, wstring& filename);
+
 };
 

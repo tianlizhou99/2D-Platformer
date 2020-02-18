@@ -30,12 +30,20 @@ public:
 
     void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
+    /// Set width
+    void SetWidth(double width) { mWidth = width; }
+    /// Set height
+    void SetHeight(double height) { mHeight = height; }
+
 protected:
     CLevel(CGame* game, const std::wstring& filename);
 
 private:
 	/// The image of this level component
 	std::unique_ptr<Gdiplus::Bitmap> mImage;
+
+    int mWidth = 768; ///< width of level
+    int mHeight = 1024; ///< height of level
 
 };
 
