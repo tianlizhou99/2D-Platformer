@@ -4,12 +4,14 @@
 #include "Wall.h"
 #include "Platform.h"
 #include "EndDoor.h"
+using namespace Gdiplus;
 using namespace std;
 
 CGame::CGame()
 {
     mLevelWidth = 0;
     mLevelHeight = 0;
+
 }
 
 CGame::~CGame()
@@ -108,5 +110,16 @@ void CGame::Load(const std::wstring& filename)
 void CGame::Clear()
 {
     mEntities.clear();
+}
+
+/** Handle updates for animation
+* \param elapsed The time since the last update
+*/
+void CGame::Update(double elapsed)
+{
+    for (auto item : mEntities)
+    {
+        item->Update(elapsed);
+    }
 }
 

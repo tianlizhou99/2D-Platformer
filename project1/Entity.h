@@ -46,7 +46,7 @@ public:
 
     CEntity(const std::wstring& filename);
 
-    void Draw(Gdiplus::Graphics* graphics);
+    virtual void Draw(Gdiplus::Graphics* graphics);
 
     /// \return void
     virtual void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);

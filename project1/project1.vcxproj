@@ -201,6 +201,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Visitor.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Project1.cpp" />
+    <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Visitor.cpp" />
     <ClCompile Include="Wall.cpp" />

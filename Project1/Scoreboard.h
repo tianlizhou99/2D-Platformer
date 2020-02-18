@@ -1,26 +1,24 @@
 #pragma once
 #include "Element.h"
 #include <memory>
-class CTimer :
+
+
+class CScoreboard :
 	public CElement
 {
 public:
-	double GetTime();
-	void SetTime(double time);
+	int GetScore();
 
 	void Draw(Gdiplus::Graphics* graphics) override;
 
 	/// Default constructor (disabled)
-	CTimer() = delete;
+	CScoreboard() = delete;
 
 	/// Copy constructor (disabled)
-	CTimer(const CTimer&) = delete;
+	CScoreboard(const CScoreboard&) = delete;
 
-	CTimer(CGame* game);
+	CScoreboard(CGame* game);
 
 	void Update(double elpased) override;
-
-private:
-	double mTime = 0; ///< time elapsed
 };
 

@@ -7,6 +7,9 @@
 #include "project1.h"
 #include "DoubleBufferDC.h"
 #include "ChildView.h"
+#include "Timer.h"
+#include <memory>
+#include "Scoreboard.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -36,6 +39,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_LEVELS_LEVEL1, &CChildView::OnLevelsLevel1)
 	ON_COMMAND(ID_LEVELS_LEVEL2, &CChildView::OnLevelsLevel2)
 	ON_COMMAND(ID_LEVELS_LEVEL3, &CChildView::OnLevelsLevel3)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -89,7 +93,15 @@ void CChildView::OnPaint()
         mLastTime = time.QuadPart;
         mTimeFreq = double(freq.QuadPart);
 
+		/// add the timer to the game
+		auto timer = make_shared<CTimer>(&mGame);
+		mGame.Add(timer);
 
+		/// add the scoreboard to the game
+		auto scorebaord = make_shared<CScoreboard>(&mGame);
+		mGame.Add(scorebaord);
+
+		
     }
 
     // Get the size of the window
@@ -104,6 +116,9 @@ void CChildView::OnPaint()
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
+
+
+	mGame.Update(elapsed);
 
     /*
      * Actually Draw the game
@@ -146,4 +161,12 @@ void CChildView::OnLevelsLevel2()
 void CChildView::OnLevelsLevel3()
 {
 	mGame.Load(L"levels/level3.xml");
+}
+
+
+void CChildView::OnTimer(UINT_PTR nIDEvent)
+{
+	
+	Invalidate();
+	CWnd::OnTimer(nIDEvent);
 }

@@ -11,4 +11,6 @@
 #include "framework.h"
 #include "Game.h"
 
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
 #endif //PCH_H

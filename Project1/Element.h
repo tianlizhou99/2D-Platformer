@@ -12,12 +12,14 @@ private:
 	/// Copy constructor (disabled)
 	CElement(const CElement&) = delete;
 
-protected:
-	CElement(CGame* game, const std::wstring& filename);
 
-	virtual void Update(double elpased) {};
 
 public:
-	virtual void Draw(Gdiplus::Graphics* graphics) {};
+	void Draw(Gdiplus::Graphics* graphics) override;
+
+	CElement(CGame* game, const std::wstring& filename);
+
+	/// update function for all onscreen objects
+	virtual void Update(double elpased) {};
 };
 
