@@ -159,10 +159,10 @@ void CGame::Load(const std::wstring& filename)
                         }
                         if (name == L"money")
                         {
-                            // needs to be changed to a money object
                             auto image = L"images/" + get<0>(money_declarations[id]);
                             auto entity = make_shared<CMoney>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            //entity->SetWorth(get<1>(money_declarations[id]));
                             Add(entity);
                         }
                         if (name == L"tuition-tip")
@@ -223,21 +223,23 @@ void CGame::Update(double elapsed)
 
 std::vector<double> CGame::ItemDistances(CPlayer* player)
 {
-    std::vector<double> distances;
+    std::vector<double> pointsEarned;
     for (auto entity : mEntities)
     {
-        if ((player != entity.get()) && (entity->Worth() != 0))
+        if ((player != entity.get()) && (entity->GetWorth() != 0))
         {
             // Distance in the X and Y directions
             double dx = player->GetX() - entity->GetX();
             double dy = player->GetY() - entity->GetY();
 
             double distance = sqrt(dx * dx + dy * dy);
-
-            distances.push_back(distance);
+            if (distance == 0)
+            {
+                pointsEarned.push_back(entity->GetWorth());
+            }
         }
     }
-    return distances;
+    return pointsEarned;
 }
 
 /** Accept a visitor for the collection
