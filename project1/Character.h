@@ -38,8 +38,6 @@ public:
     */
     void SetSpeedY(double y);
 
-
-protected:
     /** Constructor for character
     * \param game is the game the character is held in
     * \param filename File location of the image
