@@ -65,7 +65,6 @@ public:
      * \returns game the entity is associated with */
     CGame * GetGame() const { return mGame; }
 
-protected:
     CEntity(CGame* game, const std::wstring& filename);
 
 private:

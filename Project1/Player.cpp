@@ -8,7 +8,7 @@ using namespace Gdiplus;
 const wstring GnomeImage = L"images/gnome.png";
 CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
 {
-    SetLocation(521,521);
+    SetLocation(521, 521);
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
@@ -30,7 +30,7 @@ void CPlayer::Update(double elapsed)
         // update time in jumping state
         mTime += elapsed;
         // set new vertical position
-        SetLocation(GetX(),GetY()+elapsed*10);
+        SetLocation(GetX(), GetY() + elapsed * 10);
         // end jumping state after some point in time
         if (mTime == 1.5)
         {

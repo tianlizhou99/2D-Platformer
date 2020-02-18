@@ -4,6 +4,7 @@
 #include "Wall.h"
 #include "Platform.h"
 #include "EndDoor.h"
+#include "Character.h"
 #include <map>
 #include <tuple>
 using namespace std;
@@ -26,16 +27,6 @@ CGame::~CGame()
 void CGame::Add(std::shared_ptr<CEntity> entity)
 {
 	mEntities.push_back(entity);
-}
-
-/**
-* Handle a level node.
-* \param node Pointer to XML node we are handling
-*/
-void CGame::XmlLevel(const std::shared_ptr<xmlnode::CXmlNode>& node)
-{
-    // A pointer for the item we are loading
-    shared_ptr<CLevel> item;
 }
 
 /** Draw the game
@@ -151,22 +142,49 @@ void CGame::Load(const std::wstring& filename)
                             auto midimage = L"images/" + get<1>(platform_declarations[id]);
                             auto rightimage = L"images/" + get<2>(platform_declarations[id]);
                             auto entity = make_shared<CPlatform>(this, leftimage, midimage, rightimage);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetWidth(node2->GetAttributeIntValue(L"width", 0));
+                            entity->SetHeight(node2->GetAttributeIntValue(L"height", 0));
                             Add(entity);
                         }
                         if (name == L"wall")
                         {
+                            auto image = L"images/" + wall_declarations[id];
+                            auto entity = make_shared<CWall>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetWidth(node2->GetAttributeIntValue(L"width", 0));
+                            entity->SetHeight(node2->GetAttributeIntValue(L"height", 0));
+                            Add(entity);
                         }
                         if (name == L"money")
                         {
+                            // needs to be changed to a money object
+                            auto image = L"images/" + get<0>(money_declarations[id]);
+                            auto entity = make_shared<CEntity>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
                         if (name == L"tuition-tip")
                         {
+                            // needs to be changed to a tuitionup object
+                            auto image = L"images/" + tuitionup_declarations[id];
+                            auto entity = make_shared<CEntity>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
                         if (name == L"door")
                         {
+                            auto image = L"images/" + door_declarations[id];
+                            auto entity = make_shared<CEndDoor>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
                         if (name == L"villain")
                         {
+                            auto image = L"images/" + villain_declarations[id];
+                            auto entity = make_shared<CCharacter>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
                     }
                 }

@@ -23,5 +23,7 @@ public:
 
     /// Copy constructor (disabled)
     CEndDoor(const CEndDoor&) = delete;
+
+    CEndDoor(CGame* game, wstring& filename);
 };
 

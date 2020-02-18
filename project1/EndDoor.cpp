@@ -12,3 +12,7 @@ CEndDoor::CEndDoor(CGame* game) :
     CLevel(game, ImageNameEndDoor)
 {
 }
+
+CEndDoor::CEndDoor(CGame* game, wstring& filename) : CLevel(game, filename)
+{
+}

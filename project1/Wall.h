@@ -23,5 +23,7 @@ public:
 
     /// Copy constructor (disabled)
     CWall(const CWall&) = delete;
+
+    CWall(CGame* game, wstring& filename);
 };
 
