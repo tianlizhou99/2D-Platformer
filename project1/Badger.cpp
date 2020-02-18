@@ -5,9 +5,11 @@
 using namespace std;
 using namespace Gdiplus;
 
-const wstring badgerImage = L"project1/images/badger.png";
+const wstring badgerImage = L"images/wisc.png";
 CBadger::CBadger(CGame* game) : CCharacter(game, badgerImage)
 {
+    SetLocation(500, 500);
+    SetSpeedY(50);
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CBadger::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)

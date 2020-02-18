@@ -22,6 +22,21 @@ void CPlayer::Jump()
 {
     mJumping = true;
 }
+void CPlayer::MoveR()
+{
+    mMoveR = !mMoveR;
+    if (mMoveL) {
+        mMoveL = false;
+    }
+}
+
+void CPlayer::MoveL()
+{
+    mMoveL = !mMoveL;
+    if (mMoveR) {
+        mMoveR = false;
+    }
+}
 
 void CPlayer::Update(double elapsed)
 {
@@ -38,4 +53,12 @@ void CPlayer::Update(double elapsed)
             mJumping = false;
         }
     }
+
+}
+
+void CPlayer::UpdateMove(double elapsed)
+{
+
+    SetLocation(GetX() + 50 * elapsed , GetY());
+
 }
