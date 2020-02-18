@@ -138,26 +138,37 @@ void CGame::Load(const std::wstring& filename)
                 {
                     for (auto node2 : node->GetChildren())
                     {
+                        shared_ptr<CEntity> entity;
                         if (node2->GetName() == L"background")
                         {
+                            //entity = make_shared<CFishBeta>(this);
                         }
-                        if (node2->GetName() == L"platform")
+                        else if (node2->GetName() == L"platform")
+                        {
+                            entity = make_shared<CPlatform>(this);
+                        }
+                        else if (node2->GetName() == L"wall")
+                        {
+                            entity = make_shared<CWall>(this);
+                        }
+                        else if (node2->GetName() == L"money")
                         {
                         }
-                        if (node2->GetName() == L"wall")
+                        else if (node2->GetName() == L"tuition-tip")
                         {
                         }
-                        if (node2->GetName() == L"money")
+                        else if (node2->GetName() == L"door")
+                        {
+                            entity = make_shared<CEndDoor>(this);
+                        }
+                        else if (node2->GetName() == L"villain")
                         {
                         }
-                        if (node2->GetName() == L"tuition-tip")
+
+                        if (entity != nullptr)
                         {
-                        }
-                        if (node2->GetName() == L"door")
-                        {
-                        }
-                        if (node2->GetName() == L"villain")
-                        {
+                            entity->XmlLoad(node);
+                            Add(entity);
                         }
                     }
                 }
@@ -193,3 +204,27 @@ void CGame::Update(double elapsed)
     }
 }
 
+/**
+ * Creates a list of the distance between every item and the given gillman
+ * \param item1 A pointer to the given gillman
+ * \returns A list of distances
+ */
+std::vector<double> CGame::PlatformDistances(CEntity* entity1)
+{
+    std::vector<double> distances;
+    for (auto entity2 : mEntities)
+    {
+        if (entity1 != entity2.get())
+        {
+            // Distance in the X and Y directions
+            double dx = entity1->GetX() - entity2->GetX();
+            double dy = entity1->GetY() - entity2->GetY();
+
+            if (dy == 0)
+            {
+                distances.push_back(dx);
+            }
+        }
+    }
+    return distances;
+}

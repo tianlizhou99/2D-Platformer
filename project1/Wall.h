@@ -23,5 +23,15 @@ public:
 
     /// Copy constructor (disabled)
     CWall(const CWall&) = delete;
+
+    void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
+
+
+private:
+    /// Height of wall
+    double mHeight = 0;
+
+    /// Width of wall
+    double mWidth = 0;
 };
 

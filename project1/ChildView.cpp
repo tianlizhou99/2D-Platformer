@@ -181,7 +181,5 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
  */
 BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 {
-	// TODO: Add your message handler code here and/or call default
-
 	return FALSE;
 }

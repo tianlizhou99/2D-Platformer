@@ -42,6 +42,8 @@ public:
     void Clear();
     void Update(double elapsed);
 
+    std::vector<double> PlatformDistances(CEntity* entity1);
+
     /** gets the current score of the game
      * \returns the current score of the game */
     int GetScore() { return mScore; };

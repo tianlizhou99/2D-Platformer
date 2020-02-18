@@ -3,7 +3,7 @@
 
 
 /// End Door filename
-const wstring ImageNameEndDoor = L"project1/images/door.png";
+const wstring ImageNameEndDoor = L"images/door.png";
 
 /** Constructor
  * \param game The game this is a member of
