@@ -239,14 +239,14 @@ std::vector<double> CGame::ItemDistances(CPlayer* player)
             double distance = sqrt(dx * dx + dy * dy);
             if (mTuitionIncrease)
             {
-                if (min <= distance <= max)
+                if (min <= distance && distance <= max)
                 {
                     pointsEarned.push_back(worth + extraTuition);
                 }
             }
             else
             {
-                if (min <= distance <= max)
+                if (min <= distance && distance <= max)
                 {
                     pointsEarned.push_back(worth);
                 }
