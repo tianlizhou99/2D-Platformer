@@ -22,8 +22,5 @@ public:
     CMoney(const CMoney&) = delete;
 
     CMoney(CGame* game, wstring& filename);
-
-    int Worth();
-
 };
 

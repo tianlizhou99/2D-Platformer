@@ -10,6 +10,7 @@
 #include "ChildView.h"
 #include "Timer.h"
 #include "Scoreboard.h"
+#include "Badger.h"
 #include "Player.h"
 
 #ifdef _DEBUG
@@ -42,6 +43,8 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_COMMAND(ID_LEVELS_LEVEL3, &CChildView::OnLevelsLevel3)
 	ON_WM_TIMER()
 	ON_WM_ERASEBKGND()
+	ON_WM_KEYDOWN()
+	ON_WM_KEYUP()
 END_MESSAGE_MAP()
 
 
@@ -106,7 +109,10 @@ void CChildView::OnPaint()
 
 		// add player to the game
 		auto player = make_shared<CPlayer>(&mGame);
+		mPlayer = player;
 		mGame.Add(player);
+
+
     }
 
     // Get the size of the window
@@ -190,4 +196,40 @@ void CChildView::OnTimer(UINT_PTR nIDEvent)
 BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 {
 	return FALSE;
+}
+
+
+void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	switch (nChar)
+	{
+	case VK_RIGHT:
+		// right arrow pressed
+		mPlayer->UpdateMove(1);
+		break;
+
+	case VK_LEFT:
+		// left arrow pressed
+		mPlayer->UpdateMove(-1);
+		break;
+
+	case VK_SPACE:
+		// space bar pressed
+		break;
+	}
+}
+
+
+void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: Add your message handler code here and/or call default
+	switch (nChar)
+	{
+	case VK_RIGHT:
+
+	case VK_LEFT:
+
+		// left or right arrow released
+		break;
+	}
 }

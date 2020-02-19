@@ -52,10 +52,10 @@ CScoreboard::CScoreboard(CGame* game) :
 
 /**
  * update function for the scoreboard
- * \param elpased amount of time elapsed since the last update
+ * \param elapsed amount of time elapsed since the last update
  * given in milliseconds
  */
-void CScoreboard::Update(double elpased)
+void CScoreboard::Update(double elapsed)
 {	
 	auto game = GetGame();
 	CPlayer player(game);
@@ -65,10 +65,8 @@ void CScoreboard::Update(double elpased)
 	double score = GetScore();
 	for (auto itemDist : itemDists)
 	{
-		if (itemDist <= 0)
-		{
-			score += 100; //use Worth function later
-		}
+		score += itemDist;
 	}
 	game->SetScore(score);
+	itemDists.clear();
 }

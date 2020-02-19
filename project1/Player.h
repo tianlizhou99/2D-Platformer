@@ -26,7 +26,11 @@ public:
     /// Copy constructor (disabled)
     CPlayer(const CPlayer&) = delete;
     void Jump();
+    void MoveR();
+    void MoveL();
     void Update(double elpased) override;
+
+    void UpdateMove(double elapsed);
 
     /** Accept a visitor
     * \param visitor The visitor we accept */
@@ -34,6 +38,8 @@ public:
 
 private:
     double mJumping = false; ///< whether player is jumping
+    bool mMoveR = false;
     double mTime = 0; ///< time elapsed since space bar
+    bool mMoveL = false;
 
 };

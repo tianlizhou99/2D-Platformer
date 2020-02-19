@@ -40,7 +40,7 @@ public:
 	afx_msg void OnLevelsLevel3();
 private:
 	CGame mGame; ///< Game being run
-
+	std::shared_ptr<CPlayer> mPlayer; ///< Player being controlled
 	/// True until the first time we draw
 	bool mFirstDraw = true;
 
@@ -49,5 +49,7 @@ private:
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 

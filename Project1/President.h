@@ -22,5 +22,7 @@ public:
     CPresident(const CPresident&) = delete;
 
     CPresident(CGame* game, wstring& filename);
+
+    bool IsPresident() { return true; }
 };
 

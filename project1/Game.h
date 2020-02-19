@@ -32,6 +32,7 @@ private:
     
     int mLevelWidth = 0; ///< Level width
     int mLevelHeight = 0; ///< Level height
+    bool mTuitionIncrease = false;
 
 public:
     CGame(); 

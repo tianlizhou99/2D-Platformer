@@ -5,7 +5,7 @@
 using namespace std;
 using namespace Gdiplus;
 
-const wstring wolverineImage = L"project1/images/wolverine.png";
+const wstring wolverineImage = L"images/UofM.png";
 CWolverine::CWolverine(CGame* game) : CCharacter(game, wolverineImage)
 {
 }
