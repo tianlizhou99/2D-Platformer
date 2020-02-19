@@ -25,13 +25,5 @@ public:
     CPlatform(const CPlatform&) = delete;
 
     CPlatform(CGame* game, const std::wstring& filename);
-
-    CPlatform(CGame* game, const std::wstring& filename1, const std::wstring& filename2, const std::wstring& filename3);
-
-
-private:
-    wstring mLeftImage;
-    wstring mMidImage;
-    wstring mRightImage;
 };
 

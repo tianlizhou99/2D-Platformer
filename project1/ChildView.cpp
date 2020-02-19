@@ -89,6 +89,11 @@ void CChildView::OnPaint()
 
 		SetTimer(1, FrameDuration, nullptr);
 
+		// add player to the game
+		auto player = make_shared<CPlayer>(&mGame);
+		mPlayer = player;
+		mGame.Add(player);
+
         /*
         * Initialize the elapsed time system
         */
@@ -107,10 +112,6 @@ void CChildView::OnPaint()
 		auto scorebaord = make_shared<CScoreboard>(&mGame);
 		mGame.Add(scorebaord);
 
-		// add player to the game
-		auto player = make_shared<CPlayer>(&mGame);
-		mPlayer = player;
-		mGame.Add(player);
 
 
     }
@@ -134,7 +135,7 @@ void CChildView::OnPaint()
     /*
      * Actually Draw the game
      */
-    mGame.OnDraw(&graphics);
+	mGame.OnDraw(&graphics, rect.Width(), rect.Height());
 }
 
 
