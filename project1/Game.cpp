@@ -162,7 +162,7 @@ void CGame::Load(const std::wstring& filename)
                             auto image = L"images/" + get<0>(money_declarations[id]);
                             auto entity = make_shared<CMoney>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
-                            //entity->SetWorth(get<1>(money_declarations[id]));
+                            entity->SetWorth(get<1>(money_declarations[id]));
                             Add(entity);
                         }
                         if (name == L"tuition-tip")
@@ -224,19 +224,38 @@ void CGame::Update(double elapsed)
 std::vector<double> CGame::ItemDistances(CPlayer* player)
 {
     std::vector<double> pointsEarned;
+    double max = 50;
+    double min = -50;
     for (auto entity : mEntities)
     {
-        if ((player != entity.get()) && (entity->GetWorth() != 0))
+        double worth = entity->GetWorth();
+        double extraTuition = worth / 10;
+        if ((player != entity.get()) && (worth != 0))
         {
             // Distance in the X and Y directions
             double dx = player->GetX() - entity->GetX();
             double dy = player->GetY() - entity->GetY();
 
             double distance = sqrt(dx * dx + dy * dy);
-            if (distance == 0)
+            if (mTuitionIncrease)
             {
-                pointsEarned.push_back(entity->GetWorth());
+                if (min <= distance <= max)
+                {
+                    pointsEarned.push_back(worth + extraTuition);
+                }
             }
+            else
+            {
+                if (min <= distance <= max)
+                {
+                    pointsEarned.push_back(worth);
+                }
+            }
+        }
+        else if (entity->IsPresident())
+        {
+            // Display "Tuition Increase" on screen here
+            mTuitionIncrease = true;
         }
     }
     return pointsEarned;

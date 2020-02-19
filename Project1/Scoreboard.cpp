@@ -68,4 +68,5 @@ void CScoreboard::Update(double elapsed)
 		score += itemDist;
 	}
 	game->SetScore(score);
+	itemDists.clear();
 }

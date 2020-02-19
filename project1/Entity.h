@@ -75,6 +75,8 @@ public:
     int GetWorth() { return mWorth; }
     void SetWorth(int worth) { mWorth = worth; }
 
+    virtual bool IsPresident() { return false; }
+
 private:
     int mWorth = 0;
 
