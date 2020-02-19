@@ -42,8 +42,8 @@ private:
 	/// The image of this level component
 	std::unique_ptr<Gdiplus::Bitmap> mImage;
 
-    int mWidth = 768;
-    int mHeight = 1024;
+    double mWidth = 0; ///< width of level
+    double mHeight = 0; ///< height of level
 
 };
 
