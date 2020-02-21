@@ -31,9 +31,9 @@ public:
     void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
     /// Set width
-    void SetWidth(double width) { mWidth = width; }
+    void SetWidth(int width) { mWidth = width; }
     /// Set height
-    void SetHeight(double height) { mHeight = height; }
+    void SetHeight(int height) { mHeight = height; }
 
 protected:
     CLevel(CGame* game, const std::wstring& filename);
