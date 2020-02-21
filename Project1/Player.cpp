@@ -45,6 +45,6 @@ void CPlayer::Update(double elapsed)
 void CPlayer::UpdateMove(double elapsed)
 {
 
-    SetLocation(GetX() + 50 * elapsed , GetY());
+    SetLocation(GetX() + 500 * elapsed , GetY());
 
 }
