@@ -12,6 +12,9 @@
 #include "President.h"
 using namespace std;
 
+/// Game area height in virtual pixels
+const static int Height = 1024;
+
 CGame::CGame()
 {
     mLevelWidth = 0;
@@ -35,22 +38,46 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 /** Draw the game
 * \param graphics The GDI+ graphics context to draw on
 */
-void CGame::OnDraw(Gdiplus::Graphics* graphics)
+void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX)
 {
+    //
+    // Automatic Scaling
+    //
+    mScale = float(height) / float(Height);
+    graphics->ScaleTransform(mScale, mScale);
+
+    // Determine the virtual width
+    auto virtualWidth = (float)width / mScale;
+
+    // Save current settings
+    auto save = graphics->Save();
+
+
+    // Keep centered on half virtual window width
+    graphics->TranslateTransform(scrollX + virtualWidth/2, 0);
+
     if (mBackground != nullptr)
     {
+       
         int width = static_cast<int>(mBackground->GetWidth());
         for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width)
         {
-            graphics->DrawImage(mBackground.get(), iter, 0,
+            graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
-        }
-    }
 
+        }
+        graphics->Restore(save);
+    }
+    auto save2 = graphics->Save();
+    // Keep centered on half virtual window width
+    graphics->TranslateTransform(virtualWidth / 2, 0);
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
     }
+
+    // Remove centering on half virtual window width
+    graphics->Restore(save2);
 }
 
 /** Loads a level
@@ -117,7 +144,7 @@ void CGame::Load(const std::wstring& filename)
                             auto t = make_tuple(node2->GetAttributeValue(L"image", L""), node2->GetAttributeIntValue(L"value", 0));
                             money_declarations[id] = t;
                         }
-                        if (name == L"tuition-tip")
+                        if (name == L"tuition-up")
                         {
                             tuitionup_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
@@ -142,20 +169,20 @@ void CGame::Load(const std::wstring& filename)
                             auto leftimage = L"images/" + get<0>(platform_declarations[id]);
                             auto midimage = L"images/" + get<1>(platform_declarations[id]);
                             auto rightimage = L"images/" + get<2>(platform_declarations[id]);
-                            auto entity = make_shared<CPlatform>(this, leftimage, midimage, rightimage);
-                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
-                            entity->SetWidth(node2->GetAttributeIntValue(L"width", 0));
-                            entity->SetHeight(node2->GetAttributeIntValue(L"height", 0));
-                            Add(entity);
+                            auto x = node2->GetAttributeIntValue(L"x", 0);
+                            auto y = node2->GetAttributeIntValue(L"y", 0);
+                            auto width = node2->GetAttributeIntValue(L"width", 0);
+                            auto height = node2->GetAttributeIntValue(L"height", 0);
+                            LoadPlatform(leftimage, midimage, rightimage, x, y, width, height);
                         }
                         if (name == L"wall")
                         {
                             auto image = L"images/" + wall_declarations[id];
-                            auto entity = make_shared<CWall>(this, image);
-                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
-                            entity->SetWidth(node2->GetAttributeIntValue(L"width", 0));
-                            entity->SetHeight(node2->GetAttributeIntValue(L"height", 0));
-                            Add(entity);
+                            auto x = node2->GetAttributeIntValue(L"x", 0);
+                            auto y = node2->GetAttributeIntValue(L"y", 0);
+                            auto width = node2->GetAttributeIntValue(L"width", 0);
+                            auto height = node2->GetAttributeIntValue(L"height", 0);
+                            LoadWall(image, x, y, width, height);
                         }
                         if (name == L"money")
                         {
@@ -165,7 +192,7 @@ void CGame::Load(const std::wstring& filename)
                             entity->SetWorth(get<1>(money_declarations[id]));
                             Add(entity);
                         }
-                        if (name == L"tuition-tip")
+                        if (name == L"tuition-up")
                         {
                             // needs to be changed to a tuitionup object
                             auto image = L"images/" + tuitionup_declarations[id];
@@ -218,6 +245,59 @@ void CGame::Update(double elapsed)
     for (auto item : mEntities)
     {
         item->Update(elapsed);
+    }
+}
+
+
+
+/**
+ * Handles loading platform into Game class
+ * \param leftimage Left image to use
+ * \param midimage Middle image to use
+ * \param rightimage Right image to use
+ * \param x X position of center of platform
+ * \param y Y position of center of platform
+ * \param width Width of platform
+ * \param height Height of platform
+ */
+void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage, int x, int y, int width, int height)
+{
+    double count = width / 32;
+    double leftx = x - ((count - 1) / 2) * 32;
+    double rightx = x + ((count - 1) / 2) * 32;
+    auto leftplatform = make_shared<CPlatform>(this, leftimage);
+    leftplatform->SetLocation(leftx, y);
+    Add(leftplatform);
+    auto rightplatform = make_shared<CPlatform>(this, rightimage);
+    rightplatform->SetLocation(rightx, y);
+    Add(rightplatform);
+    for (int i = 1; i <= count - 2; i++)
+    {
+        auto midplatform = make_shared<CPlatform>(this, midimage);
+        double offset = 32 * i;
+        midplatform->SetLocation(leftx + offset, y);
+        Add(midplatform);
+    }
+}
+
+/**
+ * Handles loading wall into Game class
+ * \param image Image to use
+ * \param x X position of center of wall
+ * \param y Y position of center of wall
+ * \param width Width of wall
+ * \param height Height of wall
+ */
+void CGame::LoadWall(wstring image, int x, int y, int width, int height)
+{
+    double count = height / 32;
+    double topy = y - ((count - 1) / 2) * 32;
+    for (int i = 0; i <= count - 1; i++)
+    {
+        auto wall = make_shared<CWall>(this, image);
+        double offset = 32 * i;
+        wall->SetLocation(x, topy + offset);
+        Add(wall);
     }
 }
 
