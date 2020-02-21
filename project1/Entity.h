@@ -77,6 +77,22 @@ public:
 
     virtual bool IsPresident() { return false; }
 
+    /// getter function getting the width of the image
+    /// \returns double representing image width
+    virtual int GetWidth() const { return mEntityImage->GetWidth(); }
+
+    /// getter function getting the height of the image
+    /// \returns double representing Image Height
+    virtual int GetHeight() const { return mEntityImage->GetHeight(); }
+
+    /// virtual function used to carry out different actions dependent
+    /// on what item the player collides with.
+    virtual void Collision() {};
+
+    /// getter function getting the image of the object
+    /// \returns the image that is used to draw the item
+    virtual Gdiplus::Bitmap* GetImage() { return mEntityImage.get(); }
+
 private:
     int mWorth = 0;
 

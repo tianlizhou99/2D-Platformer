@@ -44,7 +44,7 @@ public:
     void Update(double elapsed);
     //void Accept(CVisitor* visitor);
 
-
+    void CollisionTest(CPlayer* player);
     std::vector<double> ItemDistances(CPlayer* player);
 
     /** gets the current score of the game

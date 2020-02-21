@@ -127,6 +127,7 @@ void CChildView::OnPaint()
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
+	mElapsed = elapsed;
 
 
 	mGame.Update(elapsed);
@@ -205,12 +206,12 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
 	case VK_RIGHT:
 		// right arrow pressed
-		mPlayer->UpdateMove(1);
+		mPlayer->UpdateMove(mElapsed);
 		break;
 
 	case VK_LEFT:
 		// left arrow pressed
-		mPlayer->UpdateMove(-1);
+		mPlayer->UpdateMove(-mElapsed);
 		break;
 
 	case VK_SPACE:
@@ -226,10 +227,13 @@ void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	switch (nChar)
 	{
 	case VK_RIGHT:
+		mPlayer->SetTimer(0);
+		mPlayer->SetVel(0);
+		break;
 
 	case VK_LEFT:
-
-		// left or right arrow released
+		mPlayer->SetTimer(0);
+		mPlayer->SetVel(0);
 		break;
 	}
 }

@@ -221,6 +221,78 @@ void CGame::Update(double elapsed)
     }
 }
 
+/**
+ * Tests each item in the collection of items to see if it is touching the player
+ * \param player a pointer pointing to the spartygnome object or player of the game
+ */
+void CGame::CollisionTest(CPlayer* player)
+{
+    double PlayerX = player->GetX();
+    double PlayerY = player->GetY();
+    double PlayerHeight = (player->GetHeight())/2;
+    double PlayerWidth = (player->GetWidth()) /2;
+
+    for (auto entity : mEntities)
+    {
+        if (entity.get() == player)
+        {
+            continue;
+        }
+        double entityX = entity->GetX();
+        double entityY = entity->GetY();
+        double entityHeight = (entity->GetHeight()) / 2;
+        double entityWidth = (entity->GetWidth()) / 2;
+
+        if ((PlayerY - PlayerHeight <= entityY + entityHeight) && (PlayerY - PlayerHeight >= entityY - entityHeight))
+        {
+            if ((entityX + entityWidth <= PlayerX + PlayerWidth) && (entityX + entityWidth >= PlayerX - PlayerWidth))
+            {
+                entity->Collision();
+            }
+            else if ((entityX - entityWidth <= PlayerX + PlayerWidth) && (entityX - entityWidth >= PlayerX - PlayerWidth))
+            {
+                entity->Collision();
+            }
+        }
+        else if ((PlayerY + PlayerHeight <= entityY + entityHeight) && (PlayerY + PlayerHeight >= entityY - entityHeight))
+        {
+            if ((entityX + entityWidth <= PlayerX + PlayerWidth) && (entityX + entityWidth >= PlayerX - PlayerWidth))
+            {
+                entity->Collision();
+            }
+            else if ((entityX - entityWidth <= PlayerX + PlayerWidth) && (entityX - entityWidth >= PlayerX - PlayerWidth))
+            {
+                entity->Collision();
+            }
+        }
+        if ((PlayerX + PlayerWidth <= entityX + entityWidth) && (PlayerX + PlayerWidth >= entityX - entityWidth))
+        {
+            if ((entityY + entityHeight <= PlayerY + PlayerHeight) && (entityY + entityHeight >= PlayerY - PlayerHeight))
+            {
+                entity->Collision();
+            }
+            else if ((entityY - entityHeight <= PlayerY + PlayerHeight) && (entityY - entityHeight >= PlayerY - PlayerHeight))
+            {
+                entity->Collision();
+            }
+        }
+        else if ((PlayerX - PlayerWidth <= entityX + entityWidth) && (PlayerX - PlayerWidth >= entityX - entityWidth))
+        {
+            
+            if ((entityY + entityHeight <= PlayerY + PlayerHeight) && (entityY + entityHeight >= PlayerY - PlayerHeight))
+            {
+                entity->Collision();
+            }
+            else if ((entityY - entityHeight <= PlayerY + PlayerHeight) && (entityY - entityHeight >= PlayerY - PlayerHeight))
+            {
+                entity->Collision();
+            }
+            
+        }
+    }
+}
+
+
 std::vector<double> CGame::ItemDistances(CPlayer* player)
 {
     std::vector<double> pointsEarned;
