@@ -54,7 +54,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
 
 
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(scrollX, 0);
+    graphics->TranslateTransform(scrollX + virtualWidth/2, 0);
 
     if (mBackground != nullptr)
     {
