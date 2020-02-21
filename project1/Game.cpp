@@ -228,7 +228,6 @@ void CGame::Load(const std::wstring& filename)
     {
         AfxMessageBox(ex.Message().c_str());
     }
-
 }
 
 /**
@@ -251,6 +250,10 @@ void CGame::Update(double elapsed)
         item->Update(elapsed);
 
     }
+
+    if (mTimer < 0.5) mGameState = start;
+    else if (mTimer > 0.5) mGameState = progress;
+    //TODO other game state detections
 }
 
 
@@ -373,7 +376,7 @@ void CGame::CollisionTest(CPlayer* player)
     }
 
 }
-
+/*
 std::vector<double> CGame::ItemDistances(CPlayer* player)
 {
     std::vector<double> pointsEarned;
@@ -412,7 +415,7 @@ std::vector<double> CGame::ItemDistances(CPlayer* player)
         }
     }
     return pointsEarned;
-}
+}*/
 
 /** Accept a visitor for the collection
  * \param visitor The visitor for the collection

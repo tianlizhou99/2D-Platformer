@@ -72,9 +72,6 @@ public:
     * \param visitor The visitor we accept */
     //virtual void Accept(CVisitor* visitor) = 0;
 
-    int GetWorth() { return mWorth; }
-    void SetWorth(int worth) { mWorth = worth; }
-
     virtual bool IsPresident() { return false; }
 
     /// getter function getting the width of the image
@@ -94,8 +91,6 @@ public:
     virtual Gdiplus::Bitmap* GetImage() { return mEntityImage.get(); }
 
 private:
-    int mWorth = 0;
-
     double mX = 0; ///< X location for the center of the item
     double mY = 0; ///< Y location for the center of the item
 

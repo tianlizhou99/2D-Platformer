@@ -80,7 +80,8 @@ void CChildView::OnPaint()
 	
 	Graphics graphics(dc.m_hDC);
 	graphics.Clear(Color(0, 0, 0));
-	
+
+
 	// Do not call CWnd::OnPaint() for painting messages
 
     if (mFirstDraw)
@@ -100,6 +101,7 @@ void CChildView::OnPaint()
         mTimeFreq = double(freq.QuadPart);
 
 		/// add the timer to the game
+		mGame.SetTimer(0);
 		auto timer = make_shared<CTimer>(&mGame);
 		mGame.Add(timer);
 
@@ -111,8 +113,6 @@ void CChildView::OnPaint()
 		auto player = make_shared<CPlayer>(&mGame);
 		mPlayer = player;
 		mGame.Add(player);
-
-
     }
 
     // Get the size of the window
@@ -136,6 +136,46 @@ void CChildView::OnPaint()
      */
 	auto xOffset = (float)-mPlayer->GetX() + rect.Width()/2.0f;
     mGame.OnDraw(&graphics, rect.Width(), rect.Height(), xOffset);
+
+	/*
+	 * Display message
+	 */
+	double timer = 0;
+	
+	FontFamily fontFamily(L"Arial");
+	Gdiplus::Font font(&fontFamily, 100);
+
+	SolidBrush pink(Color(255, 105, 180));
+
+	if (!mMessageDisplayBool)
+	{
+		switch (mGame.GetState())
+		{
+		case 0:
+			mMessageDisplay = ("LEVEL " + to_string(mlevelNum) + " BEGIN");
+			timer = mGame.GetTimer();
+			mMessageDisplayBool = true;
+			break;
+		case 2:
+			mMessageDisplay = "LEVEL COMPLETE";
+			timer = mGame.GetTimer();
+			mMessageDisplayBool = true;
+			break;
+		case 3:
+			mMessageDisplay = "YOU LOSE";
+			timer = mGame.GetTimer();
+			mMessageDisplayBool = true;
+		}
+	}
+
+	wstring wide_string = wstring(mMessageDisplay.begin(), mMessageDisplay.end());
+	const wchar_t* result = wide_string.c_str();
+	
+	if (mMessageDisplayBool)
+	{
+		graphics.DrawString(result, -1, &font, PointF(500, 500), &pink);
+		if (mGame.GetTimer() - timer >= 2) mMessageDisplayBool = false;
+	}
 }
 
 
@@ -147,6 +187,7 @@ void CChildView::OnLevelsLevel0()
 {
 	mGame.Load(L"levels/level0.xml");
 	mFirstDraw = true;
+	mlevelNum = 0;
 }
 
 /**
@@ -157,6 +198,7 @@ void CChildView::OnLevelsLevel1()
 {
 	mGame.Load(L"levels/level1.xml");
 	mFirstDraw = true;
+	mlevelNum = 1;
 }
 
 /**
@@ -167,6 +209,7 @@ void CChildView::OnLevelsLevel2()
 {
 	mGame.Load(L"levels/level2.xml");
 	mFirstDraw = true;
+	mlevelNum = 2;
 }
 
 /**
@@ -177,6 +220,7 @@ void CChildView::OnLevelsLevel3()
 {
 	mGame.Load(L"levels/level3.xml");
 	mFirstDraw = true;
+	mlevelNum = 3;
 }
 
 

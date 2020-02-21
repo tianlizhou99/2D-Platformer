@@ -6,7 +6,6 @@ class CTimer :
 {
 public:
 	double GetTime();
-	void SetTime(double time);
 
 	void Draw(Gdiplus::Graphics* graphics) override;
 
