@@ -48,6 +48,7 @@ const wstring ScoreboardImageName = L"images/grass.png";
 CScoreboard::CScoreboard(CGame* game) :
 	CElement(game, ScoreboardImageName)
 {
+	SetLocation(0, 0);
 }
 
 /**

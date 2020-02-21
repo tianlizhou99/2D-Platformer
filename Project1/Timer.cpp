@@ -65,6 +65,7 @@ const wstring TimerImageName = L"images/grass.png";
 CTimer::CTimer(CGame* game) :
 	CElement(game , TimerImageName)
 {
+	SetLocation(0, 0);
 }
 
 /**

@@ -54,7 +54,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
 
 
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(scrollX, 0);
+    graphics->TranslateTransform(scrollX + virtualWidth/2, 0);
 
     if (mBackground != nullptr)
     {
@@ -299,6 +299,74 @@ void CGame::LoadWall(wstring image, int x, int y, int width, int height)
         wall->SetLocation(x, topy + offset);
         Add(wall);
     }
+}
+
+void CGame::CollisionTest(CPlayer* player)
+{
+    double PlayerX = player->GetX();
+    double PlayerY = player->GetY();
+    double PlayerHeight = player->GetHeight() / 2;
+    double PlayerWidth = player->GetWidth() / 2;
+
+    for (auto entity : mEntities)
+    {
+        double EntityX = entity->GetX();
+        double EntityY = entity->GetY();
+        double EntityHeight = entity->GetHeight() / 2;
+        double EntityWidth = entity->GetWidth() / 2;
+
+        if (entity.get() == player)
+        {
+            continue;
+        }
+
+        if ((PlayerX + PlayerWidth >= EntityX - EntityWidth) && (PlayerX + PlayerWidth <= EntityX + EntityWidth))
+        {
+            if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
+            {
+                entity->Collision();
+            }
+            else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
+            {
+                entity->Collision();
+            }
+        }
+        else if ((PlayerX - PlayerWidth >= EntityX - EntityWidth) && (PlayerX - PlayerWidth <= EntityX + EntityWidth))
+        {
+            if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
+            {
+                entity->Collision();
+            }
+            else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
+            {
+                entity->Collision();
+            }
+        }
+
+        if((PlayerY + PlayerHeight >= EntityY - EntityHeight) && (PlayerY + PlayerHeight <= EntityY + EntityWidth))
+        {
+            if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
+            {
+                entity->Collision();
+            }
+            else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
+            {
+                entity->Collision();
+            }
+        }
+        else if ((PlayerY - PlayerHeight >= EntityY - EntityHeight) && (PlayerY - PlayerHeight <= EntityY + EntityWidth))
+        {
+            if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
+            {
+                entity->Collision();
+            }
+            else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
+            {
+                entity->Collision();
+            }
+        }
+    }
+
 }
 
 std::vector<double> CGame::ItemDistances(CPlayer* player)
