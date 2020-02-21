@@ -24,10 +24,10 @@
     <ClCompile Include="EmptyTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CGameTest.cpp">
+    <ClCompile Include="CTimerTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTimerTest.cpp">
+    <ClCompile Include="CPlayerTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

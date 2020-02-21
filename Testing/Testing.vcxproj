@@ -172,10 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CGameTest.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+    <ClCompile Include="CPlayerTest.cpp" />
     <ClCompile Include="CTimerTest.cpp" />
     <ClCompile Include="initialize.cpp" />
     <ClCompile Include="pch.cpp">

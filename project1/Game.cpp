@@ -66,18 +66,20 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
                 mBackground->GetWidth(), mBackground->GetHeight());
 
         }
-        graphics->Restore(save);
+
     }
-    auto save2 = graphics->Save();
+
     // Keep centered on half virtual window width
     graphics->TranslateTransform(virtualWidth / 2, 0);
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
+       
+        
     }
 
     // Remove centering on half virtual window width
-    graphics->Restore(save2);
+    graphics->Restore(save);
 }
 
 /** Loads a level
@@ -212,7 +214,9 @@ void CGame::Load(const std::wstring& filename)
                             auto image = L"images/" + villain_declarations[id];
                             auto entity = make_shared<CCharacter>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetStart(node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
+                            
                         }
                     }
                 }
@@ -245,6 +249,7 @@ void CGame::Update(double elapsed)
     for (auto item : mEntities)
     {
         item->Update(elapsed);
+
     }
 }
 

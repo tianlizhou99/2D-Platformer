@@ -31,6 +31,7 @@ public:
 
     /// Copy constructor (disabled)
     CBadger(const CBadger&) = delete;
+   
 
 
 };
