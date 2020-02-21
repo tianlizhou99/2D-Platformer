@@ -47,7 +47,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     graphics->ScaleTransform(mScale, mScale);
 
     // Determine the virtual width
-    auto virtualWidth = (float)width / mScale;
+    float virtualWidth = (float)width / mScale;
 
     // Save current settings
     auto save = graphics->Save();
@@ -60,7 +60,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width - 1)
+        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width - 2)
         {
             graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
@@ -68,9 +68,8 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
         }
 
     }
-
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(virtualWidth / 2, 0);
+    graphics->TranslateTransform(-virtualWidth / 3, 512);
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
