@@ -13,16 +13,9 @@ using namespace std;
  */
 double CTimer::GetTime()
 {
-	return mTime;
-}
-
-/**
- * Sets the time of the member variable mTime
- * \param time the time that mTime is being set to
- */
-void CTimer::SetTime(double time)
-{
-	mTime = time;
+	auto game = GetGame();
+	double time = game->GetTimer();
+	return time;
 }
 
 /**
@@ -77,5 +70,5 @@ void CTimer::Update(double elpased)
 	auto game = GetGame();
 	double time = GetTime();
 	time += elpased;
-	SetTime(time);
+	game->SetTimer(time);
 }
