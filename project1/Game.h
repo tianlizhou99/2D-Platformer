@@ -40,7 +40,7 @@ public:
     CGame(); 
     virtual ~CGame();
     void Add(std::shared_ptr<CEntity> entity);
-    void OnDraw(Gdiplus::Graphics* graphics, int width, int height);
+    void OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX);
     void Load(const std::wstring& filename);
     void Clear();
     void Update(double elapsed);

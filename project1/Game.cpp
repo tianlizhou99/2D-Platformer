@@ -38,7 +38,7 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 /** Draw the game
 * \param graphics The GDI+ graphics context to draw on
 */
-void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
+void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX)
 {
     //
     // Automatic Scaling
@@ -52,26 +52,32 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height)
     // Save current settings
     auto save = graphics->Save();
 
+
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(virtualWidth/2, 0);
+    graphics->TranslateTransform(scrollX, 0);
 
     if (mBackground != nullptr)
     {
+       
         int width = static_cast<int>(mBackground->GetWidth());
         for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width)
         {
-            graphics->DrawImage(mBackground.get(), iter, 0,
+            graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
-        }
-    }
 
+        }
+        graphics->Restore(save);
+    }
+    auto save2 = graphics->Save();
+    // Keep centered on half virtual window width
+    graphics->TranslateTransform(virtualWidth / 2, 0);
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
     }
 
     // Remove centering on half virtual window width
-    graphics->Restore(save);
+    graphics->Restore(save2);
 }
 
 /** Loads a level

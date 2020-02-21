@@ -8,7 +8,7 @@ using namespace Gdiplus;
 const wstring GnomeImage = L"images/gnome.png";
 CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
 {
-    SetLocation(521, 521);
+    //SetLocation(521, 521);
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
