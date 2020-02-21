@@ -172,6 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CPlayerTest.cpp" />
     <ClCompile Include="CGameTest.cpp">
       <SubType>
       </SubType>

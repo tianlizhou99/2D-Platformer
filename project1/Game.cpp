@@ -60,24 +60,26 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width)
+        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width - 1)
         {
             graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
 
         }
-        graphics->Restore(save);
+
     }
-    auto save2 = graphics->Save();
+
     // Keep centered on half virtual window width
     graphics->TranslateTransform(virtualWidth / 2, 0);
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
+       
+        
     }
 
     // Remove centering on half virtual window width
-    graphics->Restore(save2);
+    graphics->Restore(save);
 }
 
 /** Loads a level
@@ -212,7 +214,9 @@ void CGame::Load(const std::wstring& filename)
                             auto image = L"images/" + villain_declarations[id];
                             auto entity = make_shared<CCharacter>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetStart(node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
+                            
                         }
                     }
                 }
@@ -244,6 +248,7 @@ void CGame::Update(double elapsed)
     for (auto item : mEntities)
     {
         item->Update(elapsed);
+
     }
 
     if (mTimer < 0.5) mGameState = start;
@@ -274,10 +279,10 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
     auto rightplatform = make_shared<CPlatform>(this, rightimage);
     rightplatform->SetLocation(rightx, y);
     Add(rightplatform);
-    for (int i = 1; i <= count - 2; i++)
+    for (double i = 1; i <= count - 2; i++)
     {
         auto midplatform = make_shared<CPlatform>(this, midimage);
-        double offset = 32 * i;
+        double offset = i * 32;
         midplatform->SetLocation(leftx + offset, y);
         Add(midplatform);
     }
@@ -295,10 +300,10 @@ void CGame::LoadWall(wstring image, int x, int y, int width, int height)
 {
     double count = height / 32;
     double topy = y - ((count - 1) / 2) * 32;
-    for (int i = 0; i <= count - 1; i++)
+    for (double i = 0; i <= count - 1; i++)
     {
         auto wall = make_shared<CWall>(this, image);
-        double offset = 32 * i;
+        double offset = i * 32;
         wall->SetLocation(x, topy + offset);
         Add(wall);
     }

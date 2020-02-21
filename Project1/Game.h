@@ -48,7 +48,7 @@ public:
     void OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX);
     void Load(const std::wstring& filename);
     void Clear();
-    void Update(double elapsed);
+    virtual void Update(double elapsed);
     void LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage, int x, int y, int width, int height);
     void LoadWall(wstring image, int x, int y, int width, int height);
     //void Accept(CVisitor* visitor);

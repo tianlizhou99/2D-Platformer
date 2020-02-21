@@ -4,8 +4,7 @@
 void CCharacter::XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
 	SetLocation(node->GetAttributeDoubleValue(L"x", 0), node->GetAttributeDoubleValue(L"y", 0));
-	mSpeedY = node->GetAttributeDoubleValue(L"SpeedY", 0);
-	mSpeedX = node->GetAttributeDoubleValue(L"SpeedX", 0);
+	mTime = 0;
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CCharacter::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
@@ -26,5 +25,16 @@ void CCharacter::SetSpeedY(double y)
 CCharacter::CCharacter(CGame* game, const std::wstring& filename) : CEntity(game, filename)
 {
 	mSpeedX = 0;
-	mSpeedY = 0;
+	mSpeedY = -240;
+}
+
+void CCharacter::Update(double elapsed) {
+	SetLocation(GetX(), GetY() + mSpeedY * elapsed);
+	if (GetY() <= mStartY-300 || GetY() > mStartY) {
+		SetSpeedY(-mSpeedY);
+	}
+}
+
+void CCharacter::SetStart(double start) {
+	mStartY = start;
 }

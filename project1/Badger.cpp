@@ -10,11 +10,12 @@ CBadger::CBadger(CGame* game) : CCharacter(game, badgerImage)
 {
    
     SetSpeedY(240);
+    
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CBadger::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
 {
     auto itemNode = CCharacter::XmlSave(node);
-    itemNode->SetAttribute(L"type", L"Wolverine");
+    itemNode->SetAttribute(L"type", L"Badger");
     return itemNode;
 }
