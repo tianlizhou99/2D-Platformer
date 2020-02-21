@@ -35,11 +35,11 @@ namespace Testing
 			/// add the timer to the game
 			auto timer = std::make_shared<CTimer>(&game);
 
-			timer->SetTime(5.00);
+			game.SetTimer(5.00);
 
 			Assert::IsTrue(timer->GetTime() == 5.00);
 
-			timer->SetTime(0);
+			game.SetTimer(0);
 			
 			Assert::IsTrue(timer->GetTime() == 0);
 		}

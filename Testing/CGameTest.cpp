@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "Platform.h"
+#include "Wall.h"
+
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -29,20 +31,19 @@ namespace Testing
 
 		}
 
-		TEST_METHOD(TestMoneyGetterSetters)
+		TEST_METHOD(LoadWallTest)
 		{
-			CGame game;
+			CGame game1;
+			game1.LoadWall(L"images/wall1.png", 768, 944, 96, 32);
 
-			Assert::IsTrue(game.GetScore() == 0);
-
-			game.SetScore(100);
-
-			Assert::IsTrue(game.GetScore() == 100);
-
-			game.SetScore(1000);
-
-			Assert::IsTrue(game.GetScore() == 1000);
+			CGame game2;
+			wstring wallImage = L"images/wall1.png";
+			auto wall = make_shared<CWall>(&game2, wallImage);
+			wall->SetLocation(768, 944);
+			game2.Add(wall);
 		}
+
+
 
 	};
 }
