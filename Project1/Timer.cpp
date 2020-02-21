@@ -36,10 +36,11 @@ void CTimer::Draw(Gdiplus::Graphics* graphics)
 	int seconds_int = (milliseconds - (60 * minutes_int));
 	
 	string seconds = to_string(seconds_int);
+	if (seconds_int < 10) seconds = "0" + seconds;
 
 	string minutes = to_string(minutes_int);
+	if (minutes_int < 10) minutes = "0" + minutes;
 
-	
 	string time = minutes+ ":" +seconds;
 
 	wstring wide_string = wstring(time.begin(), time.end());
