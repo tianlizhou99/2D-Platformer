@@ -29,5 +29,20 @@ namespace Testing
 
 		}
 
+		TEST_METHOD(TestMoneyGetterSetters)
+		{
+			CGame game;
+
+			Assert::IsTrue(game.GetScore() == 0);
+
+			game.SetScore(100);
+
+			Assert::IsTrue(game.GetScore() == 100);
+
+			game.SetScore(1000);
+
+			Assert::IsTrue(game.GetScore() == 1000);
+		}
+
 	};
 }
