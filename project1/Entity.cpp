@@ -47,7 +47,7 @@ void CEntity::Draw(Gdiplus::Graphics* graphics)
     if (mYMirror)
     {
         graphics->DrawImage(mEntityImage.get(),
-            float(GetX() - wid / 2), float(GetY() + hit / 2),
+            float(GetX() - wid / 2), float(GetY() - hit / 2),
             (float)mEntityImage->GetWidth(), -(float)mEntityImage->GetHeight());
     }
     else

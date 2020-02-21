@@ -46,6 +46,9 @@ private:
 
 	long long mLastTime;    ///< Last time we read the timer
 	double mTimeFreq;       ///< Rate the timer updates
+
+	double mElapsed;
+
 	int mlevelNum = 0;
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);

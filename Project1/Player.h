@@ -30,14 +30,27 @@ public:
 
     void UpdateMove(double elapsed);
 
+    void Draw(Gdiplus::Graphics* graphics)override;
+
     /** Accept a visitor
     * \param visitor The visitor we accept */
     virtual void Accept(CVisitor* visitor) { visitor->VisitPlayer(this); }
+
+    /// Setter function setting the velocity of the gnome
+    /// \param vel the velocity that mVel is being set to
+    void SetVel(double vel) { mVel = vel; }
+
+    /// Setter function setting the Timer of the gnome
+    /// \param TIme the Time that mTimer is being set to
+    void SetTimer(double Time) { mTimer = Time; }
+
 
 private:
     double mJumping = false; ///< whether player is jumping
     bool mMoveR = false;
     double mTime = 0; ///< time elapsed since space bar
     bool mMoveL = false;
+    double mTimer = 0; ///< time that left or right key has been held down for
+    double mVel = 0; ///< velocity of the player in the x direction
 
 };

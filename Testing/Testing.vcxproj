@@ -126,7 +126,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pch</AdditionalDependencies>
+      <AdditionalDependencies>pch;Game;Timer;Entity;Element;Item;Level;XmlNode;Wall;Platform;Wolverine;Badger;Character;EndDoor;Money;President</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -176,6 +176,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="CTimerTest.cpp" />
     <ClCompile Include="initialize.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
