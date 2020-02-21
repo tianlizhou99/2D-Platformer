@@ -26,8 +26,6 @@ public:
     /// Copy constructor (disabled)
     CPlayer(const CPlayer&) = delete;
     void Jump();
-    void MoveR();
-    void MoveL();
     void Update(double elpased) override;
 
     void UpdateMove(double elapsed);
