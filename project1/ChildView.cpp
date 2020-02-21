@@ -215,6 +215,7 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	case VK_SPACE:
 		// space bar pressed
+	
 		break;
 	}
 }
