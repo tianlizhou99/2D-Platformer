@@ -26,6 +26,7 @@ class CGame
 {
 private:
     int mScore = 0; ///< score of the player
+    double mTimer = 0; ///< timer of current level
 
     std::vector <std::shared_ptr<CEntity>> mEntities; ///< Vector of entities
     
@@ -49,14 +50,22 @@ public:
     //void Accept(CVisitor* visitor);
 
     void CollisionTest(CPlayer* player);
-    std::vector<double> ItemDistances(CPlayer* player);
+    //std::vector<double> ItemDistances(CPlayer* player);
 
     /** gets the current score of the game
      * \returns the current score of the game */
     int GetScore() { return mScore; };
 
     /** gets the current score of the game
-     * \returns the current score of the game */
+     * \param score the current score of the game */
     void SetScore(int score) { mScore = score; };
+
+    /** gets the current timerr of the game
+    * \returns the current time of the game */
+    double GetTimer() { return mTimer; };
+
+    /** gets the current timer of the game
+     * \param timer the current timer of the game */
+    void SetTimer(double timer) { mTimer = timer; };
 
 };

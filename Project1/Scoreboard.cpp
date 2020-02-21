@@ -59,15 +59,6 @@ CScoreboard::CScoreboard(CGame* game) :
 void CScoreboard::Update(double elapsed)
 {	
 	auto game = GetGame();
-	CPlayer player(game);
-
-	auto itemDists = game->ItemDistances(&player);
-
-	double score = GetScore();
-	for (auto itemDist : itemDists)
-	{
-		score += itemDist;
-	}
+	int score = GetScore();
 	game->SetScore(score);
-	itemDists.clear();
 }

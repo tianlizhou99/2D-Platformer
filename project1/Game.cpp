@@ -368,7 +368,7 @@ void CGame::CollisionTest(CPlayer* player)
     }
 
 }
-
+/*
 std::vector<double> CGame::ItemDistances(CPlayer* player)
 {
     std::vector<double> pointsEarned;
@@ -407,7 +407,7 @@ std::vector<double> CGame::ItemDistances(CPlayer* player)
         }
     }
     return pointsEarned;
-}
+}*/
 
 /** Accept a visitor for the collection
  * \param visitor The visitor for the collection
