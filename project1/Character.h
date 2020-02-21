@@ -36,6 +36,8 @@ public:
     /** sets the characters speed in the y direction
     * \param y is speed of characters
     */
+    virtual void Update(double elapsed);
+    void SetStart(double start);
     void SetSpeedY(double y);
 
     /** Constructor for character
@@ -50,6 +52,8 @@ private:
 
     ///  speed in the Y direction
     double mSpeedY;
+    double mStartY;
+    double mTime;
 };
 
 

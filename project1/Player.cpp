@@ -13,7 +13,7 @@ const wstring GnomeLeft1 = L"images/gnome-walk-left-1.png";
 const wstring GnomeLeft2 = L"images/gnome-walk-left-2.png";
 CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
 {
-    SetLocation(788, 796);
+   /// SetLocation(788, 796);
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
@@ -57,7 +57,7 @@ void CPlayer::Update(double elapsed)
 void CPlayer::UpdateMove(double elapsed)
 {
 
-    SetLocation(GetX() + 50 * elapsed , GetY());
+    SetLocation(GetX() + 500 * elapsed , GetY());
     if (elapsed > 0)
     {
         mTimer += elapsed;
