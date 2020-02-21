@@ -60,7 +60,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width)
+        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width - 1)
         {
             graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
@@ -274,10 +274,10 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
     auto rightplatform = make_shared<CPlatform>(this, rightimage);
     rightplatform->SetLocation(rightx, y);
     Add(rightplatform);
-    for (int i = 1; i <= count - 2; i++)
+    for (double i = 1; i <= count - 2; i++)
     {
         auto midplatform = make_shared<CPlatform>(this, midimage);
-        double offset = 32 * i;
+        double offset = i * 32;
         midplatform->SetLocation(leftx + offset, y);
         Add(midplatform);
     }
@@ -295,10 +295,10 @@ void CGame::LoadWall(wstring image, int x, int y, int width, int height)
 {
     double count = height / 32;
     double topy = y - ((count - 1) / 2) * 32;
-    for (int i = 0; i <= count - 1; i++)
+    for (double i = 0; i <= count - 1; i++)
     {
         auto wall = make_shared<CWall>(this, image);
-        double offset = 32 * i;
+        double offset = i * 32;
         wall->SetLocation(x, topy + offset);
         Add(wall);
     }

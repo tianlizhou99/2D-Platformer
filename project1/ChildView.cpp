@@ -134,7 +134,7 @@ void CChildView::OnPaint()
     /*
      * Actually Draw the game
      */
-	auto xOffset = (float)-mPlayer->GetX() + rect.Width()/2.0f;
+	int xOffset = static_cast<int>((float)-mPlayer->GetX() + rect.Width()/2.0f);
     mGame.OnDraw(&graphics, rect.Width(), rect.Height(), xOffset);
 
 	/*

@@ -192,6 +192,7 @@
     <ClInclude Include="Element.h" />
     <ClInclude Include="EndDoor.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FarmLaneWalkSign.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Item.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="EndDoor.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FarmLaneWalkSign.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Level.cpp" />

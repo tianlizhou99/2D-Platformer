@@ -29,7 +29,7 @@ void CTimer::Draw(Gdiplus::Graphics* graphics)
 
 	SolidBrush green(Color(0, 64, 0));
 
-	int milliseconds = GetTime();
+	int milliseconds = static_cast<int>(GetTime());
 
 	int minutes_int = milliseconds / 60;
 
