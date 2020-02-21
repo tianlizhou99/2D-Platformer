@@ -24,9 +24,6 @@
     <ClCompile Include="EmptyTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTimerTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CGameTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

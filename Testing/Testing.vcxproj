@@ -109,7 +109,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pch</AdditionalDependencies>
+      <AdditionalDependencies>pch;Game;Badger;Character;Element;EndDoor;Entity;Item;Level;Money;Platform;Player;President;Scoreboard;Timer;Visitor;Wall;Wolverine;XmlNode</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,7 +126,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pch;Timer;Game;Entity;Element;XmlNode;Player;Character;Wall;Platform;Money;Item;President;EndDoor;Badger;Wolverine;Level</AdditionalDependencies>
+      <AdditionalDependencies>pch</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -173,10 +173,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CGameTest.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="CTimerTest.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -127,7 +127,6 @@ void CChildView::OnPaint()
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
-	mElapsed = elapsed;
 
 
 	mGame.Update(elapsed);
@@ -135,7 +134,8 @@ void CChildView::OnPaint()
     /*
      * Actually Draw the game
      */
-    mGame.OnDraw(&graphics);
+	auto xOffset = (float)-mPlayer->GetX() + rect.Width()/2.0f;
+    mGame.OnDraw(&graphics, rect.Width(), rect.Height(), xOffset);
 }
 
 
@@ -202,20 +202,58 @@ BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 
 void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
+	LARGE_INTEGER time;
+	QueryPerformanceCounter(&time);
+	long long diff = time.QuadPart - mLastTime;
+	double elapsed = double(diff) / mTimeFreq;
+	mLastTime = time.QuadPart;
+	/// Maximum amount of time to allow for elapsed
+	const double MaxElapsed = 0.050;
 	switch (nChar)
 	{
+
 	case VK_RIGHT:
 		// right arrow pressed
-		mPlayer->UpdateMove(mElapsed);
+
+	//
+	// Prevent tunnelling
+	//
+		while (elapsed > MaxElapsed)
+		{
+			mPlayer->UpdateMove(MaxElapsed);
+
+			elapsed -= MaxElapsed;
+		}
+
+		// Consume any remaining time
+		if (elapsed > 0)
+		{
+			mPlayer->UpdateMove(elapsed);
+		}
 		break;
 
 	case VK_LEFT:
 		// left arrow pressed
-		mPlayer->UpdateMove(-mElapsed);
+	//
+	// Prevent tunnelling
+	//
+		while (elapsed > MaxElapsed)
+		{
+			mPlayer->UpdateMove(-MaxElapsed);
+
+			elapsed -= MaxElapsed;
+		}
+
+		// Consume any remaining time
+		if (elapsed > 0)
+		{
+			mPlayer->UpdateMove(-elapsed);
+		}
 		break;
 
 	case VK_SPACE:
 		// space bar pressed
+	
 		break;
 	}
 }
@@ -227,13 +265,10 @@ void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	switch (nChar)
 	{
 	case VK_RIGHT:
-		mPlayer->SetTimer(0);
-		mPlayer->SetVel(0);
-		break;
 
 	case VK_LEFT:
-		mPlayer->SetTimer(0);
-		mPlayer->SetVel(0);
+
+		// left or right arrow released
 		break;
 	}
 }

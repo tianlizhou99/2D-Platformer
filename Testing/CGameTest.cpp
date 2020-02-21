@@ -1,12 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "Game.h"
-#include <memory>
-#include "Element.h"
-#include "Entity.h"
-#include "XmlNode.h"
-#include "player.h"
-#include <memory>
+#include "Platform.h"
+
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -15,33 +10,23 @@ namespace Testing
 	TEST_CLASS(CGameTest)
 	{
 	public:
-
-		TEST_METHOD_INITIALIZE(methodName)
-		{
-			extern wchar_t g_dir[];
-			::SetCurrentDirectory(g_dir);
-		}
 		
-		TEST_METHOD(TestNothing)
+		TEST_METHOD(LoadPlatformTest)
 		{
-			// This is an empty test just to ensure the system is working
-		}
+			CGame game1;
+			game1.LoadPlatform(L"images/snowLeft.png", L"images/snowMid.png", L"images/snowRight.png", 768, 944, 96, 32);
 
-		TEST_METHOD(TestGameScoreGettersSetters)
-		{
-			// This is an empty test just to ensure the system is working
+			CGame game2;
+			auto leftplatform = make_shared<CPlatform>(&game2, L"images/snowLeft.png");
+			leftplatform->SetLocation(768 - 32, 944);
+			auto rightplatform = make_shared<CPlatform>(&game2, L"images/snowRight.png");
+			rightplatform->SetLocation(768 + 32, 944);
+			auto midplatform = make_shared<CPlatform>(&game2, L"images/snowMid.png");
+			midplatform->SetLocation(768, 944);
+			game2.Add(leftplatform);
+			game2.Add(rightplatform);
+			game2.Add(midplatform);
 
-			CGame game;
-
-			game.SetScore(100);
-
-			Assert::AreEqual(100,game.GetScore(),0.000001);
-
-			game.SetScore(1000);
-
-			Assert::AreEqual(1000, game.GetScore(), 0.000001);
-
-			
 		}
 
 	};
