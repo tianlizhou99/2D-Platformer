@@ -138,22 +138,43 @@ void CChildView::OnPaint()
     mGame.OnDraw(&graphics, rect.Width(), rect.Height(), xOffset);
 
 	/*
-	 * Display level begin message
+	 * Display message
 	 */
-	if (mGame.GetTimer() < 3)
+	double timer = 0;
+	
+	FontFamily fontFamily(L"Arial");
+	Gdiplus::Font font(&fontFamily, 100);
+
+	SolidBrush pink(Color(255, 105, 180));
+
+	if (!mMessageDisplayBool)
 	{
-		FontFamily fontFamily(L"Arial");
-		Gdiplus::Font font(&fontFamily, 32);
+		switch (mGame.GetState())
+		{
+		case 0:
+			mMessageDisplay = ("LEVEL " + to_string(mlevelNum) + " BEGIN");
+			timer = mGame.GetTimer();
+			mMessageDisplayBool = true;
+			break;
+		case 2:
+			mMessageDisplay = "LEVEL COMPLETE";
+			timer = mGame.GetTimer();
+			mMessageDisplayBool = true;
+			break;
+		case 3:
+			mMessageDisplay = "YOU LOSE";
+			timer = mGame.GetTimer();
+			mMessageDisplayBool = true;
+		}
+	}
 
-		SolidBrush pink(Color(64, 0, 64));
-
-		string beginMessage = ("Level " + to_string(mlevelNum) + " Begin");
-
-		wstring wide_string = wstring(beginMessage.begin(), beginMessage.end());
-		const wchar_t* result = wide_string.c_str();
-
-
+	wstring wide_string = wstring(mMessageDisplay.begin(), mMessageDisplay.end());
+	const wchar_t* result = wide_string.c_str();
+	
+	if (mMessageDisplayBool)
+	{
 		graphics.DrawString(result, -1, &font, PointF(500, 500), &pink);
+		if (mGame.GetTimer() - timer >= 2) mMessageDisplayBool = false;
 	}
 }
 

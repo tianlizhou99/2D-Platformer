@@ -43,13 +43,16 @@ private:
 	std::shared_ptr<CPlayer> mPlayer; ///< Player being controlled
 	/// True until the first time we draw
 	bool mFirstDraw = true;
+	
+	bool mMessageDisplayBool = false; ///< if a message is being displayed
+	string mMessageDisplay = ""; ///< message to display
 
 	long long mLastTime;    ///< Last time we read the timer
 	double mTimeFreq;       ///< Rate the timer updates
 
-	double mElapsed;
+	double mElapsed; ///< time elapsed
 
-	int mlevelNum = 0;
+	int mlevelNum = 0; ///< selected level number
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);

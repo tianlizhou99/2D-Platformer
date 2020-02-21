@@ -24,8 +24,13 @@ class CEntity;
  */
 class CGame
 {
+public:
+    ///possible game states
+    enum GameState { start = 0, progress = 1, end = 2, loss = 3 };
 private:
     int mScore = 0; ///< score of the player
+    GameState mGameState = start; ///< current state of the game
+    double mTimer = 0; ///< timer of current level
 
     std::vector <std::shared_ptr<CEntity>> mEntities; ///< Vector of entities
     
@@ -51,12 +56,24 @@ public:
     void CollisionTest(CPlayer* player);
     std::vector<double> ItemDistances(CPlayer* player);
 
+    /** gets the current state of the game
+     * \returns the current state of the game */
+    int GetState() { return mGameState; };
+
     /** gets the current score of the game
      * \returns the current score of the game */
     int GetScore() { return mScore; };
 
     /** gets the current score of the game
-     * \returns the current score of the game */
+     * \param score the current score of the game */
     void SetScore(int score) { mScore = score; };
+
+    /** gets the current timerr of the game
+    * \returns the current time of the game */
+    double GetTimer() { return mTimer; };
+
+    /** gets the current timer of the game
+     * \param timer the current timer of the game */
+    void SetTimer(double timer) { mTimer = timer; };
 
 };
