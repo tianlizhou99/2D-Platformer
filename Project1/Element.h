@@ -2,6 +2,10 @@
 #include "Entity.h"
 #include <memory>
 #include<string>
+
+/**
+* Base class for UI elements
+*/
 class CElement :
 	public CEntity
 {
@@ -19,9 +23,9 @@ public:
 
 	CElement(CGame* game, const std::wstring& filename);
 
-	/** update function for all onscreen objects
-	* \param elapsed amount of time elapsed since the last update
-	* given in milliseconds */
-	virtual void Update(double elpased) {};
+	/// update function for all onscreen objects
+	/// \param elapsed time since last call
+	/// \returns void
+	virtual void Update(double elapsed) {};
 };
 

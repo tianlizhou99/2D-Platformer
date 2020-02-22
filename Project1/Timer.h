@@ -1,6 +1,10 @@
 #pragma once
 #include "Element.h"
 #include <memory>
+
+/**
+* Timer class
+*/
 class CTimer :
 	public CElement
 {
