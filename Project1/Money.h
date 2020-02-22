@@ -11,6 +11,9 @@
 #include <string>
 using namespace std;
 
+/**
+* Class for money items
+*/
 class CMoney :
 	public CItem
 {
@@ -27,10 +30,15 @@ public:
     /// on what item the player collides with.
     void Collision();
 
+    /// Getter for mWorth
+    /// \returns int mWorth
     int GetWorth() { return mWorth; }
+
+    /// Setter for mWorth
+    /// \param worth of the money
     void SetWorth(int worth) { mWorth = worth; }
 
 private:
-    int mWorth = 0;
+    int mWorth = 0; ///< Worth of the money
 };
 
