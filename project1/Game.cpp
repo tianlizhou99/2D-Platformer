@@ -244,6 +244,7 @@ void CGame::Clear()
 
 /** Handle updates for animation
 * \param elapsed The time since the last update
+* \return void
 */
 void CGame::Update(double elapsed)
 {
