@@ -71,7 +71,7 @@ public:
      * \param score the current score of the game */
     void SetScore(int score) { mScore = score; };
 
-    /** gets the current timerr of the game
+    /** gets the current timer of the game
     * \returns the current time of the game */
     double GetTimer() { return mTimer; };
 
@@ -79,4 +79,7 @@ public:
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
 
+    /** gets the height of the current level
+    * \returns the heights of the current level */
+    int GetLevelHeight() { return mLevelHeight; };
 };
