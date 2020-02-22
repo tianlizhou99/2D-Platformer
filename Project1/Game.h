@@ -38,7 +38,6 @@ private:
     
     int mLevelWidth = 0; ///< Level width
     int mLevelHeight = 0; ///< Level height
-    bool mTuitionIncrease = false;
     float mScale = 1; ///<Window scale
 
 public:
@@ -61,7 +60,7 @@ public:
     int GetState() { return mGameState; };
 
     /** sets the current state of the game
-     * \param state the current state of the game */
+     * \param gameState the current state of the game */
     void SetState(GameState gameState) { mGameState = gameState; };
 
     /** gets the current score of the game
