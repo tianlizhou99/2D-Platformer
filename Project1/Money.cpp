@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Money.h"
 #include "DoubleBufferDC.h"
+
 using namespace Gdiplus;
 
 /**
@@ -33,9 +34,10 @@ void CMoney::Collision()
 
 	graphics.DrawString(result, -1, &font, PointF(500, 500), &green);
 	*/
-
 	// make money fly
 	auto game = GetGame();
+	//GameState gState = money;
+	//game->SetState(4);
 	int score = game->GetScore();
 	score += mWorth;
 	game->SetScore(score);
@@ -44,5 +46,6 @@ void CMoney::Collision()
 	{
 		SetLocation(GetX() , (GetY() - 50));
 		// make it wait somehow
+		// add update?
 	}
 }

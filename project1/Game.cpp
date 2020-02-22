@@ -308,6 +308,10 @@ void CGame::LoadWall(wstring image, int x, int y, int width, int height)
     }
 }
 
+/**
+ * Checks for player collision with entity
+ * \param player Height of wall
+ */
 void CGame::CollisionTest(CPlayer* player)
 {
     double PlayerX = player->GetX();

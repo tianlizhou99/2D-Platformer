@@ -10,7 +10,7 @@ class CPlayer :public CCharacter
 {
 public:
     /** Constructor for Player
-    * \param game is the Game the Player is held in
+    * \param Game is the Game the Player is held in
     */
     CPlayer(CGame* game);
     /** saves the items to xml
@@ -25,27 +25,15 @@ public:
 
     /// Copy constructor (disabled)
     CPlayer(const CPlayer&) = delete;
-    /** increases the y position of the player
-    *
-    */
     void Jump();
-    /** updates the player over time
-    * \param elapsed is the time elapsed
-    */
     void Update(double elpased) override;
-    /** updates the players movement over time
-* 
-*/
+
     void UpdateMove(double elapsed);
-    /** Draws the player
-* \param graphics is the visual representation
-*/
+
     void Draw(Gdiplus::Graphics* graphics)override;
 
     /** Accept a visitor
-    * \param visitor The visitor we accept
-    * 
-    */
+    * \param visitor The visitor we accept */
     virtual void Accept(CVisitor* visitor) { visitor->VisitPlayer(this); }
 
     /// Setter function setting the velocity of the gnome
@@ -53,13 +41,15 @@ public:
     void SetVel(double vel) { mVel = vel; }
 
     /// Setter function setting the Timer of the gnome
-    /// \param Time the Time that mTimer is being set to
+    /// \param TIme the Time that mTimer is being set to
     void SetTimer(double Time) { mTimer = Time; }
 
 
 private:
     double mJumping = false; ///< whether player is jumping
+    bool mMoveR = false;
     double mTime = 0; ///< time elapsed since space bar
+    bool mMoveL = false;
     double mTimer = 0; ///< time that left or right key has been held down for
     double mVel = 0; ///< velocity of the player in the x direction
 

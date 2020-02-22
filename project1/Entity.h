@@ -71,7 +71,8 @@ public:
     * \param visitor The visitor we accept */
     //virtual void Accept(CVisitor* visitor) = 0;
 
-    /// \return false
+    /** Tells whether or not this entitiy is a president (remove this variable when collision is implemented; bad practice)
+     * \returns true if president */
     virtual bool IsPresident() { return false; }
 
     /// getter function getting the width of the image
