@@ -45,8 +45,7 @@ public:
 
     virtual ~CEntity();
 
-    CEntity(const std::wstring& filename);
-
+    /// \return void
     virtual void Draw(Gdiplus::Graphics* graphics);
 
     /// \return void
@@ -72,6 +71,7 @@ public:
     * \param visitor The visitor we accept */
     //virtual void Accept(CVisitor* visitor) = 0;
 
+    /// \return false
     virtual bool IsPresident() { return false; }
 
     /// getter function getting the width of the image
@@ -84,10 +84,11 @@ public:
 
     /// virtual function used to carry out different actions dependent
     /// on what item the player collides with.
+    /// \return void
     virtual void Collision() {};
 
-    /// getter function getting the image of the object
-    /// \returns the image that is used to draw the item
+    /** getter function getting the image of the object
+     * \returns the image that is used to draw the item */
     virtual Gdiplus::Bitmap* GetImage() { return mEntityImage.get(); }
 
 private:
