@@ -15,6 +15,11 @@ CWall::CWall(CGame* game) :
 {
 }
 
+/**
+ * Constructor
+ * \param game The game we are in
+ * \param filename Filename for the image we use
+ */
 CWall::CWall(CGame* game, wstring& filename) : CLevel(game, filename)
 {
 }
