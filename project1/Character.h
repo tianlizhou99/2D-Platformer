@@ -33,16 +33,16 @@ public:
     * \param x is speed of character
     */
     void SetSpeedX(double x);
-    /**updates the character
-    * \param elapsed is speed of characters
-    */
+    /** updates the character
+* \param elapsed is time gone by
+*/
     void Update(double elapsed);
-    /** sets the characters starting position
-    * \param start is starting coordinate of the entity
-    */
+    /** sets the characters sstarting y coordinate
+* \param start is speed of characters
+*/
     void SetStart(double start);
     /** sets the characters speed in the y direction
-* \param y is speed of character
+* \param y is speed of characters
 */
     void SetSpeedY(double y);
 
@@ -58,9 +58,9 @@ private:
 
     ///  speed in the Y direction
     double mSpeedY;
-    ///  starting y coordinate
+    ///  Starting y coordinate
     double mStartY;
-    ///  Timer for game
+    /// timer
     double mTime;
 };
 
