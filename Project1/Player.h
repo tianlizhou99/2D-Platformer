@@ -30,20 +30,21 @@ public:
     */
     void Jump();
     /** updates the player over time
+    * \param elapsed is the time elapsed
     */
     void Update(double elpased) override;
     /** updates the players movement over time
-* \param elapsed is the time 
+* 
 */
     void UpdateMove(double elapsed);
     /** Draws the player
-* 
+* \param graphics is the visual representation
 */
     void Draw(Gdiplus::Graphics* graphics)override;
 
     /** Accept a visitor
     * \param visitor The visitor we accept
-    * \return virtual function
+    * 
     */
     virtual void Accept(CVisitor* visitor) { visitor->VisitPlayer(this); }
 
