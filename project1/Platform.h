@@ -16,6 +16,7 @@ class CPlatform :
 	public CLevel
 {
 public:
+    /// Constructor for CPlatform
     CPlatform(CGame* game);
 
     /// Default constructor (disabled)
@@ -23,7 +24,11 @@ public:
 
     /// Copy constructor (disabled)
     CPlatform(const CPlatform&) = delete;
-
+   
+    /* constructor for platform
+    * \param game the game containing the wall
+    * \param filename the name of the image file
+    */
     CPlatform(CGame* game, const std::wstring& filename);
 };
 
