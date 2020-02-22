@@ -39,7 +39,7 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 * \param graphics The GDI+ graphics context to draw on
 * \param width The width of the screen
 * \param height The height of the screen
-* \param scrollx The amount of scrolling done through game
+* \param scrollX The amount of scrolling done through game
 */
 void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX)
 {
