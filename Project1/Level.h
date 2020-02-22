@@ -30,9 +30,15 @@ public:
 
     void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node);
 
-    /// Set width
+    /** Set width
+    * \param width to set to
+    * \returns void
+    */
     void SetWidth(int width) { mWidth = width; }
-    /// Set height
+    /** Set height
+    * \param height to set to
+    * \returns void
+    */
     void SetHeight(int height) { mHeight = height; }
 
 protected:
