@@ -23,6 +23,8 @@ public:
 
     CPresident(CGame* game, wstring& filename);
 
+    /** Tells whether or not this entitiy is a president (remove this variable when collision is implemented; bad practice)
+    * \returns true if president */
     bool IsPresident() { return true; }
 };
 

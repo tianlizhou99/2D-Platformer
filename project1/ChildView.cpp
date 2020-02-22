@@ -165,6 +165,11 @@ void CChildView::OnPaint()
 			mMessageDisplay = "YOU LOSE";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
+		case 4:
+			mMessageDisplay = "$100";
+			timer = mGame.GetTimer();
+			mMessageDisplayBool = true;
+			break;
 		}
 	}
 

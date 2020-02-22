@@ -19,7 +19,9 @@ public:
 
 	CElement(CGame* game, const std::wstring& filename);
 
-	/// update function for all onscreen objects
+	/** update function for all onscreen objects
+	* \param elapsed amount of time elapsed since the last update
+	* given in milliseconds */
 	virtual void Update(double elpased) {};
 };
 
