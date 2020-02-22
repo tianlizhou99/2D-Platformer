@@ -4,7 +4,11 @@
 
 using namespace Gdiplus;
 
-
+/**
+* CMoney constructor
+* \param game to add money to
+* \param filename of the image to load
+*/
 CMoney::CMoney(CGame* game, wstring& filename) :
 	CItem(game, filename)
 {

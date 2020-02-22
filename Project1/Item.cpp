@@ -1,11 +1,10 @@
 #include "pch.h"
 #include "Item.h"
 
-
 /**
  * Constructor
- * \param game The game we are in
- * \param filename Filename for the image we use
+ * \param game The game this Item is a member of
+ * \param filename The name of the file storing image to add
  */
 CItem::CItem(CGame* game, const std::wstring& filename) :
     CEntity(game, filename)

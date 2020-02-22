@@ -60,7 +60,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width; iter <= mLevelWidth + 2 * width; iter += width - 2)
+        for (int iter = -width * 5; iter <= mLevelWidth + 5 * width; iter += width - 5)
         {
             graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
