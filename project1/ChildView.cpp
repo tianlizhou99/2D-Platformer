@@ -223,7 +223,11 @@ void CChildView::OnLevelsLevel3()
 	mlevelNum = 3;
 }
 
-
+/**
+ * Handle timer events
+ * \param nIDEvent The timer event ID
+ * \returns void
+*/
 void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
 	
@@ -243,7 +247,13 @@ BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 	return FALSE;
 }
 
-
+/**
+ * Handle key press down
+ * \param nChar
+ * \param nRepCnt
+ * \param nFlags
+ * \returns void
+*/
 void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	LARGE_INTEGER time;
@@ -265,14 +275,14 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		while (elapsed > MaxElapsed)
 		{
 			mPlayer->UpdateMove(MaxElapsed);
-			mGame.Update(MaxElapsed);
+			mGame.Update(elapsed);
+
 			elapsed -= MaxElapsed;
 		}
 
 		// Consume any remaining time
 		if (elapsed > 0)
 		{
-			mGame.Update(MaxElapsed);
 			mPlayer->UpdateMove(elapsed);
 		}
 		break;
@@ -285,14 +295,14 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		while (elapsed > MaxElapsed)
 		{
 			mPlayer->UpdateMove(-MaxElapsed);
-			mGame.Update(MaxElapsed);
+			mGame.Update(elapsed);
+
 			elapsed -= MaxElapsed;
 		}
 
 		// Consume any remaining time
 		if (elapsed > 0)
 		{
-			mGame.Update(MaxElapsed);
 			mPlayer->UpdateMove(-elapsed);
 		}
 		break;
@@ -304,7 +314,13 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 }
 
-
+/**
+ * Handle key press up
+ * \param nChar
+ * \param nRepCnt
+ * \param nFlags
+ * \returns void
+*/
 void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: Add your message handler code here and/or call default
