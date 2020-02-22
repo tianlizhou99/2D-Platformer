@@ -265,6 +265,7 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		while (elapsed > MaxElapsed)
 		{
 			mPlayer->UpdateMove(MaxElapsed);
+			mGame.Update(elapsed);
 
 			elapsed -= MaxElapsed;
 		}
@@ -284,6 +285,7 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		while (elapsed > MaxElapsed)
 		{
 			mPlayer->UpdateMove(-MaxElapsed);
+			mGame.Update(elapsed);
 
 			elapsed -= MaxElapsed;
 		}
