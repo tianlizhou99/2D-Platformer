@@ -2,7 +2,9 @@
 #include "Element.h"
 #include <memory>
 
-
+/**
+* Scoreboard class
+*/
 class CScoreboard :
 	public CElement
 {
