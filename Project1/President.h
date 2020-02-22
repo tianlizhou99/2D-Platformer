@@ -11,6 +11,9 @@
 #include <string>
 using namespace std;
 
+/**
+* Class for the Tuition Up item
+*/
 class CPresident :
 	public CItem
 {
@@ -22,9 +25,5 @@ public:
     CPresident(const CPresident&) = delete;
 
     CPresident(CGame* game, wstring& filename);
-
-    /** Tells whether or not this entitiy is a president (remove this variable when collision is implemented; bad practice)
-    * \returns true if president */
-    bool IsPresident() { return true; }
 };
 
