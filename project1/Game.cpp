@@ -37,6 +37,9 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 
 /** Draw the game
 * \param graphics The GDI+ graphics context to draw on
+* \param width The width of the screen
+* \param height The height of the screen
+* \param scrollX The amount of scrolling done through game
 */
 void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX)
 {
@@ -190,6 +193,7 @@ void CGame::Load(const std::wstring& filename)
                             auto image = L"images/" + get<0>(money_declarations[id]);
                             auto entity = make_shared<CMoney>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetTextLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             entity->SetWorth(get<1>(money_declarations[id]));
                             Add(entity);
                         }
@@ -199,6 +203,7 @@ void CGame::Load(const std::wstring& filename)
                             auto image = L"images/" + tuitionup_declarations[id];
                             auto entity = make_shared<CPresident>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetTextLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
                         }
                         if (name == L"door")
@@ -241,6 +246,7 @@ void CGame::Clear()
 
 /** Handle updates for animation
 * \param elapsed The time since the last update
+* \return void
 */
 void CGame::Update(double elapsed)
 {
@@ -308,6 +314,10 @@ void CGame::LoadWall(wstring image, int x, int y, int width, int height)
     }
 }
 
+/**
+ * Checks for player collision with entity
+ * \param player Height of wall
+ */
 void CGame::CollisionTest(CPlayer* player)
 {
     double PlayerX = player->GetX();
@@ -375,54 +385,3 @@ void CGame::CollisionTest(CPlayer* player)
     }
 
 }
-/*
-std::vector<double> CGame::ItemDistances(CPlayer* player)
-{
-    std::vector<double> pointsEarned;
-    double max = 50;
-    double min = -50;
-    for (auto entity : mEntities)
-    {
-        double worth = entity->GetWorth();
-        double extraTuition = worth / 10;
-        if ((player != entity.get()) && (worth != 0))
-        {
-            // Distance in the X and Y directions
-            double dx = player->GetX() - entity->GetX();
-            double dy = player->GetY() - entity->GetY();
-
-            double distance = sqrt(dx * dx + dy * dy);
-            if (mTuitionIncrease)
-            {
-                if (min <= distance && distance <= max)
-                {
-                    pointsEarned.push_back(worth + extraTuition);
-                }
-            }
-            else
-            {
-                if (min <= distance && distance <= max)
-                {
-                    pointsEarned.push_back(worth);
-                }
-            }
-        }
-        else if (entity->IsPresident())
-        {
-            // Display "Tuition Increase" on screen here
-            mTuitionIncrease = true;
-        }
-    }
-    return pointsEarned;
-}*/
-
-/** Accept a visitor for the collection
- * \param visitor The visitor for the collection
- *
-void CGame::Accept(CVisitor* visitor)
-{
-    for (auto entity : mEntities)
-    {
-        entity->Accept(visitor);
-    }
-}*/

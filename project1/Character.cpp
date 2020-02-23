@@ -30,8 +30,11 @@ CCharacter::CCharacter(CGame* game, const std::wstring& filename) : CEntity(game
 
 void CCharacter::Update(double elapsed) {
 	SetLocation(GetX(), GetY() + mSpeedY * elapsed);
-	if (GetY() <= mStartY-300 || GetY() > mStartY) {
-		SetSpeedY(-mSpeedY);
+	if (GetY() < mStartY-300) {
+		SetSpeedY(240);
+	}
+	else if (GetY() > mStartY) {
+		SetSpeedY(-240);
 	}
 }
 

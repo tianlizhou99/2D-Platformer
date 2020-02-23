@@ -3,8 +3,6 @@
 #include "Platform.h"
 #include "Wall.h"
 
-
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Testing
@@ -43,7 +41,29 @@ namespace Testing
 			game2.Add(wall);
 		}
 
+		TEST_METHOD(GameStateTest)
+		{
+			CGame game;
 
+			game.SetTimer(0);
+			Assert::IsTrue(game.GetState() == 0);
+
+			game.SetTimer(5);
+			Assert::IsTrue(game.GetState() == 1);
+		}
+
+		TEST_METHOD(LoadLevelTest)
+		{
+			CGame game;
+			CGame* game_ptr = &game;
+
+			Assert::IsTrue(game.GetLevelHeight() == 0);
+
+			game.Load(L"levels/level0.xml");
+
+			Assert::IsTrue(game.GetLevelHeight() == 1024);
+
+		}
 
 	};
 }

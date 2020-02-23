@@ -23,6 +23,20 @@ public:
     CItem(const CItem&) = delete;
 
 
+    double CItem::GetSpeedX() { return mSpeedX; }
+
+    double CItem::GetSpeedY() { return mSpeedY; }
+
+    void CItem::SetSpeedX(double x) { mSpeedX = x; }
+
+    void CItem::SetSpeedY(double y) { mSpeedY = y; }
+
+private:
+    ///  speed in the X direction
+    double mSpeedX;
+
+    ///  speed in the Y direction
+    double mSpeedY;
 
 
 protected:

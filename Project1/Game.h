@@ -38,8 +38,8 @@ private:
     
     int mLevelWidth = 0; ///< Level width
     int mLevelHeight = 0; ///< Level height
-    bool mTuitionIncrease = false;
     float mScale = 1; ///<Window scale
+    bool mTuitionIncrease = false;
 
 public:
     CGame(); 
@@ -60,6 +60,10 @@ public:
      * \returns the current state of the game */
     int GetState() { return mGameState; };
 
+    /** sets the current state of the game
+     * \param gameState the current state of the game */
+    void SetState(GameState gameState) { mGameState = gameState; };
+
     /** gets the current score of the game
      * \returns the current score of the game */
     int GetScore() { return mScore; };
@@ -68,12 +72,21 @@ public:
      * \param score the current score of the game */
     void SetScore(int score) { mScore = score; };
 
-    /** gets the current timerr of the game
+    /** gets the current timer of the game
     * \returns the current time of the game */
     double GetTimer() { return mTimer; };
 
     /** gets the current timer of the game
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
+
+    /** gets the height of the current level
+    * \returns the heights of the current level */
+    int GetLevelHeight() { return mLevelHeight; };
+
+
+    bool GetTuitionIncrease() { return mTuitionIncrease; }
+
+    void SetTuitionIncrease(bool tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
 
 };

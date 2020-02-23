@@ -8,9 +8,13 @@
 
 #pragma once
 #include "Item.h"
+#include "DoubleBufferDC.h"
 #include <string>
 using namespace std;
 
+/**
+* Class for the Tuition Up item
+*/
 class CPresident :
 	public CItem
 {
@@ -23,6 +27,25 @@ public:
 
     CPresident(CGame* game, wstring& filename);
 
-    bool IsPresident() { return true; }
+    /** Sets location of the text on the screen
+    * \param x position
+    * \param y position */
+    void SetTextLocation(double x, double y);
+
+    void Update(double elapsed);
+
+    /// used to carry out different actions dependent
+    /// on what item the player collides with.
+    void Collision();
+
+    void Draw(Gdiplus::Graphics* graphics);
+
+private:
+    /// Make the president fly off screen when collided with
+    bool mFlyAway = false;
+
+    double mTextX = 0;
+
+    double mTextY = 0;
 };
 

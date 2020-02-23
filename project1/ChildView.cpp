@@ -106,6 +106,7 @@ void CChildView::OnPaint()
 		mGame.Add(timer);
 
 		/// add the scoreboard to the game
+		mGame.SetScore(0);
 		auto scorebaord = make_shared<CScoreboard>(&mGame);
 		mGame.Add(scorebaord);
 
@@ -152,17 +153,17 @@ void CChildView::OnPaint()
 		switch (mGame.GetState())
 		{
 		case 0:
-			mMessageDisplay = ("LEVEL " + to_string(mlevelNum) + " BEGIN");
+			mMessageDisplay = ("Level " + to_string(mlevelNum) + " Begin");
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 			break;
 		case 2:
-			mMessageDisplay = "LEVEL COMPLETE";
+			mMessageDisplay = "Level Complete";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 			break;
 		case 3:
-			mMessageDisplay = "YOU LOSE";
+			mMessageDisplay = "You Lose!";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 		}
@@ -223,7 +224,11 @@ void CChildView::OnLevelsLevel3()
 	mlevelNum = 3;
 }
 
-
+/**
+ * Handle timer events
+ * \param nIDEvent The timer event ID
+ * \returns void
+*/
 void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
 	
@@ -243,7 +248,13 @@ BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 	return FALSE;
 }
 
-
+/**
+ * Handle key press down
+ * \param nChar
+ * \param nRepCnt
+ * \param nFlags
+ * \returns void
+*/
 void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	LARGE_INTEGER time;
@@ -265,6 +276,7 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		while (elapsed > MaxElapsed)
 		{
 			mPlayer->UpdateMove(MaxElapsed);
+			mGame.Update(elapsed);
 
 			elapsed -= MaxElapsed;
 		}
@@ -284,6 +296,7 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		while (elapsed > MaxElapsed)
 		{
 			mPlayer->UpdateMove(-MaxElapsed);
+			mGame.Update(elapsed);
 
 			elapsed -= MaxElapsed;
 		}
@@ -302,7 +315,13 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 }
 
-
+/**
+ * Handle key press up
+ * \param nChar
+ * \param nRepCnt
+ * \param nFlags
+ * \returns void
+*/
 void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	// TODO: Add your message handler code here and/or call default

@@ -33,11 +33,17 @@ public:
     * \param x is speed of character
     */
     void SetSpeedX(double x);
-    /** sets the characters speed in the y direction
-    * \param y is speed of characters
-    */
-    virtual void Update(double elapsed);
+    /** updates the character
+* \param elapsed is time gone by
+*/
+    void Update(double elapsed);
+    /** sets the characters sstarting y coordinate
+* \param start is speed of characters
+*/
     void SetStart(double start);
+    /** sets the characters speed in the y direction
+* \param y is speed of characters
+*/
     void SetSpeedY(double y);
 
     /** Constructor for character
@@ -52,7 +58,9 @@ private:
 
     ///  speed in the Y direction
     double mSpeedY;
+    ///  Starting y coordinate
     double mStartY;
+    /// timer
     double mTime;
 };
 

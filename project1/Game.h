@@ -26,7 +26,7 @@ class CGame
 {
 public:
     ///possible game states
-    enum GameState { start = 0, progress = 1, end = 2, loss = 3 };
+    enum GameState { start = 0, progress = 1, end = 2, loss = 3, money = 4 };
 private:
     int mScore = 0; ///< score of the player
     GameState mGameState = start; ///< current state of the game
@@ -38,7 +38,6 @@ private:
     
     int mLevelWidth = 0; ///< Level width
     int mLevelHeight = 0; ///< Level height
-    bool mTuitionIncrease = false;
     float mScale = 1; ///<Window scale
 
 public:
@@ -59,6 +58,10 @@ public:
     /** gets the current state of the game
      * \returns the current state of the game */
     int GetState() { return mGameState; };
+
+    /** sets the current state of the game
+     * \param gameState the current state of the game */
+    void SetState(GameState gameState) { mGameState = gameState; };
 
     /** gets the current score of the game
      * \returns the current score of the game */

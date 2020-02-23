@@ -13,6 +13,11 @@ CEndDoor::CEndDoor(CGame* game) :
 {
 }
 
+/**
+* Overloaded constructor
+* \param game that the door is in
+* \param filename image to load from
+*/
 CEndDoor::CEndDoor(CGame* game, wstring& filename) : CLevel(game, filename)
 {
 }

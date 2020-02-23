@@ -18,6 +18,11 @@ CPlatform::CPlatform(CGame* game) :
 {
 }
 
+/**
+ * Constructor
+ * \param game The game we are in
+ * \param filename Filename for the image we use
+ */
 CPlatform::CPlatform(CGame* game, const std::wstring& filename) : CLevel(game, filename)
 {
 }
