@@ -91,4 +91,8 @@ public:
 
     int GetStartX() { return mStartX; }
 
+    /** gets the height of the current level
+    * \returns the heights of the current level */
+    int GetLevelHeight() { return mLevelHeight; };
+
 };
