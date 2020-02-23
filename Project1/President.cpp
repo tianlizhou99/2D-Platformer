@@ -36,7 +36,7 @@ void CPresident::Update(double elapsed)
 }
 
 
-void CPresident::Collision()
+void CPresident::Collision(CPlayer* player)
 {
 	// Initialize game
 	auto game = GetGame();

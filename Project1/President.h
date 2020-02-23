@@ -36,7 +36,7 @@ public:
 
     /// used to carry out different actions dependent
     /// on what item the player collides with.
-    void Collision();
+    void Collision(CPlayer * player)override;
 
     void Draw(Gdiplus::Graphics* graphics);
 

@@ -23,3 +23,24 @@ CWall::CWall(CGame* game) :
 CWall::CWall(CGame* game, wstring& filename) : CLevel(game, filename)
 {
 }
+
+/// Small value to ensure we do not stay in collision
+const double Epsilon = 0.01;
+
+void CWall::Collision(CPlayer* player)
+{
+    auto PlayerVel = player->GetVelX();
+    double Width = (this->GetWidth()) / 2;
+    auto XLocation = this->GetX();
+    double PlayerWidth = player->GetWidth() / 2;
+    if (PlayerVel > 0)
+    {
+        player->SetLocation(XLocation - Width - Epsilon - PlayerWidth, player->GetY());
+        player->SetVelX(0);
+    }
+    else if (PlayerVel > 0)
+    {
+        player->SetLocation(XLocation + Width + Epsilon + PlayerWidth, player->GetY());
+        player->SetVelX(0);
+    }
+}

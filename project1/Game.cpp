@@ -122,6 +122,8 @@ void CGame::Load(const std::wstring& filename)
                 {
                     mLevelHeight = root->GetAttributeIntValue(L"height", 0);
                     mLevelWidth = root->GetAttributeIntValue(L"width", 0);
+                    mStartX = root->GetAttributeIntValue(L"start-x", 0);
+                    mStartY = root->GetAttributeIntValue(L"start-y", 0);
                 }
                 if (node->GetName() == L"declarations")
                 {
@@ -341,22 +343,22 @@ void CGame::CollisionTest(CPlayer* player)
         {
             if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
             else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
         }
         else if ((PlayerX - PlayerWidth >= EntityX - EntityWidth) && (PlayerX - PlayerWidth <= EntityX + EntityWidth))
         {
             if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
             else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
         }
 
@@ -364,22 +366,22 @@ void CGame::CollisionTest(CPlayer* player)
         {
             if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
             else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
         }
         else if ((PlayerY - PlayerHeight >= EntityY - EntityHeight) && (PlayerY - PlayerHeight <= EntityY + EntityWidth))
         {
             if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
             else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
             {
-                entity->Collision();
+                entity->Collision(player);
             }
         }
     }

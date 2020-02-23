@@ -114,6 +114,7 @@ void CChildView::OnPaint()
 		auto player = make_shared<CPlayer>(&mGame);
 		mPlayer = player;
 		mGame.Add(player);
+		player->SetLocation(mGame.GetStartX(),mGame.GetStartY());   
     }
 
     // Get the size of the window

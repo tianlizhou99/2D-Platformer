@@ -67,6 +67,10 @@ public:
 
     CEntity(CGame* game, const std::wstring& filename);
 
+    /** Tells whether or not this entitiy is a president (remove this variable when collision is implemented; bad practice)
+     * \returns true if president */
+    virtual bool IsPresident() { return false; }
+
     /// getter function getting the width of the image
     /// \returns double representing image width
     virtual int GetWidth() const { return mEntityImage->GetWidth(); }
@@ -78,7 +82,7 @@ public:
     /// virtual function used to carry out different actions dependent
     /// on what item the player collides with.
     /// \return void
-    virtual void Collision() {};
+    virtual void Collision(CPlayer* player) {};
 
     /** getter function getting the image of the object
      * \returns the image that is used to draw the item */

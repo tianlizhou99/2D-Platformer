@@ -41,7 +41,7 @@ void CMoney::Update(double elapsed)
 }
 
 
-void CMoney::Collision()
+void CMoney::Collision(CPlayer* player)
 {
 	if (!mFlyAway)
 	{

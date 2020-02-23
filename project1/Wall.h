@@ -8,6 +8,7 @@
 
 #pragma once
 #include "Level.h"
+#include "Player.h"
 
  /**
   * class that represents a wall to crash into
@@ -25,6 +26,8 @@ public:
     CWall(const CWall&) = delete;
     /// Cwall constructor
     CWall(CGame* game, wstring& filename);
+
+    void Collision(CPlayer* player) override;
 
 };
 
