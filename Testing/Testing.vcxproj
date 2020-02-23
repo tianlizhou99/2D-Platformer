@@ -126,7 +126,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pch;Game;Timer;Entity;Element;Item;Level;XmlNode;Wall;Platform;Wolverine;Badger;Character;EndDoor;Money;President</AdditionalDependencies>
+      <AdditionalDependencies>pch;Game;Timer;Entity;Element;Item;Level;XmlNode;Wall;Platform;Wolverine;Badger;Character;EndDoor;Money;President;Player;Scoreboard</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
