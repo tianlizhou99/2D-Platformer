@@ -56,27 +56,59 @@ namespace Testing
 		TEST_METHOD(TestCScoreboardTuitionIncrease)
 		{
 			CGame game;
-			/// add the scoreboard to the game
+			/// Add the scoreboard to the game
 			auto scoreboard = std::make_shared<CScoreboard>(&game);
 			auto player = std::make_shared<CPlayer>(&game);
-			wstring presImage = L"images/stanley.png";
-			auto president = std::make_shared<CPresident>(&game, presImage);
 
+			// Initialize files
+			wstring presImage = L"images/stanley.png";
+			wstring moneyImage = L"images/money100.png";
+
+
+			// Create money objects
+			auto money1 = std::make_shared<CMoney>(&game, moneyImage);
+			money1->SetLocation(100, 10);
+			money1->SetWorth(100);
+			auto money2 = std::make_shared<CMoney>(&game, moneyImage);
+			money2->SetLocation(400, 10);
+			money2->SetWorth(100);
+			auto money3 = std::make_shared<CMoney>(&game, moneyImage);
+			money3->SetLocation(700, 10);
+			money3->SetWorth(100);
+
+			// Force player to collide with money
+			player->SetLocation(100, 10);
+			game.CollisionTest(player.get());
+
+			// Check if score updates properly
+			double score = game.GetScore();
+			Assert::IsTrue(score == 100);
 
 			// Force player to collide with president
-			player->SetLocation(10, 10);
-			president->SetLocation(10, 10);
+			auto president1 = std::make_shared<CPresident>(&game, presImage);
+			president1->SetLocation(100, 10);
 			game.CollisionTest(player.get());
 
 			// Force player to collide with money
-			wstring moneyImage = L"images/money100.png";
-			auto money = std::make_shared<CMoney>(&game, moneyImage);
-			money->SetLocation(10, 10);
+			player->SetLocation(400, 10);
 			game.CollisionTest(player.get());
 
 			// Check if tuition Increased
-			double score = scoreboard->GetScore();
-			Assert::IsTrue(score == 110);
+			score = scoreboard->GetScore();
+			Assert::IsTrue(score == 210);
+
+			// Force player to collide with president, again
+			auto president2 = std::make_shared<CPresident>(&game, presImage);
+			president2->SetLocation(400, 10);
+			game.CollisionTest(player.get());
+
+			// Force player to collide with money
+			player->SetLocation(700, 10);
+			game.CollisionTest(player.get());
+
+			// Check if tuition Increased
+			score = scoreboard->GetScore();
+			Assert::IsTrue(score == 331);
 		}
 	};
 }

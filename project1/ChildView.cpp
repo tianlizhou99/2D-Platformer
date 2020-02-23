@@ -106,6 +106,7 @@ void CChildView::OnPaint()
 		mGame.Add(timer);
 
 		/// add the scoreboard to the game
+		mGame.SetScore(0);
 		auto scorebaord = make_shared<CScoreboard>(&mGame);
 		mGame.Add(scorebaord);
 
@@ -152,24 +153,19 @@ void CChildView::OnPaint()
 		switch (mGame.GetState())
 		{
 		case 0:
-			mMessageDisplay = ("LEVEL " + to_string(mlevelNum) + " BEGIN");
+			mMessageDisplay = ("Level " + to_string(mlevelNum) + " Begin");
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 			break;
 		case 2:
-			mMessageDisplay = "LEVEL COMPLETE";
+			mMessageDisplay = "Level Complete";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 			break;
 		case 3:
-			mMessageDisplay = "YOU LOSE";
+			mMessageDisplay = "You Lose!";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
-		case 4:
-			mMessageDisplay = "$100";
-			timer = mGame.GetTimer();
-			mMessageDisplayBool = true;
-			break;
 		}
 	}
 

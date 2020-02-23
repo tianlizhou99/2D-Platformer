@@ -8,6 +8,7 @@
 
 #pragma once
 #include "Item.h"
+#include "DoubleBufferDC.h"
 #include <string>
 using namespace std;
 
@@ -26,19 +27,37 @@ public:
 
     CMoney(CGame* game, wstring& filename);
 
+    void Update(double elapsed);
+
     /// used to carry out different actions dependent
     /// on what item the player collides with.
     void Collision();
+
+    void Draw(Gdiplus::Graphics* graphics);
 
     /// Getter for mWorth
     /// \returns int mWorth
     int GetWorth() { return mWorth; }
 
+    /** Sets location of the text on the screen
+     * \param x position
+     * \param y position */
+    void SetTextLocation(double x, double y);
+
     /// Setter for mWorth
     /// \param worth of the money
     void SetWorth(int worth) { mWorth = worth; }
 
+
+
 private:
-    int mWorth = 0; ///< Worth of the money
+    /// Make the money fly off screen when collided with
+    bool mFlyAway = false;
+
+    int mWorth = 0; ///< Value of the money
+
+    double mTextX = 0;
+
+    double mTextY = 0;
 };
 
