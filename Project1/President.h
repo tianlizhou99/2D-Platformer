@@ -47,5 +47,7 @@ private:
     double mTextX = 0;
 
     double mTextY = 0;
+
+    int mTextSize = 48;
 };
 
