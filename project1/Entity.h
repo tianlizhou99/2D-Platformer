@@ -82,7 +82,7 @@ public:
     /// virtual function used to carry out different actions dependent
     /// on what item the player collides with.
     /// \return void
-    virtual void Collision() {};
+    virtual void Collision(CPlayer* player) {};
 
     /** getter function getting the image of the object
      * \returns the image that is used to draw the item */

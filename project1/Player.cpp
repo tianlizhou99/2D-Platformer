@@ -13,7 +13,6 @@ const wstring GnomeLeft1 = L"images/gnome-walk-left-1.png";
 const wstring GnomeLeft2 = L"images/gnome-walk-left-2.png";
 CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
 {
-    SetLocation(512, 832);
 }
 
 std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnode::CXmlNode>& node)
@@ -66,7 +65,7 @@ void CPlayer::UpdateMove(double elapsed)
     {
         mTimer += -elapsed;
     }
-    mVel = elapsed;
+    mVelX = elapsed;
 
 }
 
@@ -76,7 +75,7 @@ void CPlayer::UpdateMove(double elapsed)
  */
 void CPlayer::Draw(Gdiplus::Graphics* graphics)
 {
-    if ((mVel == 0))
+    if ((mVelX == 0))
     {
         std::unique_ptr<Gdiplus::Bitmap> GnomeImage_img = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeImage.c_str()));
         double wid = GetImage()->GetWidth();
@@ -92,7 +91,7 @@ void CPlayer::Draw(Gdiplus::Graphics* graphics)
         mTimer = 0;
     }
     
-    if ((mTimer <= .5) && mVel > 0)
+    if ((mTimer <= .5) && mVelX > 0)
     {
         std::unique_ptr<Gdiplus::Bitmap> GnomeRight1_image = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeRight1.c_str()));
         double wid = GetImage()->GetWidth();
@@ -102,7 +101,7 @@ void CPlayer::Draw(Gdiplus::Graphics* graphics)
             float(GetX() - wid / 2), float(GetY() - hit / 2),
             (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
     }
-    else if ((mTimer <= 1) && mVel > 0)
+    else if ((mTimer <= 1) && mVelX > 0)
     {
         std::unique_ptr<Gdiplus::Bitmap> GnomeRight2_image = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeRight2.c_str()));
         double wid = GetImage()->GetWidth();
@@ -113,7 +112,7 @@ void CPlayer::Draw(Gdiplus::Graphics* graphics)
             (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
     }
 
-    if ((mTimer <= .5) && mVel < 0)
+    if ((mTimer <= .5) && mVelX < 0)
     {
         std::unique_ptr<Gdiplus::Bitmap> GnomeLeft1_image = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeLeft1.c_str()));
         double wid = GetImage()->GetWidth();
@@ -123,7 +122,7 @@ void CPlayer::Draw(Gdiplus::Graphics* graphics)
             float(GetX() - wid / 2), float(GetY() - hit / 2),
             (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
     }
-    else if ((mTimer <= 1) && mVel < 0)
+    else if ((mTimer <= 1) && mVelX < 0)
     {
         std::unique_ptr<Gdiplus::Bitmap> GnomeLeft2_image = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeLeft2.c_str()));
         double wid = GetImage()->GetWidth();

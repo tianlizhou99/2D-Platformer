@@ -39,6 +39,10 @@ private:
     int mLevelWidth = 0; ///< Level width
     int mLevelHeight = 0; ///< Level height
     float mScale = 1; ///<Window scale
+    int mStartX = 0;
+    int mStartY = 0;
+
+    bool mTuitionIncrease = false;
 
 public:
     CGame(); 
@@ -78,5 +82,13 @@ public:
     /** gets the current timer of the game
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
+
+    bool GetTuitionIncrease() { return mTuitionIncrease; }
+
+    void SetTuitionIncrease(bool tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
+
+    int GetStartY() { return mStartY; }
+
+    int GetStartX() { return mStartX; }
 
 };

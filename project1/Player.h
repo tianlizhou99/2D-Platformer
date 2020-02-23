@@ -49,17 +49,21 @@ public:
 
     /// Setter function setting the velocity of the gnome
     /// \param vel the velocity that mVel is being set to
-    void SetVel(double vel) { mVel = vel; }
+    void SetVelX(double vel) { mVelX = vel; }
 
     /// Setter function setting the Timer of the gnome
     /// \param Time the Time that mTimer is being set to
     void SetTimer(double Time) { mTimer = Time; }
+
+    /// Getter function getting the velocity of the gnome
+    /// \return mVelX the current velocity of the gnome in the x direction
+    double GetVelX() { return mVelX; }
 
 
 private:
     double mJumping = false; ///< whether player is jumping
     double mTime = 0; ///< time elapsed since space bar
     double mTimer = 0; ///< time that left or right key has been held down for
-    double mVel = 0; ///< velocity of the player in the x direction
+    double mVelX = 0; ///< velocity of the player in the x direction
 
 };
