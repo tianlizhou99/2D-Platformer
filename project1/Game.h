@@ -26,7 +26,7 @@ class CGame
 {
 public:
     ///possible game states
-    enum GameState { start = 0, progress = 1, end = 2, loss = 3, money = 4 };
+    enum GameState { start = 0, progress = 1, end = 2, loss = 3 };
 private:
     int mScore = 0; ///< score of the player
     GameState mGameState = start; ///< current state of the game
@@ -39,6 +39,7 @@ private:
     int mLevelWidth = 0; ///< Level width
     int mLevelHeight = 0; ///< Level height
     float mScale = 1; ///<Window scale
+    bool mTuitionIncrease = false;
 
 public:
     CGame(); 
@@ -71,12 +72,21 @@ public:
      * \param score the current score of the game */
     void SetScore(int score) { mScore = score; };
 
-    /** gets the current timerr of the game
+    /** gets the current timer of the game
     * \returns the current time of the game */
     double GetTimer() { return mTimer; };
 
     /** gets the current timer of the game
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
+
+    /** gets the height of the current level
+    * \returns the heights of the current level */
+    int GetLevelHeight() { return mLevelHeight; };
+
+
+    bool GetTuitionIncrease() { return mTuitionIncrease; }
+
+    void SetTuitionIncrease(bool tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
 
 };

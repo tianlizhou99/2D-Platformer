@@ -22,6 +22,9 @@ void CPresident::SetTextLocation(double x, double y)
 
 void CPresident::Update(double elapsed)
 {
+	// Initialize game
+	auto game = GetGame();
+
 	if (mFlyAway)
 	{
 		SetSpeedY(1000);
@@ -31,7 +34,10 @@ void CPresident::Update(double elapsed)
 		{
 			mFlyAway = false;
 		}
+
 		// Make text grow
+		mTextSize += 5;
+		mTextX -= 100;
 	}
 }
 
@@ -44,9 +50,7 @@ void CPresident::Collision()
 
 	if (!mFlyAway)
 	{
-		// Update score
-		//int score = game->GetScore();
-		//score += mWorth;
+		// Increase Tuition
 		game->SetTuitionIncrease(true);
 
 		// Make money fly away
@@ -83,11 +87,11 @@ void CPresident::Draw(Gdiplus::Graphics* graphics)
 	if (mFlyAway)
 	{
 		FontFamily fontFamily(L"Arial");
-		Gdiplus::Font font(&fontFamily, 64);
+		Gdiplus::Font font(&fontFamily, mTextSize);
 
 		SolidBrush green(Color(0, 64, 0));
 
-		string score = "Tuition Increase";
+		string score = "Tuition Increase!";
 
 		wstring wide_string = wstring(score.begin(), score.end());
 		const wchar_t* result = wide_string.c_str();

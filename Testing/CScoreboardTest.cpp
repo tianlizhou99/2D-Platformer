@@ -75,40 +75,70 @@ namespace Testing
 			auto money3 = std::make_shared<CMoney>(&game, moneyImage);
 			money3->SetLocation(700, 10);
 			money3->SetWorth(100);
+			auto money4 = std::make_shared<CMoney>(&game, moneyImage);
+			money4->SetLocation(1000, 10);
+			money4->SetWorth(1000);
+
+			// Create president objects
+			auto president1 = std::make_shared<CPresident>(&game, presImage);
+			president1->SetLocation(250, 10);
+			auto president2 = std::make_shared<CPresident>(&game, presImage);
+			president2->SetLocation(550, 10);
+			auto president3 = std::make_shared<CPresident>(&game, presImage);
+			president3->SetLocation(850, 10);
 
 			// Force player to collide with money
 			player->SetLocation(100, 10);
-			game.CollisionTest(player.get());
+			money1->Collision();
 
 			// Check if score updates properly
 			double score = game.GetScore();
 			Assert::IsTrue(score == 100);
 
 			// Force player to collide with president
-			auto president1 = std::make_shared<CPresident>(&game, presImage);
-			president1->SetLocation(100, 10);
-			game.CollisionTest(player.get());
+			player->SetLocation(250, 10);
+			president1->Collision();
+			money2->Update(0);
+			money3->Update(0);
+			money4->Update(0);
+			president1->Collision();
 
 			// Force player to collide with money
 			player->SetLocation(400, 10);
-			game.CollisionTest(player.get());
+			money2->Collision();
 
 			// Check if tuition Increased
 			score = scoreboard->GetScore();
 			Assert::IsTrue(score == 210);
 
 			// Force player to collide with president, again
-			auto president2 = std::make_shared<CPresident>(&game, presImage);
-			president2->SetLocation(400, 10);
-			game.CollisionTest(player.get());
+			player->SetLocation(550, 10);
+			president2->Collision();
+			money3->Update(0);
+			money4->Update(0);
+			president2->Collision();
 
 			// Force player to collide with money
 			player->SetLocation(700, 10);
-			game.CollisionTest(player.get());
+			money3->Collision();
 
 			// Check if tuition Increased
 			score = scoreboard->GetScore();
 			Assert::IsTrue(score == 331);
+
+			// Force player to collide with president, once more
+			player->SetLocation(850, 10);
+			president3->Collision();
+			money4->Update(0);
+			president3->Collision();
+
+			// Force player to collide with money
+			player->SetLocation(1000, 10);
+			money4->Collision();
+
+			// Check if tuition Increased
+			score = scoreboard->GetScore();
+			Assert::IsTrue(score == 1662);
 		}
 	};
 }
