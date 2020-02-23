@@ -32,13 +32,12 @@ public:
 
     /** Set width
     * \param width to set to
-    * \returns void
-    */
+    * \returns void */
     void SetWidth(int width) { mWidth = width; }
+
     /** Set height
     * \param height to set to
-    * \returns void
-    */
+    * \returns void */
     void SetHeight(int height) { mHeight = height; }
 
 protected:

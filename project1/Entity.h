@@ -67,10 +67,6 @@ public:
 
     CEntity(CGame* game, const std::wstring& filename);
 
-    /** Accept a visitor
-    * \param visitor The visitor we accept */
-    //virtual void Accept(CVisitor* visitor) = 0;
-
     /** Tells whether or not this entitiy is a president (remove this variable when collision is implemented; bad practice)
      * \returns true if president */
     virtual bool IsPresident() { return false; }
