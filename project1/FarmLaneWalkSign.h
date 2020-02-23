@@ -4,10 +4,20 @@
 /**
 * Class for Farm Lane Walk Sign item
 */
-class FarmLaneWalkSign :
+class CFarmLaneWalkSign :
 	public CLevel
 {
 public:
+	CFarmLaneWalkSign(CGame* game);
+
+	/// Default constructor (disabled)
+	CFarmLaneWalkSign() = delete;
+
+	/// Copy constructor (disabled)
+	CFarmLaneWalkSign(const CFarmLaneWalkSign&) = delete;
+
+	CFarmLaneWalkSign(CGame* game, wstring& filename);
+
 	///possible sign states
 	enum Sign {stop = 0, walk = 1};
 
