@@ -95,4 +95,8 @@ public:
     * \returns the heights of the current level */
     int GetLevelHeight() { return mLevelHeight; };
 
+    /** gets the current entities of the game
+    * \returns the current entities of the game */
+    auto GetEntities() { return mEntities; };
+
 };

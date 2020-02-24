@@ -60,10 +60,15 @@ public:
     double GetVelX() { return mVelX; }
 
 
+    /// Setter function setting the platform contact of the gnome
+    /// \param collision set platform contact true if collision
+    void SetPlatformContact(double collision) { mPlatformContact = collision; }
+
+
 private:
-    double mJumping = false; ///< whether player is jumping
-    double mTime = 0; ///< time elapsed since space bar
     double mTimer = 0; ///< time that left or right key has been held down for
     double mVelX = 0; ///< velocity of the player in the x direction
+    double mVelY = 0; ///<velocity of the player in the y direction
+    double mPlatformContact = false; ///whether player is in contact with platform
 
 };

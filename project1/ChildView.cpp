@@ -310,7 +310,7 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		break;
 
 	case VK_SPACE:
-		// space bar pressed
+		mPlayer->Jump();
 	
 		break;
 	}

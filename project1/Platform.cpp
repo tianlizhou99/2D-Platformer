@@ -26,3 +26,8 @@ CPlatform::CPlatform(CGame* game) :
 CPlatform::CPlatform(CGame* game, const std::wstring& filename) : CLevel(game, filename)
 {
 }
+
+void CPlatform::Collision(CPlayer* player)
+{
+    player->SetPlatformContact(true);
+}
