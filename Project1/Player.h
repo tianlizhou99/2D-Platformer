@@ -70,5 +70,6 @@ private:
     double mVelX = 0; ///< velocity of the player in the x direction
     double mVelY = 0; ///<velocity of the player in the y direction
     double mPlatformContact = false; ///whether player is in contact with platform
+    
 
 };
