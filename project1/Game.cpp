@@ -57,7 +57,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
 
 
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(scrollX + virtualWidth/2, 0);
+    graphics->TranslateTransform(scrollX + virtualWidth/5, 0);
 
     if (mBackground != nullptr)
     {
@@ -71,8 +71,6 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
         }
 
     }
-    // Keep centered on half virtual window width
-    graphics->TranslateTransform(-virtualWidth / 3, 0);
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
