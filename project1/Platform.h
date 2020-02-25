@@ -30,5 +30,9 @@ public:
     * \param filename the name of the image file
     */
     CPlatform(CGame* game, const std::wstring& filename);
+
+    /// on collision set player's y velocity to 0
+    /// \return void
+    virtual void Collision(CPlayer* player) override;
 };
 

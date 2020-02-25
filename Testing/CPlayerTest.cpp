@@ -66,5 +66,27 @@ namespace Testing
 			Assert::IsTrue(badger->GetY() > 500);
 
 		}
+		TEST_METHOD(JumpTest)
+		{
+			CGame game;
+			auto player = std::make_shared<CPlayer>(&game);
+			game.Add(player);
+
+			player->SetLocation(500, 500);
+			player->Jump();
+			double elapsed = 0;
+			player->Update(elapsed);
+			Assert::IsTrue(player->GetY() == 500);
+
+			elapsed = .5;
+			player->Update(elapsed);
+			Assert::IsTrue(player->GetY() == 125);
+
+			player->SetLocation(500, 500);
+			player->Jump();
+			elapsed = 1;
+			player->Update(elapsed);
+			Assert::IsTrue(player->GetY() == 0);
+		}
 	};
 }

@@ -26,3 +26,30 @@ CPlatform::CPlatform(CGame* game) :
 CPlatform::CPlatform(CGame* game, const std::wstring& filename) : CLevel(game, filename)
 {
 }
+
+void CPlatform::Collision(CPlayer* player)
+{
+    player->SetPlatformContact(true);
+
+
+    double PlayerX = player->GetX();
+    double PlayerY = player->GetY();
+    double PlayerHeight = player->GetHeight() / 2;
+    double PlayerWidth = player->GetWidth() / 2;
+    double PlayerVelX = player->GetVelX();
+    double PlayerVelY = player->GetVelY();
+
+    double PlatformX = GetX();
+    double PlatformY = GetY();
+    double PlatformHeight = GetHeight() / 2;
+    double PlatformWidth = GetWidth() / 2;
+
+    if (PlayerVelY > 0)
+    {
+        player->SetLocation(PlayerX, PlatformY - PlatformHeight - PlayerHeight);
+    }
+    else if (PlayerVelY < 0)
+    {
+        player->SetLocation(PlayerX, PlatformY + PlatformHeight + PlayerHeight + 1);
+    }
+}
