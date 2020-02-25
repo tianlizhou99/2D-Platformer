@@ -30,7 +30,7 @@ CCharacter::CCharacter(CGame* game, const std::wstring& filename) : CEntity(game
 
 void CCharacter::Collision(CPlayer* player)
 {
-	
+
 	player->SetSpeedY(0);
 }
 

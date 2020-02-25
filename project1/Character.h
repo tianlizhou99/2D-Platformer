@@ -52,6 +52,8 @@ public:
     */
     CCharacter(CGame* game, const std::wstring& filename);
 
+    virtual void Collision(CPlayer* player);
+
 private:
     ///  speed in the X direction
     double mSpeedX;

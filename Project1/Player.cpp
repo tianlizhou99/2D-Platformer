@@ -11,6 +11,10 @@ const wstring GnomeRight1 = L"images/gnome-walk-right-1.png";
 const wstring GnomeRight2 = L"images/gnome-walk-right-2.png";
 const wstring GnomeLeft1 = L"images/gnome-walk-left-1.png";
 const wstring GnomeLeft2 = L"images/gnome-walk-left-2.png";
+
+const double JumpSpeed = -750;
+const double Gravity = 750;
+
 CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
 {
 }
@@ -22,13 +26,25 @@ std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnod
     return itemNode;
 }
 
+/**
+ * cause player to jump
+ */
 void CPlayer::Jump()
 {
-    mVelY = -500;
+    mPlatformContact = false;
+
+    auto Game = GetGame();
+    Game->CollisionTest(this);
+
+    if (mPlatformContact)
+    {
+        SetLocation(GetX(), GetY() - 1);
+        mVelY = JumpSpeed;
+    }
 }
 
 
-/**
+/**    
  * updating the player based on the time elapsed
  * \param elapsed the amount of time that has passed since update was called
  */
@@ -39,7 +55,6 @@ void CPlayer::Update(double elapsed)
     auto Game = GetGame();
     Game->CollisionTest(this);
 
-    SetLocation(GetX() ,GetY() + mVelY * elapsed);
 
     //Gravity
     if (mPlatformContact)
@@ -48,9 +63,10 @@ void CPlayer::Update(double elapsed)
     }
     else
     {
-        mVelY += 100;
+        mVelY += Gravity*elapsed;
     }
 
+    SetLocation(GetX(), GetY() + mVelY * elapsed);
 }
 
 void CPlayer::UpdateMove(double elapsed)
