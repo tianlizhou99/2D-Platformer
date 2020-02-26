@@ -25,7 +25,8 @@ CFarmLaneWalkSign::CFarmLaneWalkSign(CGame* game, wstring& filename) : CLevel(ga
 
 void CFarmLaneWalkSign::Update(double elapse)
 {
-	if (elapse > 5)
+	mElapsed += elapse;
+	if (mElapsed > 5)
 	{
 		switch (mSign)
 		{
@@ -36,6 +37,7 @@ void CFarmLaneWalkSign::Update(double elapse)
 				mSign = stop;
 				break;
 		}
+		mElapsed = 0;
 	}
 }
 
