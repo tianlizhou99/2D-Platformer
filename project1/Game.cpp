@@ -12,9 +12,6 @@
 #include "President.h"
 using namespace std;
 
-/// Game area height in virtual pixels
-const static int Height = 1024;
-
 CGame::CGame()
 {
     mLevelWidth = 0;
@@ -46,24 +43,26 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     //
     // Automatic Scaling
     //
-    mScale = float(height) / float(Height);
-    graphics->ScaleTransform(mScale, mScale);
+    mVScale = float(height) / float(1024);
+    mHScale = float(width) / float(1024);
+    graphics->ScaleTransform(mVScale, mVScale);
 
     // Determine the virtual width
-    float virtualWidth = (float)width / mScale;
+    float virtualWidth = (float)width * mHScale;
+    float virtualHeight = (float)height * mVScale;
 
     // Save current settings
     auto save = graphics->Save();
 
 
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(scrollX + virtualWidth/5, 0);
+    graphics->TranslateTransform(scrollX + virtualWidth/virtualHeight, 0);
 
     if (mBackground != nullptr)
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width * 5; iter <= mLevelWidth + 5 * width; iter += width - 5)
+        for (int iter = -width * (int)(virtualWidth / virtualHeight); iter <= mLevelWidth + (int)(virtualWidth / virtualHeight) * width; iter += width)
         {
             graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
