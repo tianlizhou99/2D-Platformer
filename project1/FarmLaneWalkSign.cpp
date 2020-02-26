@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "FarmLaneWalkSign.h"
+#include <memory>
 
 /// Farm Lane images
 const wstring WalkSign = L"images/walksign.png";
@@ -22,18 +23,42 @@ CFarmLaneWalkSign::CFarmLaneWalkSign(CGame* game, wstring& filename) : CLevel(ga
 {
 }
 
-void CFarmLaneWalkSign::SetSign(double elapse)
+void CFarmLaneWalkSign::Update(double elapse)
 {
 	if (elapse > 5)
 	{
 		switch (mSign)
 		{
-			case 0:
+			case stop:
 				mSign = walk;
 				break;
-			case 1:
+			case walk:
 				mSign = stop;
 				break;
 		}
+	}
+}
+
+void CFarmLaneWalkSign::Draw(Gdiplus::Graphics* graphics)
+{
+	if (mSign == walk) {
+
+		std::unique_ptr<Gdiplus::Bitmap> walkImage = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile(WalkSign.c_str()));
+		double wid = GetImage()->GetWidth();
+		double hit = GetImage()->GetHeight();
+
+
+		graphics->DrawImage(walkImage.get(),
+			float(GetX() - wid / 2), float(GetY() - hit / 2),
+			(float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
+	}
+	else{
+		std::unique_ptr<Gdiplus::Bitmap> stopImage = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile(StopSign.c_str()));
+		double wid = GetImage()->GetWidth();
+		double hit = GetImage()->GetHeight();
+
+		graphics->DrawImage(stopImage.get(),
+			float(GetX() - wid / 2), float(GetY() - hit / 2),
+			(float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
 	}
 }

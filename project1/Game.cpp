@@ -227,8 +227,7 @@ void CGame::Load(const std::wstring& filename)
                         {
                             auto walkImage = L"images/" + get<0>(signDeclarations[id]);
                             auto stopImage = L"images/" + get<1>(signDeclarations[id]);
-                            auto entity = make_shared<CFarmLaneWalkSign>(this, walkImage);
-                            entity->SetSign(0);
+                            auto entity = make_shared<CFarmLaneWalkSign>(this, stopImage);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
                         }
