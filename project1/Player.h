@@ -39,7 +39,7 @@ public:
     /** Draws the player
 * 
 */
-    void Draw(Gdiplus::Graphics* graphics)override;
+    void Draw(Gdiplus::Graphics* graphics) override;
 
     /** Accept a visitor
     * \param visitor The visitor we accept
