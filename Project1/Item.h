@@ -41,5 +41,13 @@ private:
 
 protected:
     CItem(CGame* game, const std::wstring& filename);
+
+    /// Make the item fly off screen when collided with
+    bool mFlyAway = false;
+
+    double mTextX = 0;
+
+    double mTextY = 0;
+
 };
 

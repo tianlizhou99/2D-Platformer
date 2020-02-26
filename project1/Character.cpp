@@ -28,6 +28,12 @@ CCharacter::CCharacter(CGame* game, const std::wstring& filename) : CEntity(game
 	mSpeedY = -240;
 }
 
+void CCharacter::Collision(CPlayer* player)
+{
+
+	player->SetSpeedY(0);
+}
+
 void CCharacter::Update(double elapsed) {
 	SetLocation(GetX(), GetY() + mSpeedY * elapsed);
 	if (GetY() < mStartY-300) {

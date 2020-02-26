@@ -51,14 +51,10 @@ void CPresident::Collision(CPlayer* player)
 	if (!mFlyAway)
 	{
 		// Increase Tuition
-		game->SetTuitionIncrease(true);
+		game->SetTuitionIncrease(game->GetTuitionIncrease() + 1);
 
 		// Make money fly away
 		mFlyAway = true;
-	}
-	else
-	{
-		game->SetTuitionIncrease(false);
 	}
 }
 

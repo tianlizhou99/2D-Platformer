@@ -41,13 +41,6 @@ public:
     void Draw(Gdiplus::Graphics* graphics);
 
 private:
-    /// Make the president fly off screen when collided with
-    bool mFlyAway = false;
-
-    double mTextX = 0;
-
-    double mTextY = 0;
-
     int mTextSize = 48;
 };
 
