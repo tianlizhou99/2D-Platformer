@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Money.h"
 #include "President.h"
+#include "FarmLaneWalkSign.h"
 using namespace std;
 
 CGame::CGame()
@@ -105,6 +106,7 @@ void CGame::Load(const std::wstring& filename)
         map<wstring, wstring> tuitionup_declarations;
         map<wstring, wstring> door_declarations;
         map<wstring, wstring> villain_declarations;
+        map<wstring, wstring> sign_declarations;
 
         //
         // Traverse the children of the root
@@ -158,6 +160,10 @@ void CGame::Load(const std::wstring& filename)
                         if (name == L"villain")
                         {
                             villain_declarations[id] = node2->GetAttributeValue(L"image", L"");
+                        }
+                        if (name == L"sign")
+                        {
+                            sign_declarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
                     }
                 }
@@ -219,7 +225,13 @@ void CGame::Load(const std::wstring& filename)
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             entity->SetStart(node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
-                            
+                        }
+                        if (name == L"sign")
+                        {
+                            auto image = L"images/" + sign_declarations[id];
+                            auto entity = make_shared<CFarmLaneWalkSign>(this, image);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
                     }
                 }
