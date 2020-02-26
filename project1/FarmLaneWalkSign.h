@@ -31,5 +31,6 @@ public:
 	Sign GetSign() { return mSign; }
 private:
 	Sign mSign = stop; ///<Sign state
+	double mMultiplier = 2; ///< Speed multiplier
 };
 
