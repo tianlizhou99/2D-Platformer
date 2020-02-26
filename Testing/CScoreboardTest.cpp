@@ -89,7 +89,7 @@ namespace Testing
 
 			// Force player to collide with money
 			player->SetLocation(100, 10);
-			money1->Collision();
+			money1->Collision(player.get());
 
 			// Check if score updates properly
 			double score = game.GetScore();
@@ -97,15 +97,14 @@ namespace Testing
 
 			// Force player to collide with president
 			player->SetLocation(250, 10);
-			president1->Collision();
+			president1->Collision(player.get());
 			money2->Update(0);
 			money3->Update(0);
 			money4->Update(0);
-			president1->Collision();
 
 			// Force player to collide with money
 			player->SetLocation(400, 10);
-			money2->Collision();
+			money2->Collision(player.get());
 
 			// Check if tuition Increased
 			score = scoreboard->GetScore();
@@ -113,14 +112,13 @@ namespace Testing
 
 			// Force player to collide with president, again
 			player->SetLocation(550, 10);
-			president2->Collision();
+			president2->Collision(player.get());
 			money3->Update(0);
 			money4->Update(0);
-			president2->Collision();
 
 			// Force player to collide with money
 			player->SetLocation(700, 10);
-			money3->Collision();
+			money3->Collision(player.get());
 
 			// Check if tuition Increased
 			score = scoreboard->GetScore();
@@ -128,13 +126,12 @@ namespace Testing
 
 			// Force player to collide with president, once more
 			player->SetLocation(850, 10);
-			president3->Collision();
+			president3->Collision(player.get());
 			money4->Update(0);
-			president3->Collision();
 
 			// Force player to collide with money
 			player->SetLocation(1000, 10);
-			money4->Collision();
+			money4->Collision(player.get());
 
 			// Check if tuition Increased
 			score = scoreboard->GetScore();

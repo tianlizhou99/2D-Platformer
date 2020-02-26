@@ -10,10 +10,8 @@
 #include "Player.h"
 #include "Money.h"
 #include "President.h"
+#include "FarmLaneWalkSign.h"
 using namespace std;
-
-/// Game area height in virtual pixels
-const static int Height = 1024;
 
 CGame::CGame()
 {
@@ -46,24 +44,26 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     //
     // Automatic Scaling
     //
-    mScale = float(height) / float(Height);
-    graphics->ScaleTransform(mScale, mScale);
+    mVScale = float(height) / float(1024);
+    mHScale = float(width) / float(1024);
+    graphics->ScaleTransform(mVScale, mVScale);
 
     // Determine the virtual width
-    float virtualWidth = (float)width / mScale;
+    float virtualWidth = (float)width * mHScale;
+    float virtualHeight = (float)height * mVScale;
 
     // Save current settings
     auto save = graphics->Save();
 
 
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(scrollX + virtualWidth/2, 0);
+    graphics->TranslateTransform(scrollX + virtualWidth/virtualHeight, 0);
 
     if (mBackground != nullptr)
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width * 5; iter <= mLevelWidth + 5 * width; iter += width - 5)
+        for (int iter = -width * (int)(virtualWidth / virtualHeight); iter <= mLevelWidth + (int)(virtualWidth / virtualHeight) * width; iter += width)
         {
             graphics->DrawImage(mBackground.get(), iter , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
@@ -71,8 +71,6 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
         }
 
     }
-    // Keep centered on half virtual window width
-    graphics->TranslateTransform(-virtualWidth / 3, 0);
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
@@ -101,13 +99,14 @@ void CGame::Load(const std::wstring& filename)
       
 
         // Maps for declarations of each type 
-        map<wstring, wstring> background_declarations;
-        map<wstring, tuple<wstring, wstring, wstring>> platform_declarations;
-        map<wstring, wstring> wall_declarations;
-        map<wstring, tuple<wstring, int>> money_declarations;
-        map<wstring, wstring> tuitionup_declarations;
-        map<wstring, wstring> door_declarations;
-        map<wstring, wstring> villain_declarations;
+        map<wstring, wstring> backgroundDeclarations;
+        map<wstring, tuple<wstring, wstring, wstring>> platformDeclarations;
+        map<wstring, wstring> wallDeclarations;
+        map<wstring, tuple<wstring, int>> moneyDeclarations;
+        map<wstring, wstring> tuitionupDeclarations;
+        map<wstring, wstring> doorDeclarations;
+        map<wstring, wstring> villainDeclarations;
+        map<wstring, tuple<wstring, wstring>> signDeclarations;
 
         //
         // Traverse the children of the root
@@ -133,34 +132,35 @@ void CGame::Load(const std::wstring& filename)
                         auto name = node2->GetName();
                         if (name == L"background")
                         {
-                            background_declarations[id] = node2->GetAttributeValue(L"image", L"");
                             mBackground = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile((L"images/" + node2->GetAttributeValue(L"image", L"")).c_str()));
                         }
                         if (name == L"platform")
                         {
-                            auto t = make_tuple(node2->GetAttributeValue(L"left-image", L""), node2->GetAttributeValue(L"mid-image", L""), node2->GetAttributeValue(L"right-image", L""));
-                            platform_declarations[id] = t;
+                            platformDeclarations[id] = make_tuple(node2->GetAttributeValue(L"left-image", L""), node2->GetAttributeValue(L"mid-image", L""), node2->GetAttributeValue(L"right-image", L""));
                         }
                         if (name == L"wall")
                         {
-                            wall_declarations[id] = node2->GetAttributeValue(L"image", L"");
+                            wallDeclarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
                         if (name == L"money")
                         {
-                            auto t = make_tuple(node2->GetAttributeValue(L"image", L""), node2->GetAttributeIntValue(L"value", 0));
-                            money_declarations[id] = t;
+                            moneyDeclarations[id] = make_tuple(node2->GetAttributeValue(L"image", L""), node2->GetAttributeIntValue(L"value", 0));
                         }
                         if (name == L"tuition-up")
                         {
-                            tuitionup_declarations[id] = node2->GetAttributeValue(L"image", L"");
+                            tuitionupDeclarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
                         if (name == L"door")
                         {
-                            door_declarations[id] = node2->GetAttributeValue(L"image", L"");
+                            doorDeclarations[id] = node2->GetAttributeValue(L"image", L"");
                         }
                         if (name == L"villain")
                         {
-                            villain_declarations[id] = node2->GetAttributeValue(L"image", L"");
+                            villainDeclarations[id] = node2->GetAttributeValue(L"image", L"");
+                        }
+                        if (name == L"sign")
+                        {
+                            signDeclarations[id] = make_tuple(node2->GetAttributeValue(L"walk-image", L""), node2->GetAttributeValue(L"stop-image", L""));
                         }
                     }
                 }
@@ -172,9 +172,9 @@ void CGame::Load(const std::wstring& filename)
                         auto name = node2->GetName();
                         if (name == L"platform")
                         {
-                            auto leftimage = L"images/" + get<0>(platform_declarations[id]);
-                            auto midimage = L"images/" + get<1>(platform_declarations[id]);
-                            auto rightimage = L"images/" + get<2>(platform_declarations[id]);
+                            auto leftimage = L"images/" + get<0>(platformDeclarations[id]);
+                            auto midimage = L"images/" + get<1>(platformDeclarations[id]);
+                            auto rightimage = L"images/" + get<2>(platformDeclarations[id]);
                             auto x = node2->GetAttributeIntValue(L"x", 0);
                             auto y = node2->GetAttributeIntValue(L"y", 0);
                             auto width = node2->GetAttributeIntValue(L"width", 0);
@@ -183,7 +183,7 @@ void CGame::Load(const std::wstring& filename)
                         }
                         if (name == L"wall")
                         {
-                            auto image = L"images/" + wall_declarations[id];
+                            auto image = L"images/" + wallDeclarations[id];
                             auto x = node2->GetAttributeIntValue(L"x", 0);
                             auto y = node2->GetAttributeIntValue(L"y", 0);
                             auto width = node2->GetAttributeIntValue(L"width", 0);
@@ -192,17 +192,17 @@ void CGame::Load(const std::wstring& filename)
                         }
                         if (name == L"money")
                         {
-                            auto image = L"images/" + get<0>(money_declarations[id]);
+                            auto image = L"images/" + get<0>(moneyDeclarations[id]);
                             auto entity = make_shared<CMoney>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             entity->SetTextLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
-                            entity->SetWorth(get<1>(money_declarations[id]));
+                            entity->SetWorth(get<1>(moneyDeclarations[id]));
                             Add(entity);
                         }
                         if (name == L"tuition-up")
                         {
                             // needs to be changed to a tuitionup object
-                            auto image = L"images/" + tuitionup_declarations[id];
+                            auto image = L"images/" + tuitionupDeclarations[id];
                             auto entity = make_shared<CPresident>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             entity->SetTextLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
@@ -210,19 +210,26 @@ void CGame::Load(const std::wstring& filename)
                         }
                         if (name == L"door")
                         {
-                            auto image = L"images/" + door_declarations[id];
+                            auto image = L"images/" + doorDeclarations[id];
                             auto entity = make_shared<CEndDoor>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
                         }
                         if (name == L"villain")
                         {
-                            auto image = L"images/" + villain_declarations[id];
+                            auto image = L"images/" + villainDeclarations[id];
                             auto entity = make_shared<CCharacter>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             entity->SetStart(node2->GetAttributeIntValue(L"y", 0));
                             Add(entity);
-                            
+                        }
+                        if (name == L"sign")
+                        {
+                            auto walkImage = L"images/" + get<0>(signDeclarations[id]);
+                            auto stopImage = L"images/" + get<1>(signDeclarations[id]);
+                            auto entity = make_shared<CFarmLaneWalkSign>(this, stopImage);
+                            entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            Add(entity);
                         }
                     }
                 }

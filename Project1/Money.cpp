@@ -34,9 +34,10 @@ void CMoney::Update(double elapsed)
 			mFlyAway = false;
 		}
 	}
-	else if (game->GetTuitionIncrease()) // Check if worth needs update 
+	else if (game->GetTuitionIncrease() > mCurrentIncrease) // Check if worth needs update 
 	{
 		mWorth = mWorth + (mWorth / 10);
+		mCurrentIncrease += 1;
 	}
 }
 

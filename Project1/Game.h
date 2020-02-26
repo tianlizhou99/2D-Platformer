@@ -38,11 +38,12 @@ private:
     
     int mLevelWidth = 0; ///< Level width
     int mLevelHeight = 0; ///< Level height
-    float mScale = 1; ///<Window scale
+    float mVScale = 1; ///< Vertical window scale
+    float mHScale = 1; ///< Horizontal window scale
     int mStartX = 0;
     int mStartY = 0;
 
-    bool mTuitionIncrease = false;
+    int mTuitionIncrease = 0;
 
 public:
     CGame(); 
@@ -83,9 +84,9 @@ public:
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
 
-    bool GetTuitionIncrease() { return mTuitionIncrease; }
+    int GetTuitionIncrease() { return mTuitionIncrease; }
 
-    void SetTuitionIncrease(bool tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
+    void SetTuitionIncrease(int tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
 
     int GetStartY() { return mStartY; }
 
@@ -94,5 +95,9 @@ public:
     /** gets the height of the current level
     * \returns the heights of the current level */
     int GetLevelHeight() { return mLevelHeight; };
+
+    /** gets the current entities of the game
+    * \returns the current entities of the game */
+    auto GetEntities() { return mEntities; };
 
 };
