@@ -47,9 +47,13 @@ public:
     */
     virtual void Accept(CVisitor* visitor) { visitor->VisitPlayer(this); }
 
-    /// Setter function setting the velocity of the gnome
-    /// \param vel the velocity that mVel is being set to
+    /// Setter function setting the x velocity of the gnome
+    /// \param vel the velocity that mVelX is being set to
     void SetVelX(double vel) { mVelX = vel; }
+
+    /// Setter function setting the y velocity of the gnome
+    /// \param vel the velocity that mVelY is being set to
+    void SetVelY(double vel) { mVelY = vel; }
 
     /// Setter function setting the Timer of the gnome
     /// \param Time the Time that mTimer is being set to

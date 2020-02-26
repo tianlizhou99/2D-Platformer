@@ -27,6 +27,9 @@ CPlatform::CPlatform(CGame* game, const std::wstring& filename) : CLevel(game, f
 {
 }
 
+/**
+  * Handle behavior on player collision
+  */
 void CPlatform::Collision(CPlayer* player)
 {
     player->SetPlatformContact(true);
@@ -44,12 +47,25 @@ void CPlatform::Collision(CPlayer* player)
     double PlatformHeight = GetHeight() / 2;
     double PlatformWidth = GetWidth() / 2;
 
+    double PlayerLeft = PlayerX - PlayerWidth;
+    double PlayerRight = PlayerX + PlayerWidth;
+    double PlayerTop = PlayerY - PlayerHeight;
+    double PlayerBottom = PlayerY + PlayerHeight;
+    double PlatformLeft = PlatformX - PlatformWidth;
+    double PlatformRight = PlatformX + PlatformWidth;
+    double PlatformTop = PlatformY - PlatformHeight;
+    double PlatformBottom = PlatformY + PlatformHeight;
+
+    double spacer = 16;
+
     if (PlayerVelY > 0)
     {
-        player->SetLocation(PlayerX, PlatformY - PlatformHeight - PlayerHeight);
+        player->SetLocation(PlayerX, PlatformTop - PlayerHeight);
+        player->SetVelY(0);
     }
     else if (PlayerVelY < 0)
     {
-        player->SetLocation(PlayerX, PlatformY + PlatformHeight + PlayerHeight + 1);
+        player->SetLocation(PlayerX, PlatformBottom + PlayerHeight + 1);
+        player->SetVelY(0);
     }
 }
