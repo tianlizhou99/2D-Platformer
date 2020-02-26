@@ -51,13 +51,8 @@ public:
 
 
 private:
-    /// Make the money fly off screen when collided with
-    bool mFlyAway = false;
-
     int mWorth = 0; ///< Value of the money
 
-    double mTextX = 0;
-
-    double mTextY = 0;
+    int mCurrentIncrease = 0; ///< Number of times tuition increased on this dollar
 };
 

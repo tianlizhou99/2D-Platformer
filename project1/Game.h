@@ -42,7 +42,7 @@ private:
     int mStartX = 0;
     int mStartY = 0;
 
-    bool mTuitionIncrease = false;
+    int mTuitionIncrease = 0;
 
 public:
     CGame(); 
@@ -83,9 +83,9 @@ public:
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
 
-    bool GetTuitionIncrease() { return mTuitionIncrease; }
+    int GetTuitionIncrease() { return mTuitionIncrease; }
 
-    void SetTuitionIncrease(bool tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
+    void SetTuitionIncrease(int tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
 
     int GetStartY() { return mStartY; }
 

@@ -59,11 +59,15 @@ public:
     /// \return mVelX the current velocity of the gnome in the x direction
     double GetVelX() { return mVelX; }
 
+    double GetVelY() { return mVelY; }
+
+    void SetPlatformContact(bool contact) { mPlatformContact = contact; }
 
 private:
     double mJumping = false; ///< whether player is jumping
     double mTime = 0; ///< time elapsed since space bar
     double mTimer = 0; ///< time that left or right key has been held down for
     double mVelX = 0; ///< velocity of the player in the x direction
-
+    double mVelY = 0; ///< velocity of the player in the y direction
+    bool mPlatformContact = false;
 };
