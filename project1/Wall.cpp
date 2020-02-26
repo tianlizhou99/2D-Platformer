@@ -33,12 +33,13 @@ void CWall::Collision(CPlayer* player)
     double Width = (this->GetWidth()) / 2;
     auto XLocation = this->GetX();
     double PlayerWidth = player->GetWidth() / 2;
-    if (PlayerVel > 0)
+    auto playerX = player->GetX();
+    if (PlayerVel > 0 && playerX < XLocation)
     {
         player->SetLocation(XLocation - Width - Epsilon - PlayerWidth, player->GetY());
         player->SetVelX(0);
     }
-    else if (PlayerVel < 0)
+    else if (PlayerVel < 0 && playerX > XLocation)
     {
         player->SetLocation(XLocation + Width + Epsilon + PlayerWidth, player->GetY());
         player->SetVelX(0);

@@ -369,7 +369,7 @@ void CGame::CollisionTest(CPlayer* player)
             }
         }
 
-        if((PlayerY + PlayerHeight >= EntityY - EntityHeight) && (PlayerY + PlayerHeight <= EntityY + EntityWidth))
+        else if((PlayerY + PlayerHeight >= EntityY - EntityHeight) && (PlayerY + PlayerHeight <= EntityY + EntityWidth))
         {
             if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
             {

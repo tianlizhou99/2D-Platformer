@@ -68,8 +68,8 @@ public:
     double GetVelY() { return mVelY; }
 
 
-    /// Setter function setting the ground contact of the gnome
-    /// \param collision set ground contact true if collision
+    /// Setter function setting the platform contact of the gnome
+    /// \param collision set platform contact true if collision
     void SetGroundContact(double collision) { mGroundContact = collision; }
 
 
