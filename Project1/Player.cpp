@@ -54,7 +54,7 @@ void CPlayer::Update(double elapsed)
     SetLocation(GetX(), GetY() + mVelY * elapsed + .5 * Gravity * elapsed * elapsed);
     ///Update y velocity based on gravity and current y velocitty
     mVelY += Gravity * elapsed;
-    
+
     auto Game = GetGame();
     Game->CollisionTest(this);
 
