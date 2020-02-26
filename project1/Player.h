@@ -33,13 +33,13 @@ public:
     */
     void Update(double elpased) override;
     /** updates the players movement over time
-* \param elapsed is the time 
+* \param elapsed is the time
 */
     void UpdateMove(double elapsed);
     /** Draws the player
-* 
+*
 */
-    void Draw(Gdiplus::Graphics* graphics) override;
+    void Draw(Gdiplus::Graphics* graphics)override;
 
     /** Accept a visitor
     * \param visitor The visitor we accept
@@ -47,9 +47,13 @@ public:
     */
     virtual void Accept(CVisitor* visitor) { visitor->VisitPlayer(this); }
 
-    /// Setter function setting the velocity of the gnome
-    /// \param vel the velocity that mVel is being set to
+    /// Setter function setting the x velocity of the gnome
+    /// \param vel the velocity that mVelX is being set to
     void SetVelX(double vel) { mVelX = vel; }
+
+    /// Setter function setting the y velocity of the gnome
+    /// \param vel the velocity that mVelY is being set to
+    void SetVelY(double vel) { mVelY = vel; }
 
     /// Setter function setting the Timer of the gnome
     /// \param Time the Time that mTimer is being set to
@@ -59,15 +63,21 @@ public:
     /// \return mVelX the current velocity of the gnome in the x direction
     double GetVelX() { return mVelX; }
 
+    /// Getter function getting the velocity of the gnome
+    /// \return mVelY the current velocity of the gnome in the y direction
     double GetVelY() { return mVelY; }
 
-    void SetPlatformContact(bool contact) { mPlatformContact = contact; }
+
+    /// Setter function setting the platform contact of the gnome
+    /// \param collision set platform contact true if collision
+    void SetGroundContact(double collision) { mGroundContact = collision; }
+
 
 private:
     double mJumping = false; ///< whether player is jumping
     double mTime = 0; ///< time elapsed since space bar
     double mTimer = 0; ///< time that left or right key has been held down for
     double mVelX = 0; ///< velocity of the player in the x direction
-    double mVelY = 0; ///< velocity of the player in the y direction
-    bool mPlatformContact = false;
+    double mVelY = 0; ///<velocity of the player in the y direction
+    double mGroundContact = false; ///whether player is in contact with ground
 };

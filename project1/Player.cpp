@@ -11,6 +11,10 @@ const wstring GnomeRight1 = L"images/gnome-walk-right-1.png";
 const wstring GnomeRight2 = L"images/gnome-walk-right-2.png";
 const wstring GnomeLeft1 = L"images/gnome-walk-left-1.png";
 const wstring GnomeLeft2 = L"images/gnome-walk-left-2.png";
+
+const double JumpSpeed = -750;
+const double Gravity = 750;
+
 CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
 {
 }
@@ -22,9 +26,21 @@ std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnod
     return itemNode;
 }
 
+/**
+ * cause player to jump
+ */
 void CPlayer::Jump()
 {
-    mVelY = -500;
+    mGroundContact = false;
+
+    auto Game = GetGame();
+    Game->CollisionTest(this);
+
+    if (mGroundContact)
+    {
+        SetLocation(GetX(), GetY() - 1);
+        mVelY = JumpSpeed;
+    }
 }
 
 
@@ -34,29 +50,20 @@ void CPlayer::Jump()
  */
 void CPlayer::Update(double elapsed)
 {
-    mPlatformContact = false;
+    ///Update y position based on gravity and current y velocitty
+    SetLocation(GetX(), GetY() + mVelY * elapsed + .5 * Gravity * elapsed * elapsed);
+    ///Update y velocity based on gravity and current y velocitty
+    mVelY += Gravity * elapsed;
 
     auto Game = GetGame();
     Game->CollisionTest(this);
-
-    SetLocation(GetX() ,GetY() + mVelY * elapsed);
-
-    //Gravity
-    if (mPlatformContact)
-    {
-        mVelY = 0;
-    }
-    else
-    {
-        mVelY += 100;
-    }
 
 }
 
 void CPlayer::UpdateMove(double elapsed)
 {
 
-    SetLocation(GetX() + 500 * elapsed , GetY());
+    SetLocation(GetX() + 500 * elapsed, GetY());
     if (elapsed > 0)
     {
         mTimer += elapsed;
@@ -85,12 +92,12 @@ void CPlayer::Draw(Gdiplus::Graphics* graphics)
             float(GetX() - wid / 2), float(GetY() - hit / 2),
             (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
     }
-    
+
     if ((mTimer >= 1))
     {
         mTimer = 0;
     }
-    
+
     if ((mTimer <= .5) && mVelX > 0)
     {
         std::unique_ptr<Gdiplus::Bitmap> GnomeRight1_image = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeRight1.c_str()));
@@ -132,5 +139,5 @@ void CPlayer::Draw(Gdiplus::Graphics* graphics)
             float(GetX() - wid / 2), float(GetY() - hit / 2),
             (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
     }
-    
+
 }
