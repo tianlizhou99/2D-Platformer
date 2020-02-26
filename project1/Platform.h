@@ -33,7 +33,7 @@ public:
 
     CPlatform(CGame* game, const std::wstring& filename, int type);
 
-    /// on collision set player's y velocity to 0
+    /// Handle collision behavior
     /// \return void
     virtual void Collision(CPlayer* player) override;
 

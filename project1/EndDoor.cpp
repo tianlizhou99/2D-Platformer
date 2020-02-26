@@ -21,3 +21,8 @@ CEndDoor::CEndDoor(CGame* game) :
 CEndDoor::CEndDoor(CGame* game, wstring& filename) : CLevel(game, filename)
 {
 }
+
+void CEndDoor::Collision(CPlayer* player)
+{
+    auto game = GetGame();
+}

@@ -26,5 +26,7 @@ public:
 
     CEndDoor(CGame* game, wstring& filename);
 
+    void Collision(CPlayer* player) override;
+
 };
 
