@@ -28,12 +28,21 @@ CPlatform::CPlatform(CGame* game, const std::wstring& filename) : CLevel(game, f
 }
 
 /**
+ * Constructor
+ * \param game The game we are in
+ * \param filename Filename for the image we use
+ * \param type The type of plaform this is
+ */
+CPlatform::CPlatform(CGame* game, const std::wstring& filename, int type) : CLevel(game, filename)
+{
+    mType = type;
+}
+
+/**
   * Handle behavior on player collision
   */
 void CPlatform::Collision(CPlayer* player)
 {
-    player->SetPlatformContact(true);
-
 
     double PlayerX = player->GetX();
     double PlayerY = player->GetY();
@@ -56,9 +65,17 @@ void CPlatform::Collision(CPlayer* player)
     double PlatformTop = PlatformY - PlatformHeight;
     double PlatformBottom = PlatformY + PlatformHeight;
 
-    double spacer = 16;
+    double spacer = 32;
 
-    if (PlayerVelY > 0)
+    if (mType == -1 && PlayerRight - PlatformLeft <= spacer)
+    {
+        player->SetLocation(PlatformLeft - PlayerWidth, PlayerY);
+    }
+    else if (mType == 1 && PlatformRight - PlayerLeft <= spacer)
+    {
+        player->SetLocation(PlatformRight + PlayerWidth, PlayerY);
+    }
+    else if (PlayerVelY > 0)
     {
         player->SetLocation(PlayerX, PlatformTop - PlayerHeight);
         player->SetVelY(0);
@@ -67,5 +84,9 @@ void CPlatform::Collision(CPlayer* player)
     {
         player->SetLocation(PlayerX, PlatformBottom + PlayerHeight + 1);
         player->SetVelY(0);
+    }
+    else 
+    {
+        player->SetGroundContact(true);
     }
 }

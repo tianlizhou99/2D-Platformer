@@ -70,7 +70,7 @@ public:
 
     /// Setter function setting the platform contact of the gnome
     /// \param collision set platform contact true if collision
-    void SetPlatformContact(double collision) { mPlatformContact = collision; }
+    void SetGroundContact(double collision) { mGroundContact = collision; }
 
 
 private:
@@ -79,5 +79,5 @@ private:
     double mTimer = 0; ///< time that left or right key has been held down for
     double mVelX = 0; ///< velocity of the player in the x direction
     double mVelY = 0; ///<velocity of the player in the y direction
-    double mPlatformContact = false; ///whether player is in contact with platform
+    double mGroundContact = false; ///whether player is in contact with ground
 };

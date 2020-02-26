@@ -287,10 +287,10 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
     double count = width / 32;
     double leftx = x - ((count - 1) / 2) * 32;
     double rightx = x + ((count - 1) / 2) * 32;
-    auto leftplatform = make_shared<CPlatform>(this, leftimage);
+    auto leftplatform = make_shared<CPlatform>(this, leftimage, -1);
     leftplatform->SetLocation(leftx, y);
     Add(leftplatform);
-    auto rightplatform = make_shared<CPlatform>(this, rightimage);
+    auto rightplatform = make_shared<CPlatform>(this, rightimage, 1);
     rightplatform->SetLocation(rightx, y);
     Add(rightplatform);
     for (double i = 1; i <= count - 2; i++)

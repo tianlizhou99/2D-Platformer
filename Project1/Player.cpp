@@ -31,12 +31,12 @@ std::shared_ptr<xmlnode::CXmlNode> CPlayer::XmlSave(const std::shared_ptr<xmlnod
  */
 void CPlayer::Jump()
 {
-    mPlatformContact = false;
+    mGroundContact = false;
 
     auto Game = GetGame();
     Game->CollisionTest(this);
 
-    if (mPlatformContact)
+    if (mGroundContact)
     {
         SetLocation(GetX(), GetY() - 1);
         mVelY = JumpSpeed;
