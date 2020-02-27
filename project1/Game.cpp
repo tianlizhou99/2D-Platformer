@@ -264,7 +264,10 @@ void CGame::Update(double elapsed)
         item->Update(elapsed);
 
     }
-
+    if (mGameState == end)
+    {
+        LoadNextLevel();
+    }
     if (mTimer < 0.5) mGameState = start;
     else if (mTimer > 0.5) mGameState = progress;
     //TODO other game state detections
@@ -393,4 +396,32 @@ void CGame::CollisionTest(CPlayer* player)
         }
     }
 
+}
+
+/**
+  * Load next level
+  */
+void CGame::LoadNextLevel()
+{
+    if (mLevelNum == 0)
+    {
+        Load(L"levels/level1.xml");
+        mLevelNum = 1;
+    }
+    else if (mLevelNum == 1)
+    {
+        Load(L"levels/level2.xml");
+        mLevelNum = 2;
+    }
+    else if (mLevelNum == 2)
+    {
+        Load(L"levels/level3.xml");
+        mLevelNum = 3;
+    }
+    else if (mLevelNum == 3)
+    {
+        Load(L"levels/level3.xml");
+        mLevelNum = 3;
+    }
+    mFirstDraw = true;
 }

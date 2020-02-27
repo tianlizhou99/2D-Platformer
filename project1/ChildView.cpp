@@ -84,9 +84,11 @@ void CChildView::OnPaint()
 
 	// Do not call CWnd::OnPaint() for painting messages
 
+	mFirstDraw = mFirstDraw || mGame.GetFirst();
     if (mFirstDraw)
     {
         mFirstDraw = false;
+		mGame.SetFirst(false);
 
 		SetTimer(1, FrameDuration, nullptr);
 
@@ -132,6 +134,7 @@ void CChildView::OnPaint()
 
 
 	mGame.Update(elapsed);
+	mlevelNum = mGame.GetLevelNum();
 
     /*
      * Actually Draw the game
@@ -190,6 +193,7 @@ void CChildView::OnLevelsLevel0()
 	mGame.Load(L"levels/level0.xml");
 	mFirstDraw = true;
 	mlevelNum = 0;
+	mGame.SetLevelNum(mlevelNum);
 }
 
 /**
@@ -201,6 +205,7 @@ void CChildView::OnLevelsLevel1()
 	mGame.Load(L"levels/level1.xml");
 	mFirstDraw = true;
 	mlevelNum = 1;
+	mGame.SetLevelNum(mlevelNum);
 }
 
 /**
@@ -212,6 +217,7 @@ void CChildView::OnLevelsLevel2()
 	mGame.Load(L"levels/level2.xml");
 	mFirstDraw = true;
 	mlevelNum = 2;
+	mGame.SetLevelNum(mlevelNum);
 }
 
 /**
@@ -223,6 +229,7 @@ void CChildView::OnLevelsLevel3()
 	mGame.Load(L"levels/level3.xml");
 	mFirstDraw = true;
 	mlevelNum = 3;
+	mGame.SetLevelNum(mlevelNum);
 }
 
 /**
