@@ -32,19 +32,24 @@ void CMoney::Update(double elapsed)
 		if (GetY() < -250)
 		{
 			mFlyAway = false;
+			mWorth = 0;
 		}
 	}
-	else if (game->GetTuitionIncrease() > mCurrentIncrease) // Check if worth needs update 
+	else if ((game->GetTuitionIncrease() > mCurrentIncrease) && (mWorth != 0)) // Check if worth needs update 
 	{
 		mWorth = mWorth + (mWorth / 10);
 		mCurrentIncrease += 1;
+	}
+	else if (game->GetState() == 0)
+	{
+		mWorth = mInitialWorth;
 	}
 }
 
 
 void CMoney::Collision(CPlayer* player)
 {
-	if (!mFlyAway)
+	if ((!mFlyAway) && (mWorth != 0))
 	{
 		// Initialize game
 		auto game = GetGame();
@@ -73,7 +78,7 @@ void CMoney::Draw(Gdiplus::Graphics* graphics)
 		float(GetX() - wid / 2), float(GetY() - hit / 2),
 		(float)entityImage->GetWidth(), (float)entityImage->GetHeight());
 
-	if (mFlyAway)
+	if ((mFlyAway) && (mWorth != 0))
 	{
 		FontFamily fontFamily(L"Arial");
 		Gdiplus::Font font(&fontFamily, 24);

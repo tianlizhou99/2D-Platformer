@@ -35,6 +35,10 @@ public:
 
     void Draw(Gdiplus::Graphics* graphics);
 
+    /// Getter for mInitialWorth
+    /// \returns int mInitialWorth
+    int GetInitialWorth() { return mInitialWorth; }
+
     /// Getter for mWorth
     /// \returns int mWorth
     int GetWorth() { return mWorth; }
@@ -46,12 +50,17 @@ public:
 
     /// Setter for mWorth
     /// \param worth of the money
+    void SetInitialWorth(int initialWorth) { mInitialWorth = initialWorth; }
+
+    /// Setter for mWorth
+    /// \param worth of the money
     void SetWorth(int worth) { mWorth = worth; }
 
 
 
 private:
     int mWorth = 0; ///< Value of the money
+    int mInitialWorth = 0;
 
     int mCurrentIncrease = 0; ///< Number of times tuition increased on this dollar
 };

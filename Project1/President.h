@@ -42,5 +42,7 @@ public:
 
 private:
     int mTextSize = 48;
+
+    bool mUsed = false; /// Check if president has been used yet
 };
 

@@ -137,5 +137,59 @@ namespace Testing
 			score = scoreboard->GetScore();
 			Assert::IsTrue(score == 1662);
 		}
+
+		TEST_METHOD(TestCScoreboardExtraItemCollisions)
+		{
+			CGame game;
+			/// Add the scoreboard to the game
+			auto scoreboard = std::make_shared<CScoreboard>(&game);
+			auto player = std::make_shared<CPlayer>(&game);
+
+			// Initialize files
+			wstring presImage = L"images/stanley.png";
+			wstring moneyImage = L"images/money100.png";
+
+
+			// Create money objects
+			auto money1 = std::make_shared<CMoney>(&game, moneyImage);
+			money1->SetLocation(100, 10);
+			money1->SetWorth(100);
+			auto money2 = std::make_shared<CMoney>(&game, moneyImage);
+			money2->SetLocation(400, 10);
+			money2->SetWorth(100);
+
+
+			// Create president objects
+			auto president1 = std::make_shared<CPresident>(&game, presImage);
+			president1->SetLocation(250, 10);
+
+
+			// Force player to collide with money twice
+			player->SetLocation(100, 10);
+			money1->Collision(player.get());
+			money1->SetLocation(100, 10);
+			money1->Collision(player.get());
+
+			// Check if score updates properly
+			double score = game.GetScore();
+			Assert::IsTrue(score == 100);
+
+			// Force player to collide with president twice
+			player->SetLocation(250, 10);
+			president1->Collision(player.get());
+			money2->Update(0);			
+			president1->SetLocation(250, 10);
+			president1->Collision(player.get());
+			money2->Update(0);
+
+
+			// Force player to collide with money
+			player->SetLocation(400, 10);
+			money2->Collision(player.get());
+
+			// Check if tuition Increased
+			score = scoreboard->GetScore();
+			Assert::IsTrue(score == 210);
+		}
 	};
 }
