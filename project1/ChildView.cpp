@@ -133,16 +133,6 @@ void CChildView::OnPaint()
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
 
-
-	mGame.Update(elapsed);
-	mlevelNum = mGame.GetLevelNum();
-
-    /*
-     * Actually Draw the game
-     */
-	int xOffset = static_cast<int>((float)-mPlayer->GetX() + rect.Width()/2.0f);
-    mGame.OnDraw(&graphics, rect.Width(), rect.Height(), xOffset);
-
 	/*
 	 * Display message
 	 */
@@ -173,6 +163,15 @@ void CChildView::OnPaint()
 			mMessageDisplayBool = true;
 		}
 	}
+
+	mGame.Update(elapsed);
+	mlevelNum = mGame.GetLevelNum();
+
+    /*
+     * Actually Draw the game
+     */
+	int xOffset = static_cast<int>((float)-mPlayer->GetX() + rect.Width()/2.0f);
+    mGame.OnDraw(&graphics, rect.Width(), rect.Height(), xOffset);
 
 	wstring wide_string = wstring(mMessageDisplay.begin(), mMessageDisplay.end());
 	const wchar_t* result = wide_string.c_str();

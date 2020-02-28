@@ -31,6 +31,7 @@ const double Epsilon = 0.01;
 void CWall::Collision(CPlayer* player)
 {
     auto PlayerVel = player->GetVelX();
+    auto PlayerVelY = player->GetVelY();
     double Width = (this->GetWidth()) / 2;
     auto XLocation = this->GetX();
     double PlayerWidth = player->GetWidth() / 2;
@@ -42,10 +43,13 @@ void CWall::Collision(CPlayer* player)
     
 
      if (((PlayerY - PlayerHeight < YLocation - Height) && (PlayerY + PlayerHeight > YLocation - Height)) &&
-         (PlayerY + PlayerHeight < YLocation ))
+         PlayerVelY > 0)
     {
-        player->SetLocation(player->GetX(),YLocation - Height - Epsilon - PlayerHeight);
-        player->SetVelY(0);
+         if (PlayerY + PlayerHeight > YLocation - Height - 1)
+         {
+             player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
+             player->SetVelY(0);
+         }
     }
     else if ((PlayerVel > 0) && (PlayerX < XLocation))
     {

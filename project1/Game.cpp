@@ -33,6 +33,15 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 	mEntities.push_back(entity);
 }
 
+/**
+* Add an item to the game, loads later than other objects
+* \param entity New item to add
+*/
+void CGame::AddFront(std::shared_ptr<CEntity> entity)
+{
+    mEntities.insert(mEntities.begin(), entity);
+}
+
 
 /** Draw the game
 * \param graphics The GDI+ graphics context to draw on
@@ -64,19 +73,16 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width * (int)(virtualWidth / virtualHeight); iter <= mLevelWidth + (int)(virtualWidth / virtualHeight) * width; iter += width)
+        for (int iter = -width * (int)(2 / mVScale); iter <= mLevelWidth + (int)(2 / mVScale) * width; iter += width - (int)(2 / mVScale))
         {
-            graphics->DrawImage(mBackground.get(), iter , 0,
+            graphics->DrawImage(mBackground.get(), iter - 1 , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
-
         }
 
     }
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
-       
-        
     }
 
     // Remove centering on half virtual window width
@@ -92,6 +98,7 @@ void CGame::Load(const std::wstring& filename)
     // We surround with a try/catch to handle errors
     try
     {
+        mGameState = start;
         // Open the document to read
         std::shared_ptr<CXmlNode> root = CXmlNode::OpenDocument(filename);
 
@@ -100,7 +107,6 @@ void CGame::Load(const std::wstring& filename)
       
 
         // Maps for declarations of each type 
-        map<wstring, wstring> backgroundDeclarations;
         map<wstring, tuple<wstring, wstring, wstring>> platformDeclarations;
         map<wstring, wstring> wallDeclarations;
         map<wstring, tuple<wstring, int>> moneyDeclarations;
@@ -270,8 +276,10 @@ void CGame::Update(double elapsed)
     {
         LoadNextLevel();
     }
-    if (mTimer < 0.5) mGameState = start;
-    else if (mTimer > 0.5) mGameState = progress;
+    else if (mGameState != loss) {
+        if (mTimer < 0.5) mGameState = start;
+        else if (mTimer > 0.5) mGameState = progress;
+    }
     //TODO other game state detections
 }
 
@@ -289,19 +297,18 @@ void CGame::Update(double elapsed)
  */
 void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage, int x, int y, int width, int height)
 {
-    double count = width / 32;
-    double leftx = x - ((count - 1) / 2) * 32;
-    double rightx = x + ((count - 1) / 2) * 32;
+    double leftx = x - (((double)width / 32 - 1) / 2) * 32;
+    double rightx = x + (((double)width / 32 - 1) / 2) * 32;
     auto leftplatform = make_shared<CPlatform>(this, leftimage, -1);
     leftplatform->SetLocation(leftx, y);
     Add(leftplatform);
     auto rightplatform = make_shared<CPlatform>(this, rightimage, 1);
     rightplatform->SetLocation(rightx, y);
     Add(rightplatform);
-    for (double i = 1; i <= count - 2; i++)
+    for (double i = 32 - (int)(2 / mVScale); i <= width; i += 32 - (int)(2 / mVScale))
     {
         auto midplatform = make_shared<CPlatform>(this, midimage);
-        double offset = i * 32;
+        double offset = i;
         midplatform->SetLocation(leftx + offset, y);
         Add(midplatform);
     }
@@ -317,14 +324,12 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
  */
 void CGame::LoadWall(wstring image, int x, int y, int width, int height)
 {
-    double count = height / 32;
-    double topy = y - ((count - 1) / 2) * 32;
-    for (double i = 0; i <= count - 1; i++)
+    double topy = y - ((height / 32 - 1) / 2) * 32;
+    for (double i = 0; i <= height; i += 32 - (int)(2 / mVScale))
     {
         auto wall = make_shared<CWall>(this, image);
-        double offset = i * 32;
-        wall->SetLocation(x, topy + offset);
-        Add(wall);
+        wall->SetLocation(x, topy + i);
+        AddFront(wall);
     }
 }
 
@@ -341,60 +346,70 @@ void CGame::CollisionTest(CPlayer* player)
 
     for (auto entity : mEntities)
     {
-        double EntityX = entity->GetX();
-        double EntityY = entity->GetY();
-        double EntityHeight = entity->GetHeight() / 2;
-        double EntityWidth = entity->GetWidth() / 2;
+        if (mGameState != loss)
+        {
+            double EntityX = entity->GetX();
+            double EntityY = entity->GetY();
+            double EntityHeight = entity->GetHeight() / 2;
+            double EntityWidth = entity->GetWidth() / 2;
 
-        if (entity.get() == player)
-        {
-            continue;
-        }
+            if (entity.get() == player)
+            {
+                continue;
+            }
 
-        if ((PlayerX + PlayerWidth >= EntityX - EntityWidth) && (PlayerX + PlayerWidth <= EntityX + EntityWidth))
-        {
-            if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
+            if ((PlayerX + PlayerWidth >= EntityX - EntityWidth) && (PlayerX + PlayerWidth <= EntityX + EntityWidth))
             {
-                entity->Collision(player);
+                if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
+                {
+                    entity->Collision(player);
+                }
+                else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
+                {
+                    entity->Collision(player);
+                }
             }
-            else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
+            else if ((PlayerX - PlayerWidth >= EntityX - EntityWidth) && (PlayerX - PlayerWidth <= EntityX + EntityWidth))
             {
-                entity->Collision(player);
+                if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
+                {
+                    entity->Collision(player);
+                }
+                else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
+                {
+                    entity->Collision(player);
+                }
             }
-        }
-        else if ((PlayerX - PlayerWidth >= EntityX - EntityWidth) && (PlayerX - PlayerWidth <= EntityX + EntityWidth))
-        {
-            if ((EntityY + EntityHeight >= PlayerY - PlayerHeight) && (EntityY + EntityHeight <= PlayerY + PlayerHeight))
-            {
-                entity->Collision(player);
-            }
-            else if ((EntityY - EntityHeight >= PlayerY - PlayerHeight) && (EntityY - EntityHeight <= PlayerY + PlayerHeight))
-            {
-                entity->Collision(player);
-            }
-        }
 
-        else if((PlayerY + PlayerHeight >= EntityY - EntityHeight) && (PlayerY + PlayerHeight <= EntityY + EntityWidth))
-        {
-            if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
+            else if ((PlayerY + PlayerHeight >= EntityY - EntityHeight) && (PlayerY + PlayerHeight <= EntityY + EntityWidth))
             {
-                entity->Collision(player);
+                if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
+                {
+                    entity->Collision(player);
+                }
+                else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
+                {
+                    entity->Collision(player);
+                }
             }
-            else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
+            else if ((PlayerY - PlayerHeight >= EntityY - EntityHeight) && (PlayerY - PlayerHeight <= EntityY + EntityWidth))
             {
-                entity->Collision(player);
+                if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
+                {
+                    entity->Collision(player);
+                }
+                else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
+                {
+                    entity->Collision(player);
+                }
+            }
+            else if ((PlayerY - PlayerHeight >= mLevelHeight)) {
+                mGameState = loss;
             }
         }
-        else if ((PlayerY - PlayerHeight >= EntityY - EntityHeight) && (PlayerY - PlayerHeight <= EntityY + EntityWidth))
-        {
-            if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
-            {
-                entity->Collision(player);
-            }
-            else if ((EntityX - EntityWidth >= PlayerX - PlayerWidth) && (EntityX - EntityWidth <= PlayerX + PlayerWidth))
-            {
-                entity->Collision(player);
-            }
+        else {
+            player->Loss();
+            break;
         }
     }
 
