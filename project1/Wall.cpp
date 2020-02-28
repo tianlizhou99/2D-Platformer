@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Wall.h"
 
+
 /// Wall 1 filename
 const wstring ImageNameWall1 = L"project1/images/wall1.png";
 
@@ -33,13 +34,25 @@ void CWall::Collision(CPlayer* player)
     double Width = (this->GetWidth()) / 2;
     auto XLocation = this->GetX();
     double PlayerWidth = player->GetWidth() / 2;
-    auto playerX = player->GetX();
-    if (PlayerVel > 0 && playerX < XLocation)
+    double PlayerY = player->GetY();
+    double PlayerX = player->GetX();
+    double PlayerHeight = player->GetHeight() / 2;
+    auto YLocation = this->GetY();
+    double Height = this->GetHeight() / 2;
+    
+
+     if (((PlayerY - PlayerHeight < YLocation - Height) && (PlayerY + PlayerHeight > YLocation - Height)) &&
+         (PlayerY + PlayerHeight < YLocation ))
+    {
+        player->SetLocation(player->GetX(),YLocation - Height - Epsilon - PlayerHeight);
+        player->SetVelY(0);
+    }
+    else if ((PlayerVel > 0) && (PlayerX < XLocation))
     {
         player->SetLocation(XLocation - Width - Epsilon - PlayerWidth, player->GetY());
         player->SetVelX(0);
     }
-    else if (PlayerVel < 0 && playerX > XLocation)
+    else if ((PlayerVel < 0) && (PlayerX > XLocation))
     {
         player->SetLocation(XLocation + Width + Epsilon + PlayerWidth, player->GetY());
         player->SetVelX(0);

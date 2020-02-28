@@ -35,8 +35,11 @@ void CScoreboard::Draw(Gdiplus::Graphics* graphics)
 	wstring wide_string = wstring(score.begin(), score.end());
 	const wchar_t* result = wide_string.c_str();
 
+	auto Game = GetGame();
+	auto Player = Game->GetPlayer();
+	auto PlayerX = Player->GetX() + 450;
 
-	graphics->DrawString(result, -1, &font, PointF(1000, 10), &green);
+	graphics->DrawString(result, -1, &font, PointF(PlayerX, 10), &green);
 }
 
 const wstring ScoreboardImageName = L"images/grass.png";
