@@ -40,8 +40,10 @@ private:
     int mLevelHeight = 0; ///< Level height
     float mVScale = 1; ///< Vertical window scale
     float mHScale = 1; ///< Horizontal window scale
-    int mStartX = 0;
-    int mStartY = 0;
+    int mStartX = 0; ///< starting x position for the player
+    int mStartY = 0; ///< starting Y position for the player
+
+    std::shared_ptr<CEntity> mPlayer = nullptr;
 
     int mTuitionIncrease = 0;
 
@@ -88,8 +90,12 @@ public:
 
     void SetTuitionIncrease(int tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
 
+    /** gets the starting position of the player
+    * \returns the starting x position of the player */
     int GetStartY() { return mStartY; }
 
+    /** gets the starting position of the player
+    * \returns the starting Y position of the player */
     int GetStartX() { return mStartX; }
 
     /** gets the height of the current level
@@ -100,4 +106,11 @@ public:
     * \returns the current entities of the game */
     auto GetEntities() { return mEntities; };
 
+    /** sets the pointer to the player character
+    * \param player the player that player is being set to */
+    void SetPlayer(std::shared_ptr<CEntity> player) { mPlayer = player; }
+
+    /** gets the current player object of the game
+    * \returns the current player object of the game */
+    std::shared_ptr<CEntity> GetPlayer() { return mPlayer; }
 };

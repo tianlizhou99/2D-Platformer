@@ -39,7 +39,7 @@ public:
     /** Draws the player
 * 
 */
-    void Draw(Gdiplus::Graphics* graphics) override;
+    void Draw(Gdiplus::Graphics* graphics)override;
 
     /** Accept a visitor
     * \param visitor The visitor we accept
@@ -50,6 +50,10 @@ public:
     /// Setter function setting the velocity of the gnome
     /// \param vel the velocity that mVel is being set to
     void SetVelX(double vel) { mVelX = vel; }
+
+    /// Setter function setting the velocity of the gnome
+    /// \param vel the velocity that mVel is being set to
+    void SetVelY(double vel) { mVelY = vel; }
 
     /// Setter function setting the Timer of the gnome
     /// \param Time the Time that mTimer is being set to

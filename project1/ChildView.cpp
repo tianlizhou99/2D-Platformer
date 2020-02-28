@@ -113,6 +113,7 @@ void CChildView::OnPaint()
 		// add player to the game
 		auto player = make_shared<CPlayer>(&mGame);
 		mPlayer = player;
+		mGame.SetPlayer(player);
 		mGame.Add(player);
 		player->SetLocation(mGame.GetStartX(),mGame.GetStartY());   
     }
@@ -274,45 +275,67 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	//
 	// Prevent tunnelling
 	//
-		while (elapsed > MaxElapsed)
+		if (mMessageDisplayBool == true)
 		{
-			mPlayer->UpdateMove(MaxElapsed);
-			mGame.Update(elapsed);
+			break;
+		}
+		else
+		{
+			while (elapsed > MaxElapsed)
+			{
+				mPlayer->UpdateMove(MaxElapsed);
+				mGame.Update(elapsed);
 
-			elapsed -= MaxElapsed;
+				elapsed -= MaxElapsed;
+			}
+
+			// Consume any remaining time
+			if (elapsed > 0)
+			{
+				mPlayer->UpdateMove(elapsed);
+			}
+			break;
 		}
 
-		// Consume any remaining time
-		if (elapsed > 0)
-		{
-			mPlayer->UpdateMove(elapsed);
-		}
-		break;
 
 	case VK_LEFT:
 		// left arrow pressed
 	//
 	// Prevent tunnelling
 	//
-		while (elapsed > MaxElapsed)
+		if (mMessageDisplayBool == true)
 		{
-			mPlayer->UpdateMove(-MaxElapsed);
-			mGame.Update(elapsed);
-
-			elapsed -= MaxElapsed;
+			break;
 		}
-
-		// Consume any remaining time
-		if (elapsed > 0)
+		else
 		{
-			mPlayer->UpdateMove(-elapsed);
+			while (elapsed > MaxElapsed)
+			{
+				mPlayer->UpdateMove(-MaxElapsed);
+				mGame.Update(elapsed);
+
+				elapsed -= MaxElapsed;
+			}
+
+			// Consume any remaining time
+			if (elapsed > 0)
+			{
+				mPlayer->UpdateMove(-elapsed);
+			}
+			break;
 		}
-		break;
 
 	case VK_SPACE:
-		mPlayer->Jump();
-	
-		break;
+		if (mMessageDisplayBool == true)
+		{
+			break;
+		}
+		else
+		{
+			mPlayer->Jump();
+
+			break;
+		}
 	}
 }
 
@@ -329,10 +352,12 @@ void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	switch (nChar)
 	{
 	case VK_RIGHT:
+		mPlayer->SetVelX(0);
+		break;
 
 	case VK_LEFT:
 
-		// left or right arrow released
+		mPlayer->SetVelX(0);
 		break;
 	}
 }

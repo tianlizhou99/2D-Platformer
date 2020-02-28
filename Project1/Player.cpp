@@ -39,7 +39,6 @@ void CPlayer::Update(double elapsed)
     auto Game = GetGame();
     Game->CollisionTest(this);
 
-    SetLocation(GetX() ,GetY() + mVelY * elapsed);
 
     //Gravity
     if (mPlatformContact)
@@ -51,8 +50,13 @@ void CPlayer::Update(double elapsed)
         mVelY += 100;
     }
 
+    SetLocation(GetX(), GetY() + mVelY * elapsed);
 }
 
+/**
+ * Update the position based on the player based on the velocity
+ * \param elapsed 
+ */
 void CPlayer::UpdateMove(double elapsed)
 {
 

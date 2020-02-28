@@ -46,8 +46,11 @@ void CTimer::Draw(Gdiplus::Graphics* graphics)
 	wstring wide_string = wstring(time.begin(), time.end());
 	const wchar_t* result = wide_string.c_str();
 
+	auto Game = GetGame();
+	auto Player = Game->GetPlayer();
+	auto PlayerX = Player->GetX() - 450;
 	
-	graphics->DrawString(result, -1, &font, PointF(10, 10), &green);
+	graphics->DrawString(result, -1, &font, PointF((PlayerX ), 10), &green);
 }
 
 const wstring TimerImageName = L"images/grass.png";

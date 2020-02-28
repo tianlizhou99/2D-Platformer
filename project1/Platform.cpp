@@ -47,6 +47,7 @@ void CPlatform::Collision(CPlayer* player)
     if (PlayerVelY > 0)
     {
         player->SetLocation(PlayerX, PlatformY - PlatformHeight - PlayerHeight);
+        
     }
     else if (PlayerVelY < 0)
     {
