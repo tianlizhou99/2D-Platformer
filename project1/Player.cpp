@@ -60,6 +60,10 @@ void CPlayer::Update(double elapsed)
 
 }
 
+/**
+ * Update the position based on the player based on the velocity
+ * \param elapsed 
+ */
 void CPlayer::UpdateMove(double elapsed)
 {
 
