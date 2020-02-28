@@ -64,19 +64,16 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     {
        
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width * (int)(virtualWidth / virtualHeight); iter <= mLevelWidth + (int)(virtualWidth / virtualHeight) * width; iter += width)
+        for (int iter = -width * (int)(2 / mVScale); iter <= mLevelWidth + (int)(2 / mVScale) * width; iter += width - (int)(2 / mVScale))
         {
-            graphics->DrawImage(mBackground.get(), iter , 0,
+            graphics->DrawImage(mBackground.get(), iter - 1 , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
-
         }
 
     }
     for (auto entity : mEntities)
     {
         entity->Draw(graphics);
-       
-        
     }
 
     // Remove centering on half virtual window width
