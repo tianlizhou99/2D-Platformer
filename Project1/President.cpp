@@ -33,6 +33,9 @@ void CPresident::Update(double elapsed)
 		if ((GetY() > 1250) && (mTextY < -250))
 		{
 			mFlyAway = false;
+
+			// Mark as used
+			mUsed = true;
 		}
 
 		// Make text grow
@@ -48,13 +51,14 @@ void CPresident::Collision(CPlayer* player)
 	auto game = GetGame();
 
 
-	if (!mFlyAway)
+	if ((!mFlyAway) && (!mUsed))
 	{
 		// Increase Tuition
 		game->SetTuitionIncrease(game->GetTuitionIncrease() + 1);
 
-		// Make money fly away
+		// Make president fly away
 		mFlyAway = true;
+
 	}
 }
 
@@ -68,19 +72,11 @@ void CPresident::Draw(Gdiplus::Graphics* graphics)
 	double wid = entityImage->GetWidth();
 	double hit = entityImage->GetHeight();
 
-	/*if (mYMirror)
-	{
-		graphics->DrawImage(mEntityImage.get(),
-			float(GetX() - wid / 2), float(GetY() - hit / 2),
-			(float)mEntityImage->GetWidth(), -(float)mEntityImage->GetHeight());
-	}
-	else
-	{*/
 	graphics->DrawImage(entityImage,
 		float(GetX() - wid / 2), float(GetY() - hit / 2),
 		(float)entityImage->GetWidth(), (float)entityImage->GetHeight());
-	//}
-	if (mFlyAway)
+
+	if ((mFlyAway) && (!mUsed))
 	{
 		FontFamily fontFamily(L"Arial");
 		Gdiplus::Font font(&fontFamily, mTextSize);

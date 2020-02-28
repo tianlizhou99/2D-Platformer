@@ -33,6 +33,7 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 	mEntities.push_back(entity);
 }
 
+
 /** Draw the game
 * \param graphics The GDI+ graphics context to draw on
 * \param width The width of the screen
@@ -196,6 +197,7 @@ void CGame::Load(const std::wstring& filename)
                             auto entity = make_shared<CMoney>(this, image);
                             entity->SetLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
                             entity->SetTextLocation(node2->GetAttributeIntValue(L"x", 0), node2->GetAttributeIntValue(L"y", 0));
+                            entity->SetInitialWorth(get<1>(moneyDeclarations[id]));
                             entity->SetWorth(get<1>(moneyDeclarations[id]));
                             Add(entity);
                         }

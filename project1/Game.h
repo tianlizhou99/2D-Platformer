@@ -54,16 +54,15 @@ public:
     CGame(); 
     virtual ~CGame();
     void Add(std::shared_ptr<CEntity> entity);
+
     void OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX);
     void Load(const std::wstring& filename);
     void Clear();
     virtual void Update(double elapsed);
     void LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage, int x, int y, int width, int height);
     void LoadWall(wstring image, int x, int y, int width, int height);
-    //void Accept(CVisitor* visitor);
 
     void CollisionTest(CPlayer* player);
-    //std::vector<double> ItemDistances(CPlayer* player);
 
     /** gets the current state of the game
      * \returns the current state of the game */
