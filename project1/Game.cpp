@@ -264,7 +264,10 @@ void CGame::Update(double elapsed)
         item->Update(elapsed);
 
     }
-
+    if (mGameState == end)
+    {
+        LoadNextLevel();
+    }
     if (mTimer < 0.5) mGameState = start;
     else if (mTimer > 0.5) mGameState = progress;
     //TODO other game state detections
@@ -287,10 +290,10 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
     double count = width / 32;
     double leftx = x - ((count - 1) / 2) * 32;
     double rightx = x + ((count - 1) / 2) * 32;
-    auto leftplatform = make_shared<CPlatform>(this, leftimage);
+    auto leftplatform = make_shared<CPlatform>(this, leftimage, -1);
     leftplatform->SetLocation(leftx, y);
     Add(leftplatform);
-    auto rightplatform = make_shared<CPlatform>(this, rightimage);
+    auto rightplatform = make_shared<CPlatform>(this, rightimage, 1);
     rightplatform->SetLocation(rightx, y);
     Add(rightplatform);
     for (double i = 1; i <= count - 2; i++)
@@ -369,7 +372,7 @@ void CGame::CollisionTest(CPlayer* player)
             }
         }
 
-        if((PlayerY + PlayerHeight >= EntityY - EntityHeight) && (PlayerY + PlayerHeight <= EntityY + EntityWidth))
+        else if((PlayerY + PlayerHeight >= EntityY - EntityHeight) && (PlayerY + PlayerHeight <= EntityY + EntityWidth))
         {
             if ((EntityX + EntityWidth >= PlayerX - PlayerWidth) && (EntityX + EntityWidth <= PlayerX + PlayerWidth))
             {
@@ -393,4 +396,32 @@ void CGame::CollisionTest(CPlayer* player)
         }
     }
 
+}
+
+/**
+  * Load next level
+  */
+void CGame::LoadNextLevel()
+{
+    if (mLevelNum == 0)
+    {
+        Load(L"levels/level1.xml");
+        mLevelNum = 1;
+    }
+    else if (mLevelNum == 1)
+    {
+        Load(L"levels/level2.xml");
+        mLevelNum = 2;
+    }
+    else if (mLevelNum == 2)
+    {
+        Load(L"levels/level3.xml");
+        mLevelNum = 3;
+    }
+    else if (mLevelNum == 3)
+    {
+        Load(L"levels/level3.xml");
+        mLevelNum = 3;
+    }
+    mFirstDraw = true;
 }

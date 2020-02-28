@@ -47,6 +47,9 @@ private:
 
     int mTuitionIncrease = 0;
 
+    int mLevelNum = 0; ///< current level number
+    bool mFirstDraw = true; ///<first draw status
+
 public:
     CGame(); 
     virtual ~CGame();
@@ -82,7 +85,7 @@ public:
     * \returns the current time of the game */
     double GetTimer() { return mTimer; };
 
-    /** gets the current timer of the game
+    /** sets the current timer of the game
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
 
@@ -113,4 +116,21 @@ public:
     /** gets the current player object of the game
     * \returns the current player object of the game */
     std::shared_ptr<CEntity> GetPlayer() { return mPlayer; }
+    /** gets the current level number of the game
+    * \returns the current levelnumber of the game */
+    auto GetLevelNum() { return mLevelNum; };
+
+    /** sets the current level number of the game
+     * \param timer the new level number of the game */
+    void SetLevelNum(int num) { mLevelNum = num; };
+
+    /** gets the first draw status of the game
+    * \returns the first draw status of the game */
+    auto GetFirst() { return mFirstDraw; };
+    
+    /** sets the first draw status of the game
+     * \param timer the new first draw status of the game */
+    void SetFirst(bool first) { mFirstDraw = first; };
+
+    void LoadNextLevel();
 };
