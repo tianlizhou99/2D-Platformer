@@ -29,6 +29,10 @@ public:
     *
     */
     void Jump();
+    /** sets ground contact to false on loss
+*
+*/
+    void Loss();
     /** updates the player over time
     */
     void Update(double elpased) override;

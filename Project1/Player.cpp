@@ -43,6 +43,12 @@ void CPlayer::Jump()
     }
 }
 
+void CPlayer::Loss()
+{
+    mGroundContact = false;
+}
+
+
 
 /**
  * updating the player based on the time elapsed
