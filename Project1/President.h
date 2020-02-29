@@ -34,15 +34,18 @@ public:
 
     void Update(double elapsed);
 
-    /// used to carry out different actions dependent
-    /// on what item the player collides with.
+    /** used to carry out different actions dependent
+     on what item the player collides with.
+      \param player the current player of the game
+     */
     void Collision(CPlayer * player)override;
 
     void Draw(Gdiplus::Graphics* graphics);
 
 private:
+    ///< the size of the text used to display the money
     int mTextSize = 48;
 
-    bool mUsed = false; /// Check if president has been used yet
+    bool mUsed = false; ///< Check if president has been used yet
 };
 

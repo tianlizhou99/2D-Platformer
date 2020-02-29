@@ -77,6 +77,7 @@ public:
 
     /// virtual function used to carry out different actions dependent
     /// on what item the player collides with.
+    /// \param player to check collision with
     /// \return void
     virtual void Collision(CPlayer* player) {};
 

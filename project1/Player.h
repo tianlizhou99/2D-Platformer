@@ -25,24 +25,26 @@ public:
 
     /// Copy constructor (disabled)
     CPlayer(const CPlayer&) = delete;
+
     /** increases the y position of the player
     *
     */
     void Jump();
+
     /** sets ground contact to false on loss
-*
-*/
+      *
+      */
     void Loss();
+
     /** updates the player over time
     */
     void Update(double elpased) override;
-    /** updates the players movement over time
-* \param elapsed is the time
-*/
+
     void UpdateMove(double elapsed);
+
     /** Draws the player
-*
-*/
+      *
+      */
     void Draw(Gdiplus::Graphics* graphics)override;
 
     /** Accept a visitor
@@ -83,5 +85,5 @@ private:
     double mTimer = 0; ///< time that left or right key has been held down for
     double mVelX = 0; ///< velocity of the player in the x direction
     double mVelY = 0; ///<velocity of the player in the y direction
-    double mGroundContact = false; ///whether player is in contact with ground
+    double mGroundContact = false; ///<whether player is in contact with ground
 };
