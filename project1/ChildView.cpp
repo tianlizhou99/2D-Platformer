@@ -148,17 +148,17 @@ void CChildView::OnPaint()
 		switch (mGame.GetState())
 		{
 		case 0:
-			mMessageDisplay = ("Level " + to_string(mlevelNum) + " Begin");
+			mMessageDisplay = ("LEVEL " + to_string(mlevelNum) + " BEGIN");
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 			break;
 		case 2:
-			mMessageDisplay = "Level Complete";
+			mMessageDisplay = "LEVEL COMPLETE";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 			break;
 		case 3:
-			mMessageDisplay = "You Lose!";
+			mMessageDisplay = "YOU LOSE!";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
 		}
