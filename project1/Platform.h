@@ -24,20 +24,17 @@ public:
 
     /// Copy constructor (disabled)
     CPlatform(const CPlatform&) = delete;
-   
-    /* constructor for platform
-    * \param game the game containing the wall
-    * \param filename the name of the image file
-    */
+
     CPlatform(CGame* game, const std::wstring& filename);
 
     CPlatform(CGame* game, const std::wstring& filename, int type);
 
-    /// Handle collision behavior
-    /// \return void
+    /** Handle collision behavior
+    * \param player The current player in the game
+    * \return void */
     virtual void Collision(CPlayer* player) override;
 
 private:
-    int mType = 0;
+    int mType = 0; ///< The type of this platform
 };
 

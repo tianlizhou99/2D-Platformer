@@ -47,7 +47,7 @@ private:
 
     int mTuitionIncrease = 0; ///< Tuition increase
 
-    int mLevelNum = 1; ///< current level number
+    int mLevelNum = 0; ///< current level number
     bool mFirstDraw = true; ///<first draw status
 
 public:
