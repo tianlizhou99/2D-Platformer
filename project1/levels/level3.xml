@@ -97,7 +97,7 @@
     <money id="i009" y="650" x="4800"/>
     <wall height="280" width="32" id="i006" y="550" x="5000"/>
 
-    <platform height="32" width="1050" id="i005" y="950" x="5250"/>
+    <platform height="32" width="1050" id="i005" y="1000" x="5250"/>
     <money id="i008" y="850" x="4800"/>
     <money id="i009" y="850" x="4900"/>
     <money id="i008" y="850" x="5000"/>
