@@ -71,7 +71,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
 
     if (mBackground != nullptr)
     {
-       
+        //Infinite background based on how stretched the screen is
         int width = static_cast<int>(mBackground->GetWidth());
         for (int iter = -width * (int)(2 / mVScale); iter <= mLevelWidth + (int)(2 / mVScale) * width; iter += width - (int)(2 / mVScale))
         {
@@ -80,9 +80,11 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
         }
 
     }
+
     for (auto entity : mEntities)
     {
-        if (entity->GetX() < -scrollX + (int)(2 / mVScale) * virtualWidth && entity->GetX() > scrollX * (int)(2 / mVScale))
+        //Frustum Culling: only renders the elements that should be in view to save resources and improve performance
+        if (entity->GetX() < -scrollX + (int)(2 / mVScale) * virtualWidth && entity->GetX() > scrollX - virtualWidth * (int)(2 / mVScale))
         {
             entity->Draw(graphics);
         }
