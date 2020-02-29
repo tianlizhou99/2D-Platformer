@@ -43,9 +43,9 @@ private:
     int mStartX = 0; ///< starting x position for the player
     int mStartY = 0; ///< starting Y position for the player
 
-    std::shared_ptr<CEntity> mPlayer = nullptr;
+    std::shared_ptr<CEntity> mPlayer = nullptr; ///< Pointer to player object
 
-    int mTuitionIncrease = 0;
+    int mTuitionIncrease = 0; ///< Tuition increase
 
     int mLevelNum = 0; ///< current level number
     bool mFirstDraw = true; ///<first draw status
@@ -89,8 +89,12 @@ public:
      * \param timer the current timer of the game */
     void SetTimer(double timer) { mTimer = timer; };
 
+    /** Getter for Tuition Increase
+     * \returns tuition increase*/
     int GetTuitionIncrease() { return mTuitionIncrease; }
 
+    /** Setter for the Tuition Increase
+     * \param tuitionIncrease new tuition increase*/
     void SetTuitionIncrease(int tuitionIncrease) { mTuitionIncrease = tuitionIncrease; }
 
     /** gets the starting position of the player
@@ -121,7 +125,7 @@ public:
     auto GetLevelNum() { return mLevelNum; };
 
     /** sets the current level number of the game
-     * \param timer the new level number of the game */
+     * \param num the new level number of the game */
     void SetLevelNum(int num) { mLevelNum = num; };
 
     /** gets the first draw status of the game
@@ -129,7 +133,7 @@ public:
     auto GetFirst() { return mFirstDraw; };
     
     /** sets the first draw status of the game
-     * \param timer the new first draw status of the game */
+     * \param first the new first draw status of the game */
     void SetFirst(bool first) { mFirstDraw = first; };
 
     void LoadNextLevel();

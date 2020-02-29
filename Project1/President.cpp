@@ -20,6 +20,10 @@ void CPresident::SetTextLocation(double x, double y)
 }
 
 
+/**
+ * updates the function whenever all the objects in the game are updated
+ * \param elapsed the amount of time passed since the last call of update
+ */
 void CPresident::Update(double elapsed)
 {
 	// Initialize game
