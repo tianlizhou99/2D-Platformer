@@ -52,6 +52,10 @@ public:
     */
     CCharacter(CGame* game, const std::wstring& filename);
 
+    /**
+      * Handle collision behavior with character
+      * \param player to check collision with
+      */
     virtual void Collision(CPlayer* player);
 
 private:
