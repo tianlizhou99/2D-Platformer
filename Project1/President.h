@@ -43,9 +43,8 @@ public:
     void Draw(Gdiplus::Graphics* graphics);
 
 private:
-    ///< the size of the text used to display the money
-    int mTextSize = 48;
-
+    int mTextSize = 48; ///< the size of the text used to display the money
+    
     bool mUsed = false; ///< Check if president has been used yet
 };
 
