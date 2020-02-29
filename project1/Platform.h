@@ -34,10 +34,11 @@ public:
     CPlatform(CGame* game, const std::wstring& filename, int type);
 
     /// Handle collision behavior
+    /// \param player a pointer to the player
     /// \return void
     virtual void Collision(CPlayer* player) override;
 
 private:
-    int mType = 0;
+    int mType = 0; ///< type of platform
 };
 

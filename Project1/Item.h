@@ -39,11 +39,10 @@ public:
     void CItem::SetSpeedY(double y) { mSpeedY = y; }
 
 private:
-    ///<  speed in the X direction
-    double mSpeedX;
 
-    ///<  speed in the Y direction
-    double mSpeedY;
+    double mSpeedX;     ///< speed in the X direction
+
+    double mSpeedY;     ///< speed in the Y direction
 
 
 protected:
