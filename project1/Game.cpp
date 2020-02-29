@@ -82,7 +82,7 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     }
     for (auto entity : mEntities)
     {
-        if (entity->GetX() < -scrollX + (int)(2 / mVScale) * virtualWidth && entity->GetX() > -scrollX)
+        if (entity->GetX() < -scrollX + (int)(2 / mVScale) * virtualWidth && entity->GetX() > scrollX * (int)(2 / mVScale))
         {
             entity->Draw(graphics);
         }
