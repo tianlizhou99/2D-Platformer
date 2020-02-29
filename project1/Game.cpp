@@ -82,7 +82,10 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     }
     for (auto entity : mEntities)
     {
-        entity->Draw(graphics);
+        if (entity->GetX() < -scrollX + (int)(2 / mVScale) * virtualWidth && entity->GetX() > -scrollX)
+        {
+            entity->Draw(graphics);
+        }
     }
 
     // Remove centering on half virtual window width
