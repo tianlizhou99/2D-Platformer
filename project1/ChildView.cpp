@@ -27,7 +27,7 @@ const int FrameDuration = 30;
 
 CChildView::CChildView()
 {
-	OnLevelsLevel0();
+	OnLevelsLevel1();
 }
 
 CChildView::~CChildView()
