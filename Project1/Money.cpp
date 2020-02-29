@@ -19,7 +19,10 @@ void CMoney::SetTextLocation(double x, double y)
 	mTextY = y;
 }
 
-
+/**
+* Update override
+* \param elapsed time since last call
+*/
 void CMoney::Update(double elapsed)
 {
 	auto game = GetGame();

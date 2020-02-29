@@ -34,7 +34,7 @@ public:
 	void Draw(Gdiplus::Graphics* graphics) override;
 
 private:
-	double mElapsed = 0;
+	double mElapsed = 0; ///<Time elapsed since last call
 	Sign mSign = stop; ///<Sign state
 	double mMultiplier = 2; ///< Speed multiplier
 };

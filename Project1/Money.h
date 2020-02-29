@@ -31,6 +31,7 @@ public:
 
     /// used to carry out different actions dependent
     /// on what item the player collides with.
+    /// \param player Player object for collision detection
     void Collision(CPlayer* player) override;
 
     void Draw(Gdiplus::Graphics* graphics);
@@ -49,7 +50,7 @@ public:
     void SetTextLocation(double x, double y);
 
     /// Setter for mWorth
-    /// \param worth of the money
+    /// \param initialWorth of the money
     void SetInitialWorth(int initialWorth) { mInitialWorth = initialWorth; }
 
     /// Setter for mWorth
@@ -60,7 +61,7 @@ public:
 
 private:
     int mWorth = 0; ///< Value of the money
-    int mInitialWorth = 0;
+    int mInitialWorth = 0; ///< initial value of the money
 
     int mCurrentIncrease = 0; ///< Number of times tuition increased on this dollar
 };

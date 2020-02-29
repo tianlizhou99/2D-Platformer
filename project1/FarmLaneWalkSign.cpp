@@ -43,6 +43,9 @@ void CFarmLaneWalkSign::Update(double elapse)
 	}
 }
 
+/** Override to draw the object
+* \param graphics The GDI+ graphics context to draw on
+*/
 void CFarmLaneWalkSign::Draw(Gdiplus::Graphics* graphics)
 {
 	if (mSign == walk) {
