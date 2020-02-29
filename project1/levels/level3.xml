@@ -1,2 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<level width="8192" height="1024" start-y="796" start-x="788"><declarations><platform id="i005" left-image="platformIndustrial_059.png" mid-image="platformIndustrial_060.png" right-image="platformIndustrial_061.png"/><door id="i011" image="door.png"/><sign id="i012" walk-image="walksign.png" stop-image="stopsign.png"/></declarations><items><platform id="i005" x="912" y="944" width="352" height="32"/><sign id="i012" x="1024" y="828"/><door id="i011" x="1200" y="828"/></items></level>
+<level width="8192" height="1024" start-y="796" start-x="788">
+  <declarations>
+    <background image="backgroundColorGrass.png" id="i002"/>
+    <platform id="i003" right-image="grassRight.png" mid-image="grassMid.png" left-image="grassLeft.png"/>
+    <platform id="i005" left-image="platformIndustrial_059.png" mid-image="platformIndustrial_060.png" right-image="platformIndustrial_061.png"/>
+    <wall image="wall1.png" id="i006"/>
+    <wall image="wall2.png" id="i007"/>
+    <money image="money100.png" id="i008" value="100"/>
+    <money image="money1000.png" id="i009" value="1000"/>
+    <tuition-up image="stanley.png" id="i010"/>
+    <door id="i011" image="door.png"/>
+    <villain image="UofM.png" id="i012"/>
+    <villain image="wisc.png" id="i013"/>
+    <sign id="i014" walk-image="walksign.png" stop-image="stopsign.png"/>
+
+  </declarations>
+  <items>
+    <background id="i002" y="512" x="512"/>
+    <background id="i002" y="512" x="1536"/>
+    <background id="i002" y="512" x="2560"/>
+    <background id="i002" y="512" x="3584"/>
+    <background id="i002" y="512" x="4608"/>
+    <background id="i002" y="512" x="5632"/>
+    <background id="i002" y="512" x="6656"/>
+    <background id="i002" y="512" x="7680"/>
+    <platform height="32" width="852" id="i005" y="944" x="912"/>
+    <platform height="32" width="650" id="i005" y="650" x="1650"/>
+    <sign id="i014" y="702" x="1024"/>
+    <wall height="120" width="32" id="i006" y="852" x="1024"/>
+    <wall height="250" width="32" id="i007" y="775" x="1650"/>
+    <money id="i008" y="500" x="1650"/>
+    <money id="i009" y="320" x="1650"/>
+    <tuition-up id="i010" y="830" x="1810"/>
+    <sign id="i014" y="800" x="2000"/>
+    <platform height="32" width="450" id="i005" y="930" x="1860"/>
+    <platform height="32" width="550" id="i005" y="650" x="2750"/>
+    <money id="i008" y="300" x="2750"/>
+    <money id="i008" y="350" x="2750"/>
+    <money id="i008" y="400" x="2750"/>
+    <money id="i008" y="450" x="2750"/>
+    <money id="i008" y="500" x="2750"/>
+    <money id="i008" y="500" x="2850"/>
+    <money id="i008" y="300" x="2950"/>
+    <money id="i008" y="350" x="2950"/>
+    <money id="i008" y="400" x="2950"/>
+    <money id="i008" y="450" x="2950"/>
+    <money id="i008" y="500" x="2950"/>
+    <money id="i008" y="500" x="3050"/>
+    <money id="i008" y="300" x="3150"/>
+    <money id="i008" y="350" x="3150"/>
+    <money id="i008" y="400" x="3150"/>
+    <money id="i008" y="450" x="3150"/>
+    <money id="i008" y="500" x="3150"/>
+
+    <money id="i009" y="300" x="3300"/>
+    <money id="i009" y="350" x="3300"/>
+    <money id="i009" y="400" x="3300"/>
+    <money id="i009" y="450" x="3300"/>
+    <money id="i009" y="500" x="3300"/>
+    <money id="i009" y="300" x="3400"/>
+    <money id="i009" y="400" x="3400"/>
+    <money id="i009" y="300" x="3500"/>
+    <money id="i009" y="350" x="3500"/>
+    <money id="i009" y="400" x="3500"/>
+    <money id="i009" y="450" x="3500"/>
+    <money id="i009" y="500" x="3500"/>
+
+    <money id="i008" y="300" x="3650"/>
+    <money id="i008" y="350" x="3650"/>
+    <money id="i008" y="400" x="3650"/>
+    <money id="i008" y="450" x="3650"/>
+    <money id="i008" y="500" x="3650"/>
+
+
+    <money id="i009" y="300" x="3800"/>
+    <money id="i009" y="300" x="3900"/>
+    <money id="i009" y="300" x="4000"/>
+
+    <money id="i009" y="350" x="3900"/>
+    <money id="i009" y="400" x="3900"/>
+    <money id="i009" y="450" x="3900"/>
+    <money id="i009" y="500" x="3900"/>
+
+    <platform height="32" width="350" id="i005" y="650" x="3650"/>
+    <platform height="32" width="350" id="i005" y="650" x="4650"/>
+    <platform height="32" width="350" id="i005" y="650" x="5650"/>
+    <platform height="32" width="350" id="i005" y="900" x="6200"/>
+
+    <villain id="i013" y="550" x="1650"/>
+    
+    
+    <door id="i011" y="783" x="6200" />
+  </items>
+</level>

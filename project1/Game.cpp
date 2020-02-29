@@ -33,6 +33,15 @@ void CGame::Add(std::shared_ptr<CEntity> entity)
 	mEntities.push_back(entity);
 }
 
+/**
+* Add an item to the game, loads later than other objects
+* \param entity New item to add
+*/
+void CGame::AddFront(std::shared_ptr<CEntity> entity)
+{
+    mEntities.insert(mEntities.begin(), entity);
+}
+
 
 /** Draw the game
 * \param graphics The GDI+ graphics context to draw on
@@ -98,7 +107,6 @@ void CGame::Load(const std::wstring& filename)
       
 
         // Maps for declarations of each type 
-        map<wstring, wstring> backgroundDeclarations;
         map<wstring, tuple<wstring, wstring, wstring>> platformDeclarations;
         map<wstring, wstring> wallDeclarations;
         map<wstring, tuple<wstring, int>> moneyDeclarations;
@@ -289,19 +297,18 @@ void CGame::Update(double elapsed)
  */
 void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage, int x, int y, int width, int height)
 {
-    double count = width / 32;
-    double leftx = x - ((count - 1) / 2) * 32;
-    double rightx = x + ((count - 1) / 2) * 32;
+    double leftx = x - (((double)width / 32 - 1) / 2) * 32;
+    double rightx = x + (((double)width / 32 - 1) / 2) * 32;
     auto leftplatform = make_shared<CPlatform>(this, leftimage, -1);
     leftplatform->SetLocation(leftx, y);
     Add(leftplatform);
     auto rightplatform = make_shared<CPlatform>(this, rightimage, 1);
     rightplatform->SetLocation(rightx, y);
     Add(rightplatform);
-    for (double i = 1; i <= count - 2; i++)
+    for (double i = 32 - (int)(2 / mVScale); i <= width; i += 32 - (int)(2 / mVScale))
     {
         auto midplatform = make_shared<CPlatform>(this, midimage);
-        double offset = i * 32;
+        double offset = i;
         midplatform->SetLocation(leftx + offset, y);
         Add(midplatform);
     }
@@ -317,14 +324,12 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
  */
 void CGame::LoadWall(wstring image, int x, int y, int width, int height)
 {
-    double count = height / 32;
-    double topy = y - ((count - 1) / 2) * 32;
-    for (double i = 0; i <= count - 1; i++)
+    double topy = y - ((height / 32 - 1) / 2) * 32;
+    for (double i = 0; i <= height; i += 32 - (int)(2 / mVScale))
     {
         auto wall = make_shared<CWall>(this, image);
-        double offset = i * 32;
-        wall->SetLocation(x, topy + offset);
-        Add(wall);
+        wall->SetLocation(x, topy + i);
+        AddFront(wall);
     }
 }
 
