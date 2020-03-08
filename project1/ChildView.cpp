@@ -161,6 +161,7 @@ void CChildView::OnPaint()
 			mMessageDisplay = "YOU LOSE!";
 			timer = mGame.GetTimer();
 			mMessageDisplayBool = true;
+			break;
 		}
 	}
 
@@ -265,28 +266,24 @@ BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 */
 void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	LARGE_INTEGER time;
-	QueryPerformanceCounter(&time);
-	long long diff = time.QuadPart - mLastTime;
-	double elapsed = double(diff) / mTimeFreq;
-	mLastTime = time.QuadPart;
-	/// Maximum amount of time to allow for elapsed
-	const double MaxElapsed = 0.050;
-	switch (nChar)
+	if ((mGame.GetState() != 0) && (mGame.GetState() != 2) && (mGame.GetState() != 3) && !mMessageDisplayBool)
 	{
-
-	case VK_RIGHT:
-		// right arrow pressed
-
-	//
-	// Prevent tunnelling
-	//
-		if (mMessageDisplayBool == true)
+		LARGE_INTEGER time;
+		QueryPerformanceCounter(&time);
+		long long diff = time.QuadPart - mLastTime;
+		double elapsed = double(diff) / mTimeFreq;
+		mLastTime = time.QuadPart;
+		/// Maximum amount of time to allow for elapsed
+		const double MaxElapsed = 0.050;
+		switch (nChar)
 		{
-			break;
-		}
-		else
-		{
+
+		case VK_RIGHT:
+			// Right arrow pressed
+
+			//
+			// Prevent tunnelling
+			//
 			while (elapsed > MaxElapsed)
 			{
 				mPlayer->UpdateMove(MaxElapsed);
@@ -301,20 +298,13 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 				mPlayer->UpdateMove(elapsed);
 			}
 			break;
-		}
 
+		case VK_LEFT:
+			// Left arrow pressed
 
-	case VK_LEFT:
-		// left arrow pressed
-	//
-	// Prevent tunnelling
-	//
-		if (mMessageDisplayBool == true)
-		{
-			break;
-		}
-		else
-		{
+			//
+			// Prevent tunnelling
+			//
 			while (elapsed > MaxElapsed)
 			{
 				mPlayer->UpdateMove(-MaxElapsed);
@@ -329,17 +319,11 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 				mPlayer->UpdateMove(-elapsed);
 			}
 			break;
-		}
+			
+		case VK_SPACE:
+			// Space pressed
 
-	case VK_SPACE:
-		if (mMessageDisplayBool == true)
-		{
-			break;
-		}
-		else
-		{
 			mPlayer->Jump();
-
 			break;
 		}
 	}
