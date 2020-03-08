@@ -27,7 +27,7 @@ public:
     /// Cwall constructor
     CWall(CGame* game, wstring& filename);
 
-    void Collision(CPlayer* player) override;
+    virtual void Collision(CPlayer* player) override;
 
 };
 
