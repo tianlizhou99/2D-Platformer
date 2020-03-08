@@ -31,6 +31,7 @@ private:
     int mScore = 0; ///< score of the player
     GameState mGameState = start; ///< current state of the game
     double mTimer = 0; ///< timer of current level
+    double mEndTime = 0; ///< time that player lost
 
     std::vector <std::shared_ptr<CEntity>> mEntities; ///< Vector of entities
     

@@ -279,7 +279,16 @@ void CGame::Update(double elapsed)
     }
     if (mGameState == end)
     {
-        LoadNextLevel();
+        if (mEndTime == 0)
+        {
+            mEndTime = mTimer;
+        }
+        else if (mTimer > mEndTime + 1)
+        {
+            LoadNextLevel();
+            mEndTime = 0;
+            mGameState = start;
+        }
     }
     else if (mGameState != loss) {
         if (mTimer < 0.5) mGameState = start;
