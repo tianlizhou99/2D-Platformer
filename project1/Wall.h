@@ -26,8 +26,12 @@ public:
     CWall(const CWall&) = delete;
     /// Cwall constructor
     CWall(CGame* game, wstring& filename);
-
-    virtual void Collision(CPlayer* player) override;
+    /**
+  * Handle collision behavior with wall
+  * \param player to check collision with
+  * \return void
+  */
+    void Collision(CPlayer* player) override;
 
 };
 
