@@ -18,7 +18,7 @@ CFarmLaneWalkSign::CFarmLaneWalkSign(CGame* game) :
 
 /**
 * Overloaded constructor
-* \param game that the door is in
+* \param game that the sign is in
 * \param filename image to load from
 */
 CFarmLaneWalkSign::CFarmLaneWalkSign(CGame* game, wstring& filename) : CLevel(game, filename)
@@ -48,8 +48,8 @@ void CFarmLaneWalkSign::Update(double elapse)
 */
 void CFarmLaneWalkSign::Draw(Gdiplus::Graphics* graphics)
 {
-	if (mSign == walk) {
-
+	if (mSign == walk)
+	{
 		std::unique_ptr<Gdiplus::Bitmap> walkImage = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile(WalkSign.c_str()));
 		double wid = GetImage()->GetWidth();
 		double hit = GetImage()->GetHeight();
@@ -59,7 +59,8 @@ void CFarmLaneWalkSign::Draw(Gdiplus::Graphics* graphics)
 			float(GetX() - wid / 2), float(GetY() - hit / 2),
 			(float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
 	}
-	else{
+	else
+	{
 		std::unique_ptr<Gdiplus::Bitmap> stopImage = unique_ptr<Gdiplus::Bitmap>(Gdiplus::Bitmap::FromFile(StopSign.c_str()));
 		double wid = GetImage()->GetWidth();
 		double hit = GetImage()->GetHeight();
@@ -68,4 +69,17 @@ void CFarmLaneWalkSign::Draw(Gdiplus::Graphics* graphics)
 			float(GetX() - wid / 2), float(GetY() - hit / 2),
 			(float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
 	}
+}
+
+void CFarmLaneWalkSign::Collision(CPlayer* player)
+{
+	if (mSign == walk)
+	{
+		player->SetDistanceX(player->GetDistanceX() + 150);
+	}
+	else
+	{
+		player->SetDistanceX(player->GetDistanceX() - 150);
+	}
+	SetLocation(-100, -100);
 }
