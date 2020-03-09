@@ -40,8 +40,6 @@ public:
     */
     void Update(double elpased) override;
 
-    void UpdateMove(double elapsed);
-
     /** Draws the player
       *
       */
@@ -78,6 +76,13 @@ public:
     /// \param collision set platform contact true if collision
     void SetGroundContact(double collision) { mGroundContact = collision; }
 
+    /// Setter function setting the multiplier for the speed o f the gnome
+    /// \param multiplier the new multiplier or the speed of the gnome
+    void SetDistanceX(double distance) { mDistanceX = distance; }
+
+    /// Getter function getting the velocity of the gnome
+    /// \return the current distance that the gnome travels in the x direction
+    double GetDistanceX() { return mDistanceX; }
 
 private:
     double mJumping = false; ///< whether player is jumping
@@ -86,4 +91,5 @@ private:
     double mVelX = 0; ///< velocity of the player in the x direction
     double mVelY = 0; ///<velocity of the player in the y direction
     double mGroundContact = false; ///<whether player is in contact with ground
+    double mDistanceX = 500; ///< the speed multiplier for the player in the x direction
 };

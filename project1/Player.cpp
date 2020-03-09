@@ -73,7 +73,7 @@ void CPlayer::Update(double elapsed)
 void CPlayer::UpdateMove(double elapsed)
 {
 
-    SetLocation(GetX() + 500 * elapsed, GetY());
+    SetLocation((GetX() + (mDistanceX * elapsed)), GetY());
     if (elapsed > 0)
     {
         mTimer += elapsed;
@@ -99,6 +99,29 @@ void CPlayer::Draw(Gdiplus::Graphics* graphics)
         double hit = GetImage()->GetHeight();
 
         graphics->DrawImage(GnomeImage_img.get(),
+            float(GetX() - wid / 2), float(GetY() - hit / 2),
+            (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
+    }
+    else if ((mVelY != 0) && (mVelX > 0))
+    {
+        mTimer = 0;
+
+        std::unique_ptr<Gdiplus::Bitmap> GnomeRight1_image = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeRight1.c_str()));
+        double wid = GetImage()->GetWidth();
+        double hit = GetImage()->GetHeight();
+
+        graphics->DrawImage(GnomeRight1_image.get(),
+            float(GetX() - wid / 2), float(GetY() - hit / 2),
+            (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
+    }
+    else if ((mVelY != 0) && (mVelX < 0))
+    {
+        mTimer = 0;
+        std::unique_ptr<Gdiplus::Bitmap> GnomeLeft1_image = unique_ptr<Bitmap>(Bitmap::FromFile(GnomeLeft1.c_str()));
+        double wid = GetImage()->GetWidth();
+        double hit = GetImage()->GetHeight();
+
+        graphics->DrawImage(GnomeLeft1_image.get(),
             float(GetX() - wid / 2), float(GetY() - hit / 2),
             (float)GetImage()->GetWidth(), (float)GetImage()->GetHeight());
     }

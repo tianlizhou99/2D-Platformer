@@ -51,11 +51,15 @@ private:
 	double mTimeFreq;       ///< Rate the timer updates
 
 	double mElapsed; ///< time elapsed
-
 	int mlevelNum = 0; ///< selected level number
+
+	bool mRightKey = false; ///<right key held flag
+	bool mLeftKey = false; ///<left key held flag
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	void RightKeyUpdate(double elapsed);
+	void LeftKeyUpdate(double elapsed);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 };

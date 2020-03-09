@@ -33,6 +33,8 @@ public:
 
 	void Draw(Gdiplus::Graphics* graphics) override;
 
+	virtual void Collision(CPlayer* player) override;
+
 private:
 	double mElapsed = 0; ///<Time elapsed since last call
 	Sign mSign = stop; ///<Sign state
