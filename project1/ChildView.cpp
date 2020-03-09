@@ -154,13 +154,22 @@ void CChildView::OnPaint()
 		mMessageDisplay = "LEVEL COMPLETE";
 		timer = mGame.GetTimer();
 		mMessageDisplayBool = true;
+		mRightKey = false;
+		mLeftKey = false;
+		mPlayer->SetVelX(0);
 		break;
 	case 3:
 		mMessageDisplay = "YOU LOSE!";
 		timer = mGame.GetTimer();
 		mMessageDisplayBool = true;
+		mRightKey = false;
+		mLeftKey = false;
+		mPlayer->SetVelX(0);
 		break;
 	}
+
+	if (mRightKey) { RightKeyUpdate(elapsed); }
+	if (mLeftKey) { LeftKeyUpdate(elapsed); }
 
 	mGame.Update(elapsed);
 	mlevelNum = mGame.GetLevelNum();
@@ -237,7 +246,6 @@ void CChildView::OnLevelsLevel3()
 */
 void CChildView::OnTimer(UINT_PTR nIDEvent)
 {
-	
 	Invalidate();
 	CWnd::OnTimer(nIDEvent);
 }
@@ -255,6 +263,62 @@ BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 }
 
 /**
+ * Handle right key 
+ * \param elapsed time
+ * \returns void
+*/
+void CChildView::RightKeyUpdate(double elapsed)
+{
+	/// Maximum amount of time to allow for elapsed
+	const double MaxElapsed = 0.050;
+
+	const int elapsedcopy = elapsed;
+	//
+	// Prevent tunnelling
+	//
+	while (elapsed > MaxElapsed)
+	{
+		mPlayer->SetVelX(MaxElapsed);
+		elapsed -= MaxElapsed;
+	}
+	mPlayer->Update((elapsedcopy / MaxElapsed)* MaxElapsed);
+
+	// Consume any remaining time
+	if (elapsed > 0)
+	{
+		mPlayer->SetVelX(elapsed);
+	}
+}
+
+/**
+ * Handle right key
+ * \param elapsed time
+ * \returns void
+*/
+void CChildView::LeftKeyUpdate(double elapsed)
+{
+	/// Maximum amount of time to allow for elapsed
+	const double MaxElapsed = 0.050;
+
+	const int elapsedcopy = elapsed;
+	//
+	// Prevent tunnelling
+	//
+	while (elapsed > MaxElapsed)
+	{
+		mPlayer->SetVelX(-MaxElapsed);
+		elapsed -= MaxElapsed;
+	}
+	mPlayer->Update(-1* (elapsedcopy / MaxElapsed) * MaxElapsed);
+
+	// Consume any remaining time
+	if (elapsed > 0)
+	{
+		mPlayer->SetVelX(-elapsed);
+	}
+}
+
+/**
  * Handle key press down
  * \param nChar
  * \param nRepCnt
@@ -265,61 +329,21 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	if (mGame.GetState() == 1) // Check if in progress
 	{
-		LARGE_INTEGER time;
-		QueryPerformanceCounter(&time);
-		long long diff = time.QuadPart - mLastTime;
-		double elapsed = double(diff) / mTimeFreq;
-		mLastTime = time.QuadPart;
-		/// Maximum amount of time to allow for elapsed
-		const double MaxElapsed = 0.050;
 		switch (nChar)
 		{
 
 		case VK_RIGHT:
 			// Right arrow pressed
-
-			//
-			// Prevent tunnelling
-			//
-			while (elapsed > MaxElapsed)
-			{
-				mPlayer->UpdateMove(MaxElapsed);
-				mGame.Update(elapsed);
-
-				elapsed -= MaxElapsed;
-			}
-
-			// Consume any remaining time
-			if (elapsed > 0)
-			{
-				mPlayer->UpdateMove(elapsed);
-			}
+			mRightKey = true;
 			break;
 
 		case VK_LEFT:
 			// Left arrow pressed
-
-			//
-			// Prevent tunnelling
-			//
-			while (elapsed > MaxElapsed)
-			{
-				mPlayer->UpdateMove(-MaxElapsed);
-				mGame.Update(elapsed);
-
-				elapsed -= MaxElapsed;
-			}
-
-			// Consume any remaining time
-			if (elapsed > 0)
-			{
-				mPlayer->UpdateMove(-elapsed);
-			}
+			mLeftKey = true;
 			break;
 			
 		case VK_SPACE:
 			// Space pressed
-
 			mPlayer->Jump();
 			break;
 		}
@@ -339,11 +363,12 @@ void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	switch (nChar)
 	{
 	case VK_RIGHT:
+		mRightKey = false;
 		mPlayer->SetVelX(0);
 		break;
 
 	case VK_LEFT:
-
+		mLeftKey = false;
 		mPlayer->SetVelX(0);
 		break;
 	}

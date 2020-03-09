@@ -40,8 +40,6 @@ public:
     */
     void Update(double elpased) override;
 
-    void UpdateMove(double elapsed);
-
     /** Draws the player
       *
       */
