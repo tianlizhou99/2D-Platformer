@@ -51,7 +51,6 @@ private:
 	double mTimeFreq;       ///< Rate the timer updates
 
 	double mElapsed; ///< time elapsed
-
 	int mlevelNum = 0; ///< selected level number
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);

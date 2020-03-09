@@ -143,26 +143,23 @@ void CChildView::OnPaint()
 
 	SolidBrush pink(Color(255, 105, 180));
 
-	if (!mMessageDisplayBool)
+	switch (mGame.GetState())
 	{
-		switch (mGame.GetState())
-		{
-		case 0:
-			mMessageDisplay = ("LEVEL " + to_string(mlevelNum) + " BEGIN");
-			timer = mGame.GetTimer();
-			mMessageDisplayBool = true;
-			break;
-		case 2:
-			mMessageDisplay = "LEVEL COMPLETE";
-			timer = mGame.GetTimer();
-			mMessageDisplayBool = true;
-			break;
-		case 3:
-			mMessageDisplay = "YOU LOSE!";
-			timer = mGame.GetTimer();
-			mMessageDisplayBool = true;
-			break;
-		}
+	case 0:
+		mMessageDisplay = ("LEVEL " + to_string(mlevelNum) + " BEGIN");
+		timer = mGame.GetTimer();
+		mMessageDisplayBool = true;
+		break;
+	case 2:
+		mMessageDisplay = "LEVEL COMPLETE";
+		timer = mGame.GetTimer();
+		mMessageDisplayBool = true;
+		break;
+	case 3:
+		mMessageDisplay = "YOU LOSE!";
+		timer = mGame.GetTimer();
+		mMessageDisplayBool = true;
+		break;
 	}
 
 	mGame.Update(elapsed);
@@ -266,7 +263,7 @@ BOOL CChildView::OnEraseBkgnd(CDC* pDC)
 */
 void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	if ((mGame.GetState() != 0) && (mGame.GetState() != 2) && (mGame.GetState() != 3) && !mMessageDisplayBool)
+	if (mGame.GetState() == 1) // Check if in progress
 	{
 		LARGE_INTEGER time;
 		QueryPerformanceCounter(&time);
