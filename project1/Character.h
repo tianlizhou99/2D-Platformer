@@ -55,6 +55,7 @@ public:
     /**
       * Handle collision behavior with character
       * \param player to check collision with
+      * \return void
       */
     virtual void Collision(CPlayer* player);
 
