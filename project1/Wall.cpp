@@ -42,23 +42,33 @@ void CWall::Collision(CPlayer* player)
     double Height = this->GetHeight() / 2;
     
 
-     if (((PlayerY - PlayerHeight < YLocation - Height) && (PlayerY + PlayerHeight > YLocation - Height)) &&
-         PlayerVelY > 0)
+    if ((PlayerX < XLocation))
     {
-         if (PlayerY + PlayerHeight > YLocation - Height - 1)
-         {
-             player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
-             player->SetVelY(0);
-         }
+        if (PlayerY + PlayerHeight > YLocation - Height && PlayerVelY > 0 ) {
+            player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
+            player->SetVelY(0);
+        }
+        else if (PlayerVel > 0) {
+            player->SetLocation(XLocation - Width - Epsilon - PlayerWidth, player->GetY());
+            player->SetVelX(0);
+        }
+
     }
-    else if ((PlayerVel > 0) && (PlayerX < XLocation))
+    else if ((PlayerX > XLocation))
     {
-        player->SetLocation(XLocation - Width - Epsilon - PlayerWidth, player->GetY());
-        player->SetVelX(0);
+
+        if (PlayerY + PlayerHeight > YLocation - Height && PlayerVelY > 0 ) {
+            player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
+            player->SetVelY(0);
+        }
+        else if (PlayerVel < 0) {
+            player->SetLocation(XLocation + Width + Epsilon + PlayerWidth, player->GetY());
+            player->SetVelX(0);
+        }
     }
-    else if ((PlayerVel < 0) && (PlayerX > XLocation))
-    {
-        player->SetLocation(XLocation + Width + Epsilon + PlayerWidth, player->GetY());
-        player->SetVelX(0);
+    else if (PlayerX == XLocation && PlayerVelY > 0) {
+        player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
+        player->SetVelY(0);
     }
+    
 }
