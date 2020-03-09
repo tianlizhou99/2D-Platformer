@@ -56,9 +56,10 @@ void CPlayer::Loss()
  */
 void CPlayer::Update(double elapsed)
 {
-    ///Update y position based on gravity and current y velocitty
+    ///Update y position based on gravity and current y velocity
     SetLocation(GetX(), GetY() + mVelY * elapsed + .5 * Gravity * elapsed * elapsed);
-    ///Update y velocity based on gravity and current y velocitty
+
+    ///Update y velocity based on gravity and current y velocity
     mVelY += Gravity * elapsed;
 
     auto Game = GetGame();
