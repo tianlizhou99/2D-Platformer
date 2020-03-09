@@ -48,42 +48,22 @@ void CPlayer::Loss()
     mGroundContact = false;
 }
 
-
-
 /**
  * updating the player based on the time elapsed
  * \param elapsed the amount of time that has passed since update was called
  */
 void CPlayer::Update(double elapsed)
 {
-    ///Update y position based on gravity and current y velocitty
-    SetLocation(GetX(), GetY() + mVelY * elapsed + .5 * Gravity * elapsed * elapsed);
-    ///Update y velocity based on gravity and current y velocitty
+    mTimer += (elapsed > 0) ? elapsed : -elapsed;
+
+    ///Update position based on gravity and current velocity
+    SetLocation(GetX() + (mDistanceX * mVelX), GetY() + mVelY * elapsed + .5 * Gravity * elapsed * elapsed);
+
+    ///Update y velocity based on gravity and current y velocity
     mVelY += Gravity * elapsed;
 
     auto Game = GetGame();
     Game->CollisionTest(this);
-
-}
-
-/**
- * Update the position based on the player based on the velocity
- * \param elapsed 
- */
-void CPlayer::UpdateMove(double elapsed)
-{
-
-    SetLocation((GetX() + (mDistanceX * elapsed)), GetY());
-    if (elapsed > 0)
-    {
-        mTimer += elapsed;
-    }
-    else if (elapsed < 0)
-    {
-        mTimer += -elapsed;
-    }
-    mVelX = elapsed;
-
 }
 
 /**
