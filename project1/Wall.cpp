@@ -40,35 +40,48 @@ void CWall::Collision(CPlayer* player)
     double PlayerHeight = player->GetHeight() / 2;
     auto YLocation = this->GetY();
     double Height = this->GetHeight() / 2;
-    
+    double wallTop = YLocation - Height;
 
-    if ((PlayerX < XLocation))
+    if ((PlayerX - Width < XLocation + Width))
     {
         if (PlayerY + PlayerHeight > YLocation - Height && PlayerVelY > 0 ) {
-            player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
+            player->SetLocation(player->GetX(), wallTop - PlayerHeight);
             player->SetVelY(0);
         }
-        else if (PlayerVel > 0) {
+
+        else if (PlayerVel > 0 && PlayerY + PlayerHeight > YLocation - Height) {
             player->SetLocation(XLocation - Width - Epsilon - PlayerWidth, player->GetY());
             player->SetVelX(0);
         }
-
-    }
-    else if ((PlayerX > XLocation))
-    {
-
-        if (PlayerY + PlayerHeight > YLocation - Height && PlayerVelY > 0 ) {
-            player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
+        else if (PlayerY + PlayerHeight > YLocation - Height && PlayerY + PlayerHeight < YLocation + Height - Epsilon) {
+            player->SetLocation(player->GetX(), wallTop - PlayerHeight);
             player->SetVelY(0);
         }
-        else if (PlayerVel < 0) {
+        else {
+            player->SetGroundContact(true);
+        }
+
+    }
+    else if ((PlayerX + Width > XLocation - Width))
+    {
+
+        if (PlayerY + PlayerHeight > YLocation - Height && PlayerVelY > 0  ) {
+            player->SetLocation(player->GetX(), wallTop - PlayerHeight);
+            player->SetVelY(0);
+        }
+        else if (PlayerVel < 0 && PlayerY + PlayerHeight > YLocation - Height) {
             player->SetLocation(XLocation + Width + Epsilon + PlayerWidth, player->GetY());
             player->SetVelX(0);
         }
+        else if (PlayerY + PlayerHeight > YLocation - Height && PlayerY + PlayerHeight < YLocation + Height - Epsilon) {
+            player->SetLocation(player->GetX(), wallTop - PlayerHeight);
+            player->SetVelY(0);
+        }
+        else {
+            player->SetGroundContact(true);
+        }
     }
-    else if (PlayerX == XLocation && PlayerVelY > 0) {
-        player->SetLocation(player->GetX(), YLocation - Height - Epsilon - PlayerHeight);
-        player->SetVelY(0);
-    }
+   
     
+
 }

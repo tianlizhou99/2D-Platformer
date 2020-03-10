@@ -422,9 +422,9 @@ void CGame::CollisionTest(CPlayer* player)
         }
         else {
             player->Loss();
-            break;
         }
     }
+
 
 }
 
