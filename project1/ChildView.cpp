@@ -187,6 +187,7 @@ void CChildView::OnPaint()
 	{
 		graphics.DrawString(result, -1, &font, PointF(500, 500), &pink);
 		if (mGame.GetTimer() - timer >= 2) mMessageDisplayBool = false;
+
 	}
 }
 

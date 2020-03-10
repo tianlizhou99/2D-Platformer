@@ -420,11 +420,18 @@ void CGame::CollisionTest(CPlayer* player)
                 mGameState = loss;
             }
         }
-        else {
-            player->Loss();
-        }
-    }
 
+    }
+    if (mEndTime == 0 && mGameState == loss) {
+       player->Loss();
+       mEndTime = mTimer;
+    }
+    else if (mTimer - mEndTime >= 5 && mEndTime != 0) {
+       mEndTime = 0;
+       mLevelNum -= 1;
+       mGameState = start;
+       LoadNextLevel();
+    }
 
 }
 
