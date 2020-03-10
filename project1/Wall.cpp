@@ -51,7 +51,7 @@ void CWall::Collision(CPlayer* player)
         }
 
         else if (PlayerVel > 0 && PlayerY + PlayerHeight > YLocation - Height) {
-            player->SetLocation(XLocation - Width - Epsilon - PlayerWidth, player->GetY());
+            player->SetX(XLocation - Width - Epsilon - PlayerWidth);
             player->SetVelX(0);
         }
 
@@ -66,7 +66,7 @@ void CWall::Collision(CPlayer* player)
             player->SetGroundContact(true);
         }
         else if (PlayerVel < 0 && PlayerY + PlayerHeight > YLocation - Height) {
-            player->SetLocation(XLocation + Width + Epsilon + PlayerWidth, player->GetY() );
+            player->SetX(XLocation + Width + Epsilon + PlayerWidth );
             player->SetVelX(0);
         }
 
