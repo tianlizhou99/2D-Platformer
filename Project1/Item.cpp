@@ -1,3 +1,9 @@
+/**
+ * \file Item.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Item.h"
 

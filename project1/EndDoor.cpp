@@ -1,3 +1,9 @@
+/**
+ * \file EndDoor.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "EndDoor.h"
 

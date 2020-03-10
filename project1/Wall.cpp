@@ -1,3 +1,9 @@
+/**
+ * \file Wall.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Wall.h"
 

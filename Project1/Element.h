@@ -1,3 +1,13 @@
+/**
+ * \file Element.h
+ *
+ * \author Team Sprixie
+ *
+ * Class that represents the base of an element
+ */
+
+
+
 #pragma once
 #include "Entity.h"
 #include <memory>

@@ -1,3 +1,9 @@
+/**
+ * \file Wolverine.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Wolverine.h"
 #include<string>

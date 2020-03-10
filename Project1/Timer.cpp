@@ -1,3 +1,9 @@
+/**
+ * \file Timer.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Timer.h"
 #include <string>

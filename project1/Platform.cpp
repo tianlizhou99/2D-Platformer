@@ -1,3 +1,9 @@
+/**
+ * \file Platform.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Platform.h"
 

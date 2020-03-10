@@ -1,3 +1,11 @@
+/**
+ * \file Scoreboard.h
+ *
+ * \author Team Sprixie
+ *
+ * Class that represents the scoreboard
+ */
+
 #pragma once
 #include "Element.h"
 #include <memory>

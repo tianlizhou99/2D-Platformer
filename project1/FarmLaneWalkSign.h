@@ -1,3 +1,11 @@
+/**
+ * \file FarmLaneWalkSign.h
+ *
+ * \author Team Sprixie
+ *
+ * Class that represents a Farm Lane walk sign
+ */
+
 #pragma once
 #include "Level.h"
 #include "Entity.h"
