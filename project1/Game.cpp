@@ -67,13 +67,13 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
 
 
     // Keep centered on half virtual window width
-    graphics->TranslateTransform(scrollX + virtualWidth/virtualHeight, 0);
+    graphics->TranslateTransform(scrollX + (int)(1 / (mVScale * mVScale)), 0);
 
     if (mBackground != nullptr)
     {
         //Infinite background based on how stretched the screen is
         int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width * (int)(2 / mVScale); iter <= mLevelWidth + (int)(2 / mVScale) * width; iter += width - (int)(2 / mVScale))
+        for (int iter = -width * (int)(1 / mVScale); iter <= mLevelWidth + (int)(1 / mVScale) * width; iter += width - (int)(2 / mVScale))
         {
             graphics->DrawImage(mBackground.get(), iter - 1 , 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
