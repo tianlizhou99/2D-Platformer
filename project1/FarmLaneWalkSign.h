@@ -32,7 +32,10 @@ public:
 	virtual void Update(double elapse);
 
 	void Draw(Gdiplus::Graphics* graphics) override;
-
+/** Sets the sign according to the time that has elapsed
+ * \param player a pointer to the player
+ *
+ */
 	virtual void Collision(CPlayer* player) override;
 
 private:
