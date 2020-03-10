@@ -24,7 +24,7 @@
     <background id="i002" y="512" x="5632"/>
     <background id="i002" y="512" x="6656"/>
     <background id="i002" y="512" x="7680"/>
-    <platform height="32" width="852" id="i005" y="944" x="912"/>
+    <platform height="32" width="852" id="i003" y="944" x="912"/>
     <platform height="32" width="650" id="i005" y="650" x="1650"/>
     <sign id="i014" y="702" x="1024"/>
     <wall height="120" width="32" id="i006" y="852" x="1024"/>
@@ -68,9 +68,12 @@
     <money id="i009" y="500" x="3500"/>
     
     <villain id="i012" y="800" x="3400"/>
-    <platform height="32" width="600" id="i005" y="900" x="3400"/>
+    <platform height="32" width="1000" id="i005" y="910" x="3600"/>
     <wall height="250" width="32" id="i006" y="750" x="3120"/>
     <wall height="250" width="32" id="i006" y="750" x="3700"/>
+    <money id="i009" y="800" x="3800"/>
+    <money id="i008" y="800" x="3900"/>
+    <money id="i009" y="800" x="4000"/>
 
 
     <money id="i008" y="300" x="3650"/>
@@ -96,21 +99,81 @@
     <money id="i009" y="550" x="4800"/>
     <money id="i009" y="650" x="4800"/>
     <wall height="280" width="32" id="i006" y="550" x="5000"/>
+    
+    <platform height="32" width="100" id="i003" y="1000" x="4250"/>
 
-    <platform height="32" width="1050" id="i005" y="1000" x="5250"/>
-    <money id="i008" y="850" x="4800"/>
-    <money id="i009" y="850" x="4900"/>
-    <money id="i008" y="850" x="5000"/>
+    <platform height="32" width="900" id="i003" y="1000" x="5150"/>
+    <platform height="32" width="100" id="i005" y="950" x="5925"/>
+
+    <money id="i008" y="870" x="4800"/>
+    <money id="i009" y="870" x="4900"/>
+    <money id="i008" y="870" x="5000"/>
     <sign id="i014" y="525" x="5800"/>
-    <tuition-up id="i010" y="830" x="5750"/>
+    <tuition-up id="i010" y="850" x="5930"/>
     <villain id="i013" y="850" x="5250"/>
-    <platform height="32" width="350" id="i005" y="650" x="5790"/>
+    <platform height="32" width="350" id="i005" y="650" x="5800"/>
 
 
     <platform height="32" width="350" id="i005" y="900" x="6200"/>
-    <wall height="550" width="32" id="i007" y="700" x="6010"/>
+    <wall height="550" width="32" id="i007" y="720" x="6010"/>
     <door id="i011" y="783" x="6200" />
-    <wall height="550" width="32" id="i007" y="700" x="6420"/>
+    <wall height="550" width="32" id="i007" y="720" x="6410"/>
+
+    <platform height="32" width="100" id="i005" y="464" x="6475"/>
+
+    <platform height="32" width="1650" id="i003" y="600" x="7615"/>
+
+    <money id="i009" y="300" x="6900"/>
+    <money id="i009" y="350" x="6900"/>
+    <money id="i009" y="400" x="6900"/>
+    <money id="i009" y="450" x="6900"/>
+    <money id="i009" y="500" x="6900"/>
+    <money id="i009" y="300" x="7000"/>
+    <money id="i009" y="400" x="7000"/>
+    <money id="i009" y="300" x="7100"/>
+    <money id="i009" y="400" x="7100"/>
+    
+    <money id="i008" y="300" x="7250"/>
+    <money id="i008" y="350" x="7250"/>
+    <money id="i008" y="400" x="7250"/>
+    <money id="i008" y="450" x="7250"/>
+    <money id="i008" y="500" x="7250"/>
+    <money id="i008" y="300" x="7350"/>
+    <money id="i008" y="400" x="7350"/>
+    <money id="i008" y="300" x="7450"/>
+    <money id="i008" y="350" x="7450"/>
+    <money id="i008" y="400" x="7450"/>
+    <money id="i008" y="450" x="7450"/>
+    <money id="i008" y="500" x="7450"/>
+
+    <money id="i009" y="300" x="7600"/>
+    <money id="i009" y="350" x="7600"/>
+    <money id="i009" y="400" x="7600"/>
+    <money id="i009" y="450" x="7600"/>
+    <money id="i009" y="500" x="7600"/>
+    <money id="i009" y="300" x="7700"/>
+    <money id="i009" y="400" x="7700"/>
+    <money id="i009" y="350" x="7800"/>
+    <money id="i009" y="450" x="7800"/>
+    <money id="i009" y="500" x="7800"/>
+
+    <money id="i008" y="300" x="7950"/>
+    <money id="i008" y="350" x="7950"/>
+    <money id="i008" y="400" x="7950"/>
+    <money id="i008" y="450" x="7950"/>
+    <money id="i008" y="500" x="7950"/>
+    <money id="i008" y="300" x="8050"/>
+    <money id="i008" y="300" x="8150"/>
+    <money id="i008" y="350" x="8150"/>
+    <money id="i008" y="400" x="8150"/>
+    <money id="i008" y="450" x="8150"/>
+    <money id="i008" y="500" x="8150"/>
+    <money id="i008" y="300" x="8250"/>
+    <money id="i008" y="300" x="8350"/>
+    <money id="i008" y="350" x="8350"/>
+    <money id="i008" y="400" x="8350"/>
+    <money id="i008" y="450" x="8350"/>
+    <money id="i008" y="500" x="8350"/>
 
   </items>
 </level>
