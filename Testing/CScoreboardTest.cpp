@@ -188,8 +188,8 @@ namespace Testing
 			money2->Collision(player.get());
 
 			// Check if tuition Increased
-			score = scoreboard->GetScore(); 
-			Assert::IsTrue(score == 210);
+			score = scoreboard->GetScore();
+			Assert::IsTrue(score == 100);
 		}
 	};
 }

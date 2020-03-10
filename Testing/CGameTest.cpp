@@ -68,7 +68,7 @@ namespace Testing
 			game.SetTimer(0);
 			Assert::IsTrue(game.GetState() == 0);
 
-			game.SetTimer(5);
+			game.SetTimer(5.6);
 			Assert::IsTrue(game.GetState() == 1);
 		}
 
