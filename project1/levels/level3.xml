@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level width="8192" height="1024" start-y="796" start-x="788">
   <declarations>
-    <background image="backgroundColorGrass.png" id="i002"/>
+    <background image="level3background.png" id="i002"/>
     <platform id="i003" right-image="grassRight.png" mid-image="grassMid.png" left-image="grassLeft.png"/>
     <platform id="i005" left-image="platformIndustrial_059.png" mid-image="platformIndustrial_060.png" right-image="platformIndustrial_061.png"/>
     <wall image="wall1.png" id="i006"/>
