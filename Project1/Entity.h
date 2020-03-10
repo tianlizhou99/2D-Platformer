@@ -30,10 +30,13 @@ public:
 
     /// Copy constructor (disabled)
     CEntity(const CEntity&) = delete;
-
+    /** Sets location of the entity on the screen
+    * \param x position*/
+    void SetX(double x) { mX = x; }
     /** Sets location of the entity on the screen
      * \param x position
      * \param y position */
+
     void SetLocation(double x, double y);
     /** The X location of the item
      * \returns X location in pixels */
