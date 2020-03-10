@@ -189,7 +189,7 @@ namespace Testing
 
 			// Check if tuition Increased
 			score = scoreboard->GetScore();
-			Assert::IsTrue(score == 210);
+			Assert::IsTrue(score == 100);
 		}
 	};
 }
