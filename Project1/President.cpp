@@ -87,7 +87,7 @@ void CPresident::Draw(Gdiplus::Graphics* graphics)
 
 		SolidBrush green(Color(0, 64, 0));
 
-		string score = "Tuition Increase!";
+		wstring score = L"Tuition Increase!";
 
 		wstring wide_string = wstring(score.begin(), score.end());
 		const wchar_t* result = wide_string.c_str();

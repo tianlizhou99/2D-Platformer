@@ -45,7 +45,7 @@ private:
 	bool mFirstDraw = true;
 	
 	bool mMessageDisplayBool = false; ///< if a message is being displayed
-	string mMessageDisplay = ""; ///< message to display
+	wstring mMessageDisplay; ///< message to display
 
 	long long mLastTime;    ///< Last time we read the timer
 	double mTimeFreq;       ///< Rate the timer updates

@@ -30,7 +30,7 @@ void CScoreboard::Draw(Gdiplus::Graphics* graphics)
 
 	SolidBrush green(Color(0, 64, 0));
 
-	string score ="$" + to_string(GetScore());
+	wstring score = L"$" + to_wstring(GetScore());
 
 	wstring wide_string = wstring(score.begin(), score.end());
 	const wchar_t* result = wide_string.c_str();
