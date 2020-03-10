@@ -36,7 +36,7 @@
     <ClCompile Include="CGameTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FarmLaneWalkSignTest.cpp">
+    <ClCompile Include="CFarmLaneWalkSignTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

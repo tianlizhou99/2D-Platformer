@@ -179,7 +179,7 @@
     </ClCompile>
     <ClCompile Include="CScoreboardTest.cpp" />
     <ClCompile Include="CTimerTest.cpp" />
-    <ClCompile Include="FarmLaneWalkSignTest.cpp">
+    <ClCompile Include="CFarmLaneWalkSignTest.cpp">
       <SubType>
       </SubType>
     </ClCompile>
