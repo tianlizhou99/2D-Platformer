@@ -26,9 +26,9 @@ int CScoreboard::GetScore()
 void CScoreboard::Draw(Gdiplus::Graphics* graphics)
 {
 	FontFamily fontFamily(L"Arial");
-	Gdiplus::Font font(&fontFamily, 32);
+	Gdiplus::Font font(&fontFamily, 64);
 
-	SolidBrush green(Color(0, 64, 0));
+	SolidBrush pink(Color(1, 206, 209));
 
 	wstring score = L"$" + to_wstring(GetScore());
 
@@ -39,7 +39,7 @@ void CScoreboard::Draw(Gdiplus::Graphics* graphics)
 	auto Player = Game->GetPlayer();
 	auto PlayerX = Player->GetX() + 450;
 
-	graphics->DrawString(result, -1, &font, PointF(PlayerX, 10), &green);
+	graphics->DrawString(result, -1, &font, PointF(PlayerX, 10), &pink);
 }
 
 const wstring ScoreboardImageName = L"images/grass.png";
