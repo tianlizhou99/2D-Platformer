@@ -12,7 +12,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Testing
 {
-	TEST_CLASS(FarmLaneWalkSignTest)
+	TEST_CLASS(CFarmLaneWalkSignTest)
 	{
 	public:
 
