@@ -35,13 +35,13 @@ void CTimer::Draw(Gdiplus::Graphics* graphics)
 
 	int seconds_int = (milliseconds - (60 * minutes_int));
 	
-	string seconds = to_string(seconds_int);
-	if (seconds_int < 10) seconds = "0" + seconds;
+	wstring seconds = to_wstring(seconds_int);
+	if (seconds_int < 10) seconds = L"0" + seconds;
 
-	string minutes = to_string(minutes_int);
-	if (minutes_int < 10) minutes = "0" + minutes;
+	wstring minutes = to_wstring(minutes_int);
+	if (minutes_int < 10) minutes = L"0" + minutes;
 
-	string time = minutes+ ":" +seconds;
+	wstring time = minutes + L":" + seconds;
 
 	wstring wide_string = wstring(time.begin(), time.end());
 	const wchar_t* result = wide_string.c_str();
