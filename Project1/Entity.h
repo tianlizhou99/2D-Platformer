@@ -11,13 +11,12 @@
 #include<memory>
 #include<string>
 #include "XmlNode.h"
-#include "Visitor.h"
+
 using namespace xmlnode;
 
 
-
-
 class CGame;
+class CPlayer;
 
 /**
  * base class for any object in the game

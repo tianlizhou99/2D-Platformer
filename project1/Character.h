@@ -5,9 +5,11 @@
  *
  *  Class that implements a character
  */
+
 #pragma once
 #include "Entity.h"
 #include "Game.h"
+
  /**
  *A Character Class
  */
@@ -18,6 +20,7 @@ public:
     * \param node the item to load
     */
     void XmlLoad(const std::shared_ptr<xmlnode::CXmlNode>& node) override;
+
     /** saves the items to xml
     * \param node the item to save
     * \return a shared pointer to an object to save
@@ -33,17 +36,18 @@ public:
     * \param x is speed of character
     */
     void SetSpeedX(double x);
+
     /** updates the character
-* \param elapsed is time gone by
-*/
+    * \param elapsed is time gone by
+    */
     void Update(double elapsed);
     /** sets the characters sstarting y coordinate
-* \param start is speed of characters
-*/
+    * \param start is speed of characters
+    */
     void SetStart(double start);
     /** sets the characters speed in the y direction
-* \param y is speed of characters
-*/
+    * \param y is speed of characters
+    */
     void SetSpeedY(double y);
 
     /** Constructor for character
