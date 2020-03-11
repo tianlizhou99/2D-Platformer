@@ -1,3 +1,9 @@
+/**
+ * \file Player.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Player.h"
 #include<string>

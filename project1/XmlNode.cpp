@@ -1,5 +1,5 @@
 /**
- * \file
+ * \file XmlNode.cpp
  *
  * \author Charles B. Owen
  * \brief Class that implements a wrapper for msxml nodes
