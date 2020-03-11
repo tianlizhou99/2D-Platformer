@@ -57,7 +57,7 @@ void CGame::AddFront(std::shared_ptr<CEntity> entity)
 * \param height The height of the screen
 * \param scrollX The amount of scrolling done through game
 */
-void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, float scrollX)
+void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX)
 {
     //
     // Automatic Scaling
