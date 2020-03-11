@@ -47,6 +47,7 @@ void CScoreboard::Draw(Gdiplus::Graphics* graphics)
 	graphics->DrawString(result, -1, &font, PointF(PlayerX, 10), &pink);
 }
 
+/// Dummy Image
 const wstring ScoreboardImageName = L"images/grass.png";
 
 /**

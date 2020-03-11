@@ -5,7 +5,9 @@
 using namespace std;
 using namespace Gdiplus;
 
+/// Badger filename
 const wstring badgerImage = L"images/wisc.png";
+
 CBadger::CBadger(CGame* game) : CCharacter(game, badgerImage)
 {  
     SetSpeedY(240);   
