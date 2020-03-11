@@ -355,7 +355,7 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
  */
 void CGame::LoadWall(wstring image, int x, int y, int width, int height)
 {
-    double topy = y - ((height / 32 - 1) / 2) * 32;
+    double topy = y - ((double)(height / 32 - 1) / 2) * 32;
     for (double i = 0; i <= height; i += 32 - (int)(2 / mVScale))
     {
         auto wall = make_shared<CWall>(this, image);
