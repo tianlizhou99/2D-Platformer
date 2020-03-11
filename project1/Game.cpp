@@ -54,29 +54,28 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     //
     // Automatic Scaling
     //
-    mVScale = float(height) / float(1024);
-    mHScale = float(width) / float(1024);
-    graphics->ScaleTransform(mVScale, mVScale);
+    mHScale = float(height) / float(1024);
+    mVScale = float(width) / float(1024);
+    graphics->ScaleTransform(mHScale, mHScale);
 
     // Determine the virtual width
-    float virtualWidth = (float)width * mHScale;
-    float virtualHeight = (float)height * mVScale;
+    float virtualWidth = (float)width / mHScale;
+    float virtualHeight = (float)height / mVScale;
 
     // Save current settings
     auto save = graphics->Save();
 
 
     // Keep centered on half virtual window width
-    double temp = virtualWidth / (2 / mVScale);
-    graphics->TranslateTransform(scrollX + (virtualWidth - width)/mVScale - virtualWidth/(3 / mVScale), 0);
+    graphics->TranslateTransform(scrollX + virtualWidth / 2.0f, 0);
 
     if (mBackground != nullptr)
     {
         //Infinite background based on how stretched the screen is
-        int width = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -width * (int)(1 / mVScale); iter <= mLevelWidth + (int)(1 / mVScale) * width; iter += width - (int)(2 / mVScale))
+        int backgroundWidth = static_cast<int>(mBackground->GetWidth());
+        for (int iter = -backgroundWidth * (int)(1 / mHScale); iter <= mLevelWidth + (int)(1 / mHScale) * backgroundWidth; iter += backgroundWidth - (1.5 / mHScale))
         {
-            graphics->DrawImage(mBackground.get(), iter - 1 , 0,
+            graphics->DrawImage(mBackground.get(), iter - 1, 0,
                 mBackground->GetWidth(), mBackground->GetHeight());
         }
 
