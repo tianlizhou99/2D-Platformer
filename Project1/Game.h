@@ -57,7 +57,7 @@ public:
     void Add(std::shared_ptr<CEntity> entity);
     void AddFront(std::shared_ptr<CEntity> entity);
 
-    void OnDraw(Gdiplus::Graphics* graphics, int width, int height, float scrollX);
+    void OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX);
     void Load(const std::wstring& filename);
     void Clear();
     virtual void Update(double elapsed);
