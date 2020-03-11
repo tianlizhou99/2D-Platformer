@@ -138,4 +138,5 @@ public:
     void SetFirst(bool first) { mFirstDraw = first; };
 
     void LoadNextLevel();
+
 };
