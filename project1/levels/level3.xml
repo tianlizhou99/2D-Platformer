@@ -69,8 +69,8 @@
     
     <villain id="i012" y="800" x="3400"/>
     <platform height="32" width="1000" id="i005" y="910" x="3600"/>
-    <wall height="250" width="32" id="i006" y="750" x="3120"/>
-    <wall height="250" width="32" id="i006" y="750" x="3700"/>
+    <wall height="220" width="32" id="i006" y="760" x="3120"/>
+    <wall height="220" width="32" id="i006" y="760" x="3700"/>
     <money id="i009" y="800" x="3800"/>
     <money id="i008" y="800" x="3900"/>
     <money id="i009" y="800" x="4000"/>
@@ -98,12 +98,12 @@
     <platform height="32" width="580" id="i005" y="750" x="4720"/>
     <money id="i009" y="550" x="4800"/>
     <money id="i009" y="650" x="4800"/>
-    <wall height="280" width="32" id="i006" y="550" x="5000"/>
+    <wall height="260" width="32" id="i006" y="590" x="4990"/>
     
     <platform height="32" width="100" id="i003" y="1000" x="4250"/>
 
     <platform height="32" width="900" id="i003" y="1000" x="5150"/>
-    <platform height="32" width="100" id="i005" y="950" x="5925"/>
+    <platform height="32" width="100" id="i005" y="950" x="5945"/>
 
     <money id="i008" y="870" x="4800"/>
     <money id="i009" y="870" x="4900"/>
@@ -111,10 +111,10 @@
     <sign id="i014" y="525" x="5800"/>
     <tuition-up id="i010" y="850" x="5930"/>
     <villain id="i013" y="850" x="5250"/>
-    <platform height="32" width="350" id="i005" y="650" x="5800"/>
+    <platform height="32" width="350" id="i005" y="650" x="5820"/>
 
 
-    <platform height="32" width="350" id="i005" y="900" x="6200"/>
+    <platform height="32" width="370" id="i005" y="900" x="6210"/>
     <wall height="550" width="32" id="i007" y="720" x="6010"/>
     <door id="i011" y="783" x="6200" />
     <wall height="550" width="32" id="i007" y="720" x="6410"/>
