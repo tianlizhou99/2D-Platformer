@@ -109,7 +109,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pch;Game;Badger;Character;Element;EndDoor;Entity;Item;Level;Money;Platform;Player;President;Scoreboard;Timer;Visitor;Wall;Wolverine;XmlNode</AdditionalDependencies>
+      <AdditionalDependencies>pch;Game;Badger;Character;Element;EndDoor;Entity;FarmLaneWalkSign;Item;Level;Money;Platform;Player;President;Scoreboard;Timer;Visitor;Wall;Wolverine;XmlNode</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
