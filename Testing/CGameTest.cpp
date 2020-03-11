@@ -55,7 +55,7 @@ namespace Testing
 			game2.AddFront(bottomwall);
 			game2.AddFront(ttomwall);
 
-			Assert::IsTrue(game2.GetEntities().size() == 3);
+			Assert::IsTrue(game1.GetEntities().size() == 4);
 
 			for (int i = 0; i < 3; i++)
 			{
