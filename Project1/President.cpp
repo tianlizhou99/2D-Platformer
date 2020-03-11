@@ -1,3 +1,9 @@
+/**
+ * \file President.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "President.h"
 

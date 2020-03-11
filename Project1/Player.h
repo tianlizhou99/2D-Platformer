@@ -1,3 +1,11 @@
+/**
+ * \file Player.h
+ *
+ * \author Team Sprixie
+ *
+ * Class that represents the player in the game
+ */
+
 #pragma once
 #include<memory>
 #include "Character.h"
@@ -44,12 +52,6 @@ public:
       *
       */
     void Draw(Gdiplus::Graphics* graphics)override;
-
-    /** Accept a visitor
-    * \param visitor The visitor we accept
-    * \return virtual function
-    */
-    virtual void Accept(CVisitor* visitor) { visitor->VisitPlayer(this); }
 
     /// Setter function setting the x velocity of the gnome
     /// \param vel the velocity that mVelX is being set to

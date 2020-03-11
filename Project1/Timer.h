@@ -1,3 +1,11 @@
+/**
+ * \file Timer.h
+ *
+ * \author Team Sprixie
+ *
+ * Class that represents the timer
+ */
+
 #pragma once
 #include "Element.h"
 #include <memory>

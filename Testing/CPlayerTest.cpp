@@ -36,20 +36,22 @@ namespace Testing
 		TEST_METHOD(PlayerMoveTest)
 		{
 			CGame game;
-			/// add the Player to the game
 			auto player = std::make_shared<CPlayer>(&game);
+			game.Add(player);
 
-			player->SetLocation(500, 500);
-
-			Assert::IsTrue(player->GetX() == 500);
-
-			Assert::IsTrue(player->GetY() == 500);
-			player->UpdateMove(1);
+			player->SetLocation(0, 500);
+			player->SetVelX(10);
+			double elapsed = 0;
+			player->Update(elapsed);
 			Assert::IsTrue(player->GetX() > 500);
-			player->UpdateMove(-2);
-			Assert::IsTrue(player->GetX() < 500);
 
+			player->SetLocation(0, 500);
+			player->SetVelX(-10);
+			elapsed = 0;
+			player->Update(elapsed);
+			Assert::IsTrue(player->GetX() < 500);
 		}
+
 		TEST_METHOD(VillianMoveTest)
 		{
 			CGame game;

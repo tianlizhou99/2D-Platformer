@@ -1,3 +1,9 @@
+/**
+ * \file Entity.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Entity.h"
 #include "XmlNode.h"

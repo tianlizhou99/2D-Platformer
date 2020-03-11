@@ -1,8 +1,13 @@
+/**
+ * \file Scoreboard.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Scoreboard.h"
 #include <memory>
 #include <string>
-#include "Visitor.h"
 
 using namespace Gdiplus;
 using namespace std;

@@ -1,3 +1,9 @@
+/**
+ * \file Money.cpp
+ *
+ * \author Team Sprixie
+ */
+
 #include "pch.h"
 #include "Money.h"
 

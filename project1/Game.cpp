@@ -1,3 +1,10 @@
+/**
+ * \file Game.cpp
+ *
+ * \author Team Sprixie
+ */
+
+
 #include "pch.h"
 #include "Game.h"
 #include "Level.h"
@@ -11,6 +18,7 @@
 #include "Money.h"
 #include "President.h"
 #include "FarmLaneWalkSign.h"
+
 using namespace std;
 
 CGame::CGame()
