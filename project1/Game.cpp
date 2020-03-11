@@ -57,7 +57,7 @@ void CGame::AddFront(std::shared_ptr<CEntity> entity)
 * \param height The height of the screen
 * \param scrollX The amount of scrolling done through game
 */
-void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrollX)
+void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, float scrollX)
 {
     //
     // Automatic Scaling
@@ -81,18 +81,28 @@ void CGame::OnDraw(Gdiplus::Graphics* graphics, int width, int height, int scrol
     {
         //Infinite background based on how stretched the screen is
         int backgroundWidth = static_cast<int>(mBackground->GetWidth());
-        for (int iter = -backgroundWidth * (int)(1 / mHScale); iter <= mLevelWidth + (int)(1 / mHScale) * backgroundWidth; iter += backgroundWidth - (1.5 / mHScale))
+        if (backgroundWidth == 1024)
         {
-            graphics->DrawImage(mBackground.get(), iter - 1, 0,
-                mBackground->GetWidth(), mBackground->GetHeight());
+            for (int iter = -backgroundWidth * (int)(1 / mHScale); iter <= mLevelWidth + (int)(1 / mHScale) * backgroundWidth; iter += backgroundWidth - (1.5 / mHScale))
+            {
+                graphics->DrawImage(mBackground.get(), iter - 1, 0,
+                    mBackground->GetWidth(), mBackground->GetHeight());
+            }
         }
-
+        else
+        {
+            for (int iter = -backgroundWidth; iter <= mLevelWidth; iter += backgroundWidth - (1.5 / mHScale))
+            {
+                graphics->DrawImage(mBackground.get(), iter - 1, 0,
+                    mBackground->GetWidth(), mBackground->GetHeight());
+            }
+        }
     }
 
     for (auto entity : mEntities)
     {
         //Frustum Culling: only renders the elements that should be in view to save resources and improve performance
-        if (entity->GetX() < -scrollX + (int)(2 / mVScale) * virtualWidth && entity->GetX() > scrollX - virtualWidth * (int)(2 / mVScale))
+        if (entity->GetX() < -scrollX + virtualWidth / 2.0f && entity->GetX() > scrollX - virtualWidth / 2.0f)
         {
             entity->Draw(graphics);
         }
