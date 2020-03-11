@@ -9,9 +9,8 @@
 #include "FarmLaneWalkSign.h"
 #include <memory>
 
-/// Farm Lane walk image
+/// Farm Lane images
 const wstring WalkSign = L"images/walksign.png";
-/// Farm Lane stop image
 const wstring StopSign = L"images/stopsign.png";
 
 /** Constructor
