@@ -42,17 +42,20 @@ namespace Testing
 			game1.LoadWall(L"", 768, 944, 32, 96);
 
 			CGame game2;
-			auto topwall = make_shared<CPlatform>(&game2, L"");
-			topwall->SetLocation(768, 944 - 32);
-			auto midwall = make_shared<CPlatform>(&game2, L"");
-			midwall->SetLocation(768, 944);
-			auto bottomwall = make_shared<CPlatform>(&game2, L"");
-			bottomwall->SetLocation(768, 944 + 32);
-			game2.Add(topwall);
-			game2.Add(midwall);
-			game2.Add(bottomwall);
+			auto topwall = make_shared<CWall>(&game2);
+			topwall->SetLocation(768, 942 - 30);
+			auto midwall = make_shared<CWall>(&game2);
+			midwall->SetLocation(768, 942);
+			auto bottomwall = make_shared<CWall>(&game2);
+			bottomwall->SetLocation(768, 942 + 30);
+			auto ttomwall = make_shared<CWall>(&game2);
+			ttomwall->SetLocation(768, 942 + 60);
+			game2.AddFront(topwall);
+			game2.AddFront(midwall);
+			game2.AddFront(bottomwall);
+			game2.AddFront(ttomwall);
 
-			Assert::IsTrue(game1.GetEntities().size() == 3);
+			Assert::IsTrue(game1.GetEntities().size() == 4);
 
 			for (int i = 0; i < 3; i++)
 			{

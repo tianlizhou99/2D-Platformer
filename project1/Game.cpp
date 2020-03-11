@@ -319,8 +319,8 @@ void CGame::Update(double elapsed)
  */
 void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage, int x, int y, int width, int height)
 {
-    double leftx = x - (((double)width / 32 ) / 2) * 32;
-    double rightx = x + (((double)width / 32 ) / 2) * 32;
+    double leftx = x - (((double)width / 32 - 1) / 2) * 32;
+    double rightx = x + (((double)width / 32 - 1) / 2) * 32;
     auto leftplatform = make_shared<CPlatform>(this, leftimage, -1);
     leftplatform->SetLocation(leftx, y);
     Add(leftplatform);
@@ -346,7 +346,7 @@ void CGame::LoadPlatform(wstring leftimage, wstring midimage, wstring rightimage
  */
 void CGame::LoadWall(wstring image, int x, int y, int width, int height)
 {
-    double topy = y - ((height / 32) / 2) * 32;
+    double topy = y - ((height / 32 - 1) / 2) * 32;
     for (double i = 0; i <= height; i += 32 - (int)(2 / mVScale))
     {
         auto wall = make_shared<CWall>(this, image);
