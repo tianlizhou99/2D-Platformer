@@ -76,6 +76,11 @@ void CFarmLaneWalkSign::Draw(Gdiplus::Graphics* graphics)
 	}
 }
 
+/**
+ * functionality of the sign when it collides with a player
+ * \param player the player of the game that is colliding with the object
+ * \returns void
+ */
 void CFarmLaneWalkSign::Collision(CPlayer* player)
 {
 	if (mSign == walk)
