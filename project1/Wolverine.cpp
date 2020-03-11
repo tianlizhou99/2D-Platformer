@@ -11,7 +11,9 @@
 using namespace std;
 using namespace Gdiplus;
 
+/// Wolverine filename
 const wstring wolverineImage = L"images/UofM.png";
+
 CWolverine::CWolverine(CGame* game) : CCharacter(game, wolverineImage)
 {
     SetLocation(500, 500);

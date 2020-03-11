@@ -12,13 +12,20 @@
 using namespace std;
 using namespace Gdiplus;
 
+/// Default Gnome Image
 const wstring GnomeImage = L"images/gnome.png";
+/// Right Facing Gnome Image 1
 const wstring GnomeRight1 = L"images/gnome-walk-right-1.png";
+/// Right Facing Gnome Image 2
 const wstring GnomeRight2 = L"images/gnome-walk-right-2.png";
+/// Left Facing Gnome Image 1
 const wstring GnomeLeft1 = L"images/gnome-walk-left-1.png";
+/// Left Facing Gnome Image 2
 const wstring GnomeLeft2 = L"images/gnome-walk-left-2.png";
 
+/// Initial vertical velocity when jumping
 const double JumpSpeed = -750;
+/// Gravitational acceleration
 const double Gravity = 750;
 
 CPlayer::CPlayer(CGame* game) : CCharacter(game, GnomeImage)
